@@ -2,7 +2,7 @@ import React, { use } from 'react';
 import { AuthContext } from '../Firebase/AuthProvider';
 import { useNavigate } from 'react-router';
 
-const SocialLogin = () => {
+const SocialLogin = ({from}) => {
     const {registerWithGoogle} = use(AuthContext);
 
     // navigate kore home cole jabo
@@ -10,7 +10,7 @@ const SocialLogin = () => {
     
     const handleGoogle=()=>{
         registerWithGoogle().then(result=>{
-            console.log("Register Successfully", result); navigate("/")
+            console.log("Register Successfully", result); navigate(from)
         }).catch(error=> console.log("Failed to Register", error))
     }
     return (

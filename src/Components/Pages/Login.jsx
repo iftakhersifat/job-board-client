@@ -1,6 +1,7 @@
 import React, { use, useState } from 'react';
-import { Link, useNavigate } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../Firebase/AuthProvider';
+import SocialLogin from './SocialLogin';
 
 const Login = () => {
     // for user login
@@ -8,6 +9,8 @@ const Login = () => {
 
     // navigate kora
     const navigate = useNavigate()
+    const location =useLocation()
+    const from = location.state || "/"
 
 
     const [showPassword, setShowPassword] = useState(false);
@@ -22,7 +25,7 @@ const Login = () => {
         userLogin(email,pass).then(result=>{
             const user = result.user;
             console.log("User Login Successfully:", user);
-            navigate("/")
+            navigate(from)
         }).catch(error=>{
             console.log("Failed to User Login", error)
         })
@@ -43,12 +46,14 @@ const Login = () => {
           <label className="label">Password</label>
           <div className='relative'>
             <input type={showPassword? 'text': "password"} name='password' className="input w-full focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter Your Password" />
-            <button onClick={()=>setShowPassword(!showPassword)} className="absolute mt-3 -ml-10">
+            <button type="button"  onClick={()=>setShowPassword(!showPassword)} className="absolute mt-3 -ml-10">
                 {showPassword? "Hide" : "Show"}
             </button>
           </div>
 
           <div><a className="link link-hover">Forgot password?</a></div>
+
+          <SocialLogin from={from}></SocialLogin>
           <button className="btn btn-neutral mt-4 text-white bg-blue-500 hover:bg-blue-700 border-0">Login</button>
           <Link to="/register" className='mt-3'>Don't have an account? <span className='text-red-500 underline'>Register</span></Link>
 

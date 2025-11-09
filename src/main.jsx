@@ -11,6 +11,8 @@ import Register from './Components/Pages/Register.jsx';
 import AuthProvider from './Components/Firebase/AuthProvider.jsx';
 import ProfileUpdate from './Components/Pages/ProfileUpdate.jsx';
 import MoreDetails from './Components/Jobs/MoreDetails.jsx';
+import Private from './Components/Firebase/Private.jsx';
+import ApplyJobs from './Components/Jobs/ApplyJobs.jsx';
 
 
 
@@ -26,6 +28,7 @@ const router = createBrowserRouter([
       {path: '/jobs/:id', Component:MoreDetails,
         loader: ({params})=> fetch(`http://localhost:3000/jobs/${params.id}`)
       },
+      {path: '/jobApply/:id', element:<Private><ApplyJobs></ApplyJobs></Private>}
       // {path: '/profile', Component:ProfileUpdate},
       
     ]
