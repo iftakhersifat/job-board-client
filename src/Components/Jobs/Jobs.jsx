@@ -1,12 +1,39 @@
 import React, { use } from 'react';
 import { FaLocationDot } from 'react-icons/fa6';
+import { Link } from 'react-router';
 
 const Jobs = ({jobsPromise}) => {
     const jobs = use(jobsPromise)
     console.log(jobs)
     return (
         <div className='max-w-6xl mx-auto'>
-            <p>{jobs.length}</p>
+            <div className="text-center py-14 px-6 relative">
+  {/* Background Accent */}
+  {/* <div className="absolute inset-0 bg-gradient-to-b from-blue-50 via-white to-purple-50 opacity-80 -z-10"></div> */}
+
+  {/* Decorative Blurs */}
+  {/* <div className="absolute -top-20 -right-16 w-40 h-40 bg-gradient-to-br from-blue-200 to-purple-300 rounded-full blur-3xl opacity-30 -z-10"></div>
+  <div className="absolute -bottom-20 -left-16 w-40 h-40 bg-gradient-to-tr from-purple-300 to-blue-200 rounded-full blur-3xl opacity-30 -z-10"></div> */}
+
+  {/* Title */}
+  <h1 className="text-4xl md:text-5xl font-extrabold mt-6 leading-snug">
+    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-purple-600 to-pink-600">
+      Hot Jobs
+    </span>
+  </h1>
+
+  {/* Accent Line */}
+  <div className="w-24 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 mx-auto mt-3 rounded-full"></div>
+
+  {/* Description */}
+  <p className="text-gray-600 mt-6 max-w-2xl mx-auto text-base md:text-lg">
+    Discover the latest career opportunities and apply to positions that align
+    with your passion and expertise. Stay ahead of the competition with today’s top openings.
+  </p>
+</div>
+
+
+
 
             <div className='grid grid-cols-1 md:grid-cols-3 px-6 md:px-6 lg:px-0 gap-4'>
                 {jobs.map(job=>(
@@ -62,15 +89,9 @@ const Jobs = ({jobsPromise}) => {
   </div>
 
   <div className="mt-6">
-    <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">More Details
-    </button>
+    <Link to={`/jobs/${job._id}`}><button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">More Details
+    </button></Link>
   </div>
-
-            {/* Apply Button */}
-            {/* <div className="text-right">
-              <Link to={`/jobs/${job._id}`}><button className="btn bg-blue-600 text-white px-6 py-2 rounded-xl hover:bg-blue-700">More Details
-              </button></Link>
-            </div> */}
           </div>
                 ))}
             </div>
