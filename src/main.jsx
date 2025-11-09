@@ -13,6 +13,7 @@ import ProfileUpdate from './Components/Pages/ProfileUpdate.jsx';
 import MoreDetails from './Components/Jobs/MoreDetails.jsx';
 import Private from './Components/Firebase/Private.jsx';
 import ApplyJobs from './Components/Jobs/ApplyJobs.jsx';
+import MyApplications from './Components/Jobs/MyApplications.jsx';
 
 
 
@@ -28,7 +29,8 @@ const router = createBrowserRouter([
       {path: '/jobs/:id', Component:MoreDetails,
         loader: ({params})=> fetch(`http://localhost:3000/jobs/${params.id}`)
       },
-      {path: '/jobApply/:id', element:<Private><ApplyJobs></ApplyJobs></Private>}
+      {path: '/jobApply/:id', element:<Private><ApplyJobs></ApplyJobs></Private>},
+      {path: '/myApplications', element:<Private><MyApplications></MyApplications></Private>}
       // {path: '/profile', Component:ProfileUpdate},
       
     ]

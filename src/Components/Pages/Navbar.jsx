@@ -14,13 +14,16 @@ const handleLogOut =() =>{
 }
 
   const links = <>
-  <li><NavLink to="/">Home</NavLink></li>
+  <li><NavLink to="/" className={({isActive})=> isActive ? 'text-blue-600 font-medium underline' : 'hover:text-violet-500 font-medium transition'}>Home</NavLink></li>
   <li><NavLink to="/profile">Profile</NavLink></li>
+  {
+    user && <><li><NavLink to="/myApplications" className={({isActive})=> isActive ? 'text-blue-600 font-medium underline' : 'hover:text-violet-500 font-medium transition'}>MyApplications</NavLink></li></>
+  }
   </>
 
   const moreLinks = <>
-  <li><NavLink to="/about">About</NavLink></li>
-  <li><NavLink to="/contact">Contact</NavLink></li>
+  <li><NavLink to="/about" className={({isActive})=> isActive ? 'text-blue-600 font-medium underline' : 'hover:text-violet-500 font-medium transition'}>About</NavLink></li>
+  <li><NavLink to="/contact" className={({isActive})=> isActive ? 'text-blue-600 font-medium underline' : 'hover:text-violet-500 font-medium transition'}>Contact</NavLink></li>
   </>
 
 
