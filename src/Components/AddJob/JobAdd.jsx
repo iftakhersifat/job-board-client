@@ -1,5 +1,7 @@
 import React, { use } from 'react';
 import { AuthContext } from '../Firebase/AuthProvider';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const JobAdd = () => {
     const {user} = use(AuthContext);
@@ -18,6 +20,19 @@ const JobAdd = () => {
         rest.responsibilities = rest.responsibilities.split(',').map(req=>req.trim())
         console.log(rest)
         rest.status="active";
+
+        axios.post('http://localhost:3000/jobs',rest)
+        .then(result=>{
+            if(result.data.insertedId){
+                Swal.fire({
+                title: "This New Job has been Added and Published Successfully",
+                icon: "success",
+                draggable: true
+              });
+              console.log("successfully job add",result)
+            }
+        })
+        .catch(error=>console.log(error))
     }
     return (
         <div className='max-w-6xl mx-auto mt-12'>
