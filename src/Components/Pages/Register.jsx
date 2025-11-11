@@ -76,7 +76,7 @@ const Register = () => {
 
           {/* register with gmail */}
           <SocialLogin from={from}></SocialLogin>
-          <button className="btn btn-neutral mt-4 text-white bg-blue-500 hover:bg-blue-700 border-0">Login</button>
+          <button className="btn btn-neutral mt-4 text-white bg-blue-500 hover:bg-blue-700 border-0">Register</button>
           <Link to="/login" className='mt-3'>Do you have an account? <span className='text-red-500 underline'>Login</span></Link>
 
         </fieldset>

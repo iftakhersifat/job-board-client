@@ -11,7 +11,7 @@ const MyApplications = () => {
     const {user}=use(AuthContext);
     return (
         <div>
-            <Suspense fallback={'loading your applications'}>
+            <Suspense>
                 <ApplicationList myApplicationList ={myApplicationList(user.email)}></ApplicationList>
             </Suspense>
         </div>

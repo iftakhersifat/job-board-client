@@ -73,7 +73,7 @@ const JobAdd = () => {
             {/* job-categories */}
             <fieldset className="fieldset max-w-2xl mx-auto bg-base-200 border-base-300 rounded-box  border p-4">
                 <legend className="fieldset-legend">Job Categories</legend>
-            <select defaultValue="Pick a color" className="select">
+            <select defaultValue="Pick a color" className="select" name="category">
               <option disabled={true}>Select a Job Category</option>
               <option>Software Engineer</option>
               <option>Marketing Specialist</option>

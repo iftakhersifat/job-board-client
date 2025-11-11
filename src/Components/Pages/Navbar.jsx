@@ -34,7 +34,7 @@ const handleLogOut =() =>{
 
 
     return (
-        <div className="shadow-md sticky top-0 z-50">
+        <div className="shadow-md sticky top-0 z-50 bg-white">
             <div className="navbar max-w-6xl mx-auto">
   <div className="navbar-start">
     <div className="dropdown">
@@ -72,7 +72,7 @@ const handleLogOut =() =>{
   </div>
   <div className="navbar-end">
     {user? <><img src={user.photoURL || '/assets/user.png'} alt={user.displayName || 'User'} className="w-10 h-10 rounded-full mr-2 border-2 border-[#613FE5] object-cover" />
-    <button onClick={handleLogOut} className='btn bg-red-500 text-white px-4 py-1 rounded-xl font-medium hover:bg-red-600 transition'>Log Out</button></> : <><NavLink className="bg-blue-600 text-white px-4 py-1 rounded-lg font-medium hover:bg-blue-700" to="/login">Login</NavLink></>}
+    <button onClick={handleLogOut} className='btn bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 shadow-md hover:shadow-lg text-white px-4 py-1 rounded-xl font-medium hover:bg-red-600 transition'>Log Out</button></> : <><NavLink className="bg-gradient-to-r from-blue-500 to-indigo-600 shadow-lg hover:shadow-xl text-white px-4 py-1 rounded-lg font-medium hover:bg-blue-700" to="/login">Login</NavLink></>}
   </div>
 </div>
         </div>
