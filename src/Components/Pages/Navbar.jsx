@@ -21,6 +21,8 @@ const handleLogOut =() =>{
     <li><NavLink to="/myApplications" className={({isActive})=> isActive ? 'text-blue-600 font-medium underline' : 'hover:text-violet-500 font-medium transition'}>MyApplications</NavLink></li>
 
     <li><NavLink to="/addJob" className={({isActive})=> isActive ? 'text-blue-600 font-medium underline' : 'hover:text-violet-500 font-medium transition'}>Add Job</NavLink></li>
+
+    <li><NavLink to="/myPostedJobs" className={({isActive})=> isActive ? 'text-blue-600 font-medium underline' : 'hover:text-violet-500 font-medium transition'}>Posted Job</NavLink></li>
     </>
   }
   </>

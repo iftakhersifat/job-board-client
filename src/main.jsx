@@ -15,6 +15,7 @@ import Private from './Components/Firebase/Private.jsx';
 import ApplyJobs from './Components/Jobs/ApplyJobs.jsx';
 import MyApplications from './Components/Jobs/MyApplications.jsx';
 import JobAdd from './Components/AddJob/JobAdd.jsx';
+import MyPostedJobs from './Components/AddJob/MyPostedJobs.jsx';
 
 
 
@@ -35,6 +36,7 @@ const router = createBrowserRouter([
 
       // add job
       {path: '/addJob', element:<Private><JobAdd></JobAdd></Private>},
+      {path: '/myPostedJobs', element:<Private><MyPostedJobs></MyPostedJobs></Private>},
       // {path: '/profile', Component:ProfileUpdate},
       
     ]
