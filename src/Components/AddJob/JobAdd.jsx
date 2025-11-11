@@ -2,9 +2,14 @@ import React, { use } from 'react';
 import { AuthContext } from '../Firebase/AuthProvider';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router';
 
 const JobAdd = () => {
     const {user} = use(AuthContext);
+
+    // navigate
+    const navigate = useNavigate();
+
     const handleJobAdd =e=>{
         e.preventDefault();
         const form = e.target;
@@ -13,7 +18,7 @@ const JobAdd = () => {
         // console.log(data)
 
         const {min, max, currency, ...rest} = data
-        rest.SalaryRange = {min,max,currency}
+        rest.salaryRange = {min,max,currency}
         // console.log(rest)
         rest.requirements=rest.requirements.split(',').map(req=>req.trim())
         // console.log(rest)
@@ -28,8 +33,7 @@ const JobAdd = () => {
                 title: "This New Job has been Added and Published Successfully",
                 icon: "success",
                 draggable: true
-              });
-              console.log("successfully job add",result)
+              }).then(()=>{navigate('/')})
             }
         })
         .catch(error=>console.log(error))
@@ -52,17 +56,17 @@ const JobAdd = () => {
                 <input type="text" className="input input-bordered w-full" name='location' placeholder="Company Location" />
               
                 <label className="label">Company Logo</label>
-                <input type="url" className="input input-bordered w-full" name='logo' placeholder="Company URL" />
+                <input type="url" className="input input-bordered w-full" name='company_logo' placeholder="Company URL" />
             </fieldset>
 
             {/* job-type */}
             <fieldset className="fieldset max-w-2xl mx-auto bg-base-200 border-base-300 rounded-box  border p-4">
                 <legend className="fieldset-legend">Job Type</legend>
             <div className="filter">
-                <input className="btn filter-reset" type="radio" name="job-type" aria-label="All"/>
-                <input className="btn" type="radio" name="job-type" value="On-Site" aria-label="On-Site"/>
-                <input className="btn" type="radio" name="job-type" value="Remote" aria-label="Remote"/>
-                <input className="btn" type="radio" name="job-type" value="Hybrid" aria-label="Hybrid"/>
+                <input className="btn filter-reset" type="radio" name="jobType" aria-label="All"/>
+                <input className="btn" type="radio" name="jobType" value="On-Site" aria-label="On-Site"/>
+                <input className="btn" type="radio" name="jobType" value="Remote" aria-label="Remote"/>
+                <input className="btn" type="radio" name="jobType" value="Hybrid" aria-label="Hybrid"/>
             </div>
             </fieldset>
 
