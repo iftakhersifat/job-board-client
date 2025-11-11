@@ -1,12 +1,46 @@
-import React, { use } from 'react';
+import axios from 'axios';
+import React, { use, useEffect, useState } from 'react';
 import { Link } from 'react-router';
+import Swal from 'sweetalert2';
 
 const PostedJobList = ({postedJobPromise}) => {
-    const posted = use(postedJobPromise);
-    console.log(posted)
+    // keep jobs in state so we can update after delete
+  const [postedJob, setPostedJob] = useState([]);
+
+  // set initial state from list promise
+    useEffect(() => {
+      postedJobPromise.then(data => setPostedJob(data));
+    }, [postedJobPromise]);
+
+  // for delete button
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.delete(`http://localhost:3000/jobs/${id}`)
+          .then((res) => {
+            if (res.data.deletedCount > 0) {
+              Swal.fire("Deleted!", "Job has been deleted.", "success");
+              // remove from state so UI updates
+              setPostedJob((prev) => prev.filter((job) => job._id !== id));
+            }
+          })
+          .catch((err) =>{
+            console.log(err);
+            Swal.fire("Error!", "Something went wrong.", "error");
+          } );
+      }
+    });
+  };
+
     return (
         <div className='max-w-6xl mx-auto mt-12'>
-            <h1>{posted.length}</h1>
+            <h1>{postedJob.length}</h1>
 
             <div className="overflow-x-auto">
   <table className="table">
@@ -21,7 +55,7 @@ const PostedJobList = ({postedJobPromise}) => {
       </tr>
     </thead>
     <tbody>
-            {posted.map((post, index) => (
+            {postedJob.map((post, index) => (
               <tr key={post._id}>
                 <th>{index + 1}</th>
                 <td>
@@ -42,7 +76,7 @@ const PostedJobList = ({postedJobPromise}) => {
                 <td>
                   <button
                     className="btn text-white btn-error btn-xs"
-                    
+                    onClick={() => handleDelete(post._id)}
                   >
                     Delete
                   </button>
