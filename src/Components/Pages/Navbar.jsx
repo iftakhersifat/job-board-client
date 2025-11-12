@@ -71,8 +71,12 @@ const handleLogOut =() =>{
     </ul>
   </div>
   <div className="navbar-end">
-    {user? <><img src={user.photoURL || '/assets/user.png'} alt={user.displayName || 'User'} className="w-10 h-10 rounded-full mr-2 border-2 border-[#613FE5] object-cover" />
-    <button onClick={handleLogOut} className='btn bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 shadow-md hover:shadow-lg text-white px-4 py-1 rounded-xl font-medium hover:bg-red-600 transition'>Log Out</button></> : <><NavLink className="bg-gradient-to-r from-blue-500 to-indigo-600 shadow-lg hover:shadow-xl text-white px-4 py-1 rounded-lg font-medium hover:bg-blue-700" to="/login">Login</NavLink></>}
+    {user? <><img src={user.photoURL} alt={user.displayName || 'User'} className="w-10 h-10 rounded-full mr-2 border-2 border-[#613FE5] object-cover" />
+    <button onClick={handleLogOut} className='btn bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 shadow-md hover:shadow-lg text-white px-4 py-1 rounded-xl font-medium hover:bg-red-600 transition'>Log Out</button></> : <>
+    
+    <NavLink className="bg-gradient-to-r from-blue-500 to-indigo-600 shadow-lg hover:shadow-xl text-white px-4 py-1 rounded-lg font-medium hover:bg-blue-700" to="/login">Login</NavLink>
+    
+    </>}
   </div>
 </div>
         </div>

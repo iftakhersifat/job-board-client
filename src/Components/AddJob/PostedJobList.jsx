@@ -7,7 +7,6 @@ const PostedJobList = ({postedJobPromise}) => {
     // keep jobs in state so we can update after delete
   const [postedJob, setPostedJob] = useState([]);
 
-  // set initial state from list promise
     useEffect(() => {
       postedJobPromise.then(data => setPostedJob(data));
     }, [postedJobPromise]);
@@ -39,19 +38,24 @@ const PostedJobList = ({postedJobPromise}) => {
   };
 
     return (
-        <div className='max-w-6xl mx-auto mt-12'>
-            <h1>{postedJob.length}</h1>
+        <div className='max-w-6xl mx-auto mt-12 px-6 md:px-6 lg:px-0'>
 
-            <div className="overflow-x-auto">
-  <table className="table">
+            {postedJob.length === 0 ? (<div className="text-center py-20">
+      <h1 className="text-3xl md:text-4xl font-extrabold text-gray-500 mb-2">No Jobs Posted</h1>
+      <p className="text-gray-400 text-sm sm:text-base"> You haven’t posted any jobs yet. Once you post jobs, they will appear here. </p>
+    </div>) : (<div> 
+    <h1 className="text-4xl text-center font-extrabold text-blue-600 relative mb-8"> Posted Jobs</h1> 
+    
+    <div className="overflow-x-auto rounded-2xl shadow-lg border border-gray-200">
+    <table className="table">
     {/* head */}
-    <thead>
+    <thead className="bg-blue-50">
       <tr>
         <th>List</th>
         <th>Company</th>
         <th>Job Category & Location</th>
         <th>Deadline</th>
-        <th></th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -65,34 +69,25 @@ const PostedJobList = ({postedJobPromise}) => {
                     </div>
                   </div>
                 </td>
-                <td>
-                  {post.title}
-                  <br />
-                  <span className="badge badge-ghost badge-sm">
-                    {post.location}
-                  </span>
+                <td> {post.title} <br /> <span className="badge badge-ghost badge-sm"> {post.location} </span>
                 </td>
                 <td>{post.deadline}</td>
                 <td>
-                  <button
-                    className="btn text-white btn-error btn-xs"
-                    onClick={() => handleDelete(post._id)}
-                  >
-                    Delete
-                  </button>
-                </td>
-                <th>
+                  <div className='md:space-x-2 space-y-2'>
+                    <button className="btn btn-xs py-4 px-3 md:py-2 text-white bg-red-500 hover:bg-red-600 rounded-lg md:text-xs text-sm transition" onClick={() => handleDelete(post._id)}>Delete</button>
                   <Link to={`/applications/${post._id}`}>
-                    <button className="btn bg-blue-400 text-white rounded-box px-4 py-3 hover:bg-blue-600 btn-xs">
-                      View Application
-                    </button>
+
+                    <button className="px-3 py-1 bg-blue-500 text-white hover:bg-blue-700 rounded-lg md:text-xs text-sm text-wrap transition">View Application</button>
                   </Link>
-                </th>
+                  </div>
+                </td>
+                
               </tr>
             ))}
           </tbody>
-  </table>
-</div>
+  </table></div>
+  
+</div>)}
         </div>
     );
 };

@@ -149,7 +149,7 @@ const JobAdd = () => {
 
             {/* job add button */}
             {/* button */}
-            <button type="submit" className="btn mt-4 rounded-xl w-full bg-blue-500 text-white hover:bg-blue-600 px-6">Add Job </button>
+            <button type="submit" className="btn mt-4 rounded-xl w-full bg-gradient-to-r from-purple-500 via-blue-500 to-indigo-500  text-white  px-6">Add Job </button>
 
             </form>
         </div>
