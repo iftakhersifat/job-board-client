@@ -44,7 +44,14 @@ const PostedJobList = ({postedJobPromise}) => {
       <h1 className="text-3xl md:text-4xl font-extrabold text-gray-500 mb-2">No Jobs Posted</h1>
       <p className="text-gray-400 text-sm sm:text-base"> You haven’t posted any jobs yet. Once you post jobs, they will appear here. </p>
     </div>) : (<div> 
-    <h1 className="text-4xl text-center font-extrabold text-blue-600 relative mb-8"> Posted Jobs</h1> 
+    <div className="text-center py-6 px-6 relative">
+
+          <h1 className="text-4xl md:text-5xl font-extrabold mt-6">
+            <span className="text-4xl text-center font-extrabold text-blue-600 ">Posted Jobs</span>
+          </h1>
+        
+          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 mx-auto mt-3 rounded-full"></div>
+          </div>
     
     <div className="overflow-x-auto rounded-2xl shadow-lg border border-gray-200">
     <table className="table">

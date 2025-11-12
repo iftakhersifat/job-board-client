@@ -15,7 +15,6 @@ const handleLogOut =() =>{
 
   const links = <>
   <li><NavLink to="/" className={({isActive})=> isActive ? 'text-blue-600 font-medium underline' : 'hover:text-violet-500 font-medium transition'}>Home</NavLink></li>
-  <li><NavLink to="/profile">Profile</NavLink></li>
   {
     user && <>
     <li><NavLink to="/myApplications" className={({isActive})=> isActive ? 'text-blue-600 font-medium underline' : 'hover:text-violet-500 font-medium transition'}>MyApplications</NavLink></li>

@@ -4,7 +4,7 @@ import { FaSearch, FaMapMarkerAlt } from "react-icons/fa";
 const Banner = () => {
   return (
     <section className="relative bg-gradient-to-br from-white to-indigo-200 flex items-center py-12 lg:py-20 overflow-hidden">
-      <div className="container mx-auto w-full grid lg:grid-cols-2 gap-20 lg:gap-20 px-6 lg:px-0">
+      <div className="max-w-6xl mx-auto w-full grid lg:grid-cols-2 gap-20 lg:gap-20 px-6 lg:px-0">
         {/* Left Content */}
         <div className="flex flex-col justify-center text-center lg:text-left">
           <p className="text-blue-600 font-medium text-sm sm:text-base uppercase tracking-wide">

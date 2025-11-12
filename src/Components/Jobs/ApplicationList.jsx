@@ -30,11 +30,21 @@ const ApplicationList = ({myApplicationList}) => {
     });
   };
     return (
-        <div className='max-w-6xl mx-auto px-6 md:px-6 lg:px-0 mt-24'>
+        <div className='max-w-6xl mx-auto px-6 md:px-6 lg:px-0 mt-12'>
 
            {applicationList.length === 0 ? (<div className="text-center py-20">
       <h1 className="text-3xl md:text-4xl font-extrabold text-gray-500 mb-2">No Applications</h1>
-      <p className="text-gray-400 text-sm sm:text-base"> You haven’t applied to any jobs yet. Once you apply, your applications will appear here.</p> </div>): (<div className="overflow-x-auto rounded-2xl shadow-lg border border-gray-200">
+      <p className="text-gray-400 text-sm sm:text-base"> You haven’t applied to any jobs yet. Once you apply, your applications will appear here.</p> </div>): (
+        <div>
+          <div className="text-center py-6 px-6 relative">
+
+          <h1 className="text-4xl md:text-5xl font-extrabold mt-6">
+            <span className="text-4xl text-center font-extrabold text-blue-600 ">Application List</span>
+          </h1>
+        
+          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 mx-auto mt-3 rounded-full"></div>
+          </div>
+          <div className="overflow-x-auto rounded-2xl shadow-lg border border-gray-200">
         <table className="table w-full">
           <thead className="bg-blue-50">
             <tr>
@@ -62,7 +72,8 @@ const ApplicationList = ({myApplicationList}) => {
             ))}
           </tbody>
         </table>
-      </div>)} 
+      </div>
+        </div>)} 
         </div>
     );
 };
