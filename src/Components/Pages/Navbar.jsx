@@ -45,7 +45,7 @@ const handleLogOut =() =>{
         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
         {links}
         <li>
-          <a>Parent</a>
+          <a className='font-medium'>More</a>
           <ul className="p-2">
             {moreLinks}
           </ul>
@@ -63,7 +63,7 @@ const handleLogOut =() =>{
       {links}
       <li>
         <details>
-          <summary>More</summary>
+          <summary className='font-medium'>More</summary>
           <ul className="p-2">
             {moreLinks}
           </ul>

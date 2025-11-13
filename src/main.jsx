@@ -16,6 +16,8 @@ import MyApplications from './Components/Jobs/MyApplications.jsx';
 import JobAdd from './Components/AddJob/JobAdd.jsx';
 import MyPostedJobs from './Components/AddJob/MyPostedJobs.jsx';
 import ViewApplication from './Components/AddJob/ViewApplication.jsx';
+import NotFound from './Components/Pages/NotFound.jsx';
+
 
 
 
@@ -43,6 +45,9 @@ const router = createBrowserRouter([
       
     ]
   },
+  {
+    path: "*", Component: NotFound
+  }
   
 ]);
 
