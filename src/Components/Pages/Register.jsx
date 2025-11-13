@@ -65,7 +65,7 @@ const Register = () => {
           <fieldset className="fieldset">
           {/* name input */}
           <label className="label">Name</label>
-          <input type="text" name="name" className="input w-full" placeholder="Your Name" required/>
+          <input type="text" name="name" className="input w-full focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Your Name" required/>
 
           {/* email section */}
           <label className="label">Email</label>
@@ -73,7 +73,7 @@ const Register = () => {
 
           {/* photo url input */}
           <label className="label">Photo URL</label>
-          <input type="text" name="photo" placeholder="Enter your photo URL" className="input input-bordered w-full" required/>
+          <input type="text" name="photo" placeholder="Enter your photo URL" className="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-blue-500" required/>
 
           {/* password section */}
           <label className="label">Password</label>
