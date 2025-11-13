@@ -30,15 +30,6 @@ const Banner = () => {
                 className="w-full outline-none text-gray-700 text-sm sm:text-base placeholder-gray-400"
               />
             </div>
-            <div className="flex items-center gap-2 flex-1 border border-gray-200 rounded-lg px-3 py-2 focus-within:ring-2 focus-within:ring-blue-500">
-              <FaMapMarkerAlt className="text-gray-400" />
-              <input
-                type="text"
-                placeholder="City Or Postcode"
-                aria-label="City or Postcode"
-                className="w-full outline-none text-gray-700 text-sm sm:text-base placeholder-gray-400"
-              />
-            </div>
             <button className="bg-blue-600 text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg font-medium hover:bg-blue-700 transition text-sm sm:text-base focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
               Find Job
             </button>

@@ -53,7 +53,10 @@ const handleLogOut =() =>{
 
       </ul>
     </div>
-    <a className="btn btn-ghost text-xl">daisyUI</a>
+    {/* logo */}
+    <div className='ml-5 md:ml-5 lg:ml-0'>
+      <img src="/assets/logo.png" className='w-[200px] -ml-8' alt="" />
+    </div>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">

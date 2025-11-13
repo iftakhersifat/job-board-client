@@ -10,16 +10,16 @@ const Jobs = ({jobsPromise}) => {
             <div className="text-center py-14 px-6 relative">
 
           <h1 className="text-4xl md:text-5xl font-extrabold mt-6">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-purple-600 to-pink-600">Hot Jobs</span>
-          </h1>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-purple-600 to-pink-600">Hot Jobs</span></h1>
         
           <div className="w-24 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 mx-auto mt-3 rounded-full"></div>
           
           <p className="text-gray-600 mt-6 max-w-2xl mx-auto text-base md:text-lg"> Discover the latest career opportunities and apply to positions that align with your passion and expertise. Stay ahead of the competition with today’s top openings.</p>
           </div>
-            <div className='grid grid-cols-1 md:grid-cols-3 px-6 md:px-6 lg:px-0 gap-4'>
-                {jobs.map(job=>(
-                    <div key={job._id} className="group relative border border-transparent bg-gradient-to-br from-white to-blue-50 hover:from-blue-50 hover:to-white shadow-md hover:shadow-xl rounded-2xl p-6 h-[440px] md:h-[480px] flex flex-col justify-between transition-all duration-500 hover:-translate-y-1">
+          
+        <div className='grid grid-cols-1 md:grid-cols-3 px-6 md:px-6 lg:px-0 gap-4'>
+        {jobs.map(job=>(
+        <div key={job._id} className="group relative border border-transparent bg-gradient-to-br from-white to-blue-50 hover:from-blue-50 hover:to-white shadow-md hover:shadow-xl rounded-2xl p-6 h-[440px] md:h-[480px] flex flex-col justify-between transition-all duration-500 hover:-translate-y-1">
 
   <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-purple-500 rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 

@@ -7,7 +7,7 @@ const MoreDetails = () => {
     console.log(job)
     return (
         <div className='max-w-6xl mx-auto px-6 md:px-6 lg:px-0 mt-24'>
-            <div className="group relative border border-transparent bg-gradient-to-br from-white via-blue-50 to-blue-100 hover:from-blue-100 hover:to-white rounded-2xl p-6 h-[580px] md:h-[520px] flex flex-col justify-between shadow-md  transition-all duration-500">
+        <div className="group relative border border-transparent bg-gradient-to-br from-white via-blue-50 to-blue-100 hover:from-blue-100 hover:to-white rounded-2xl p-6 h-[580px] md:h-[520px] flex flex-col justify-between shadow-md  transition-all duration-500">
 
   <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
@@ -61,8 +61,7 @@ const MoreDetails = () => {
         {job.responsibilities.map((responsibility, index) => (
           <span
             key={index}
-            className="px-3 py-1 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 text-xs rounded-full text-gray-700 hover:text-blue-600 transition-all"
-          >
+            className="px-3 py-1 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 text-xs rounded-full text-gray-700 hover:text-blue-600 transition-all">
             {responsibility}
           </span>
         ))}

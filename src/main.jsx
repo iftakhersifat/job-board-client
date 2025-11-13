@@ -9,7 +9,6 @@ import Home from './Components/Pages/Home.jsx';
 import Login from './Components/Pages/Login.jsx';
 import Register from './Components/Pages/Register.jsx';
 import AuthProvider from './Components/Firebase/AuthProvider.jsx';
-import ProfileUpdate from './Components/Pages/ProfileUpdate.jsx';
 import MoreDetails from './Components/Jobs/MoreDetails.jsx';
 import Private from './Components/Firebase/Private.jsx';
 import ApplyJobs from './Components/Jobs/ApplyJobs.jsx';
@@ -41,7 +40,6 @@ const router = createBrowserRouter([
       {path: '/applications/:id', element:<Private><ViewApplication></ViewApplication></Private>,
         loader: ({params})=> fetch(`http://localhost:3000/applications/job/${params.id}`)
       },
-      // {path: '/profile', Component:ProfileUpdate},
       
     ]
   },

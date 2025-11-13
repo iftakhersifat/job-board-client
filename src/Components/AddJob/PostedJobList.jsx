@@ -4,7 +4,6 @@ import { Link } from 'react-router';
 import Swal from 'sweetalert2';
 
 const PostedJobList = ({postedJobPromise}) => {
-    // keep jobs in state so we can update after delete
   const [postedJob, setPostedJob] = useState([]);
 
     useEffect(() => {
