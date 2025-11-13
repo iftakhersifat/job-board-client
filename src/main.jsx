@@ -17,9 +17,7 @@ import JobAdd from './Components/AddJob/JobAdd.jsx';
 import MyPostedJobs from './Components/AddJob/MyPostedJobs.jsx';
 import ViewApplication from './Components/AddJob/ViewApplication.jsx';
 import NotFound from './Components/Pages/NotFound.jsx';
-
-
-
+import { Toaster } from 'react-hot-toast';
 
 
 const router = createBrowserRouter([
@@ -55,6 +53,7 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
 
     <AuthProvider>
+      <Toaster position="top-right" reverseOrder={false} />
       <RouterProvider router={router} />,
     </AuthProvider>
 

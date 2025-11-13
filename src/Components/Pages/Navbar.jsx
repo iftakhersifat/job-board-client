@@ -1,6 +1,7 @@
 import React, { use } from 'react';
 import { NavLink } from 'react-router';
 import { AuthContext } from '../Firebase/AuthProvider';
+import toast from 'react-hot-toast';
 
 const Navbar = () => {
   // for user check
@@ -9,8 +10,8 @@ const Navbar = () => {
 //  logout handel
 const handleLogOut =() =>{
   logOut()
-  .then(()=>console.log("logout successfully"))
-  .catch(()=>console.log("logout failed"))
+  .then(()=>toast.success('Logout successfully!'))
+  .catch((error)=>toast.error(error.message || "Log out failed"))
 }
 
   const links = <>
