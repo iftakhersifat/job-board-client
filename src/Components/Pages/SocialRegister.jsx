@@ -15,7 +15,6 @@ const SocialRegister = ({from}) => {
             toast.success("Successfully Registered!", { duration: 3000 });
             navigate(from)
         }).catch(error=> console.log(error))
-        toast.error("Registration Failed! Try again.", { duration: 3000 });
     }
     return (
         <div>

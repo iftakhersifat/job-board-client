@@ -15,7 +15,6 @@ const SocialLogin = ({from}) => {
             toast.success("Successfully Logged In!", { duration: 3000 });
             navigate(from)
         }).catch(error=> console.log(error))
-        toast.error("Login Failed! Please try again.", { duration: 3000 });
     }
     return (
         <div>
