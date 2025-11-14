@@ -4,13 +4,16 @@ import { Link } from 'react-router';
 const NotFound = () => {
     return (
         <div>
-            <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <h1 className="text-6xl font-bold text-red-500 mb-4">404</h1>
-      <p className="text-2xl text-gray-700 mb-6">Oops! Page Not Found</p>
-      <Link to="/"className="px-6 py-3 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition">
-        Go Back Home
-      </Link>
-    </div>
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 px-6">
+          
+        <h1 className="text-7xl md:text-9xl font-extrabold bg-gradient-to-r from-red-500 to-pink-500 text-transparent bg-clip-text">404</h1>
+        <p className="text-xl md:text-2xl text-gray-600 mt-4 mb-8 font-medium">Oops! The page you’re looking for doesn’t exist.</p>
+
+        <Link to="/" className="px-8 py-3 rounded-xl bg-gradient-to-r from-teal-500 to-teal-600 text-white font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">Go Back Home
+        </Link>
+  
+        </div>
+
         </div>
     );
 };
