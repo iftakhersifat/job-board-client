@@ -1,5 +1,6 @@
 import React, { use } from 'react';
 import { AuthContext } from '../Firebase/AuthProvider';
+import { jobCategories } from "../../Data/jobCategories";
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router';
@@ -73,12 +74,11 @@ const JobAdd = () => {
             {/* job-categories */}
             <fieldset className="fieldset max-w-2xl mx-auto bg-base-200 border-base-300 rounded-box  border p-4">
                 <legend className="fieldset-legend">Job Categories</legend>
-            <select defaultValue="Pick a color" className="select" name="category">
-              <option disabled={true}>Select a Job Category</option>
-              <option>Software Engineer</option>
-              <option>Marketing Specialist</option>
-              <option>Finance Manager</option>
-              <option>Project Manager</option>
+            <select className="select w-full" name="category" required>
+            <option disabled value="">Select a Job Category</option>
+              {jobCategories.map((c, i) => (
+                <option key={i} value={c}>{c}</option>
+              ))}
             </select>
             </fieldset>
 

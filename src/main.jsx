@@ -18,6 +18,7 @@ import MyPostedJobs from './Components/AddJob/MyPostedJobs.jsx';
 import ViewApplication from './Components/AddJob/ViewApplication.jsx';
 import NotFound from './Components/Pages/NotFound.jsx';
 import { Toaster } from 'react-hot-toast';
+import CategoryJobs from './Components/AddJob/CategoryJobs.jsx';
 
 
 const router = createBrowserRouter([
@@ -40,6 +41,11 @@ const router = createBrowserRouter([
       {path: '/applications/:id', element:<Private><ViewApplication></ViewApplication></Private>,
         loader: ({params})=> fetch(`http://localhost:3000/applications/job/${params.id}`)
       },
+      {
+        path: '/category/:category', element: <CategoryJobs></CategoryJobs>
+      },
+
+      
       
     ]
   },
