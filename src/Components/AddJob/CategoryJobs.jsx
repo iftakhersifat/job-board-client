@@ -8,13 +8,18 @@ const CategoryJobs = () => {
   const decodedCategory = decodeURIComponent(category);
 
   const [jobs, setJobs] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true); // Start loading
+
     axios.get("http://localhost:3000/jobs").then((res) => {
       const filtered = res.data.filter(
         (job) => job.category === decodedCategory
       );
       setJobs(filtered);
+
+      setLoading(false);
     });
   }, [decodedCategory]);
 
@@ -23,7 +28,11 @@ const CategoryJobs = () => {
       <h1 className="text-3xl font-bold text-blue-600 mb-2">{decodedCategory}</h1>
       <p className="text-gray-600 mb-8">Showing jobs under this category</p>
 
-      {jobs.length === 0 ? (
+      {loading ? (
+        <div className="flex justify-center items-center py-20">
+          <span className="loading loading-spinner text-info w-8 h-8"></span>
+        </div>
+      ) : jobs.length === 0 ? (
         <div className="text-center py-20">
           <h2 className="text-3xl font-bold text-gray-500">No Jobs Found</h2>
           <p className="text-gray-400">No jobs available for this category yet.</p>
