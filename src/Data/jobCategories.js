@@ -1,5 +1,18 @@
 export const jobCategories = [
+  "Software & Web Development",
+  "AI/Machine Learning/Data Science",
+  "UI/UX Design",
+  "Graphics & Multimedia",
+  "Video Editing/Animation",
+  "Project/Product Management",
+  "Cybersecurity",
+  "Cloud Computing",
+  "Digital Marketing/SEO",
+  "Content Creation",
+  "Social Media Management",
+
   "Accounting/Finance",
+  "Teaching",
   "Agro (Plant/Animal/Fisheries)",
   "Bank/Non-Bank Fin. Institution",
   "Beautician/ Salon worker",

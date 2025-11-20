@@ -4,9 +4,9 @@ import { Link } from "react-router";
 
 const JobCard = ({ job }) => {
   return (
-    <div className="group relative border border-transparent bg-gradient-to-br from-white to-blue-50 hover:from-blue-50 hover:to-white shadow-md hover:shadow-xl rounded-2xl p-6 h-[440px] md:h-[480px] flex flex-col justify-between transition-all duration-500 hover:-translate-y-1">
+    <div className="group relative border border-transparent bg-linear-to-br from-white to-blue-50 hover:from-blue-50 hover:to-white shadow-md hover:shadow-xl rounded-2xl p-6 h-[440px] md:h-[480px] flex flex-col justify-between transition-all duration-500 hover:-translate-y-1">
 
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-purple-500 rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+      <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-blue-400 to-purple-500 rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
       {/* company info */}
       <div className="flex gap-4 items-center mb-4">
@@ -42,7 +42,7 @@ const JobCard = ({ job }) => {
           {job.requirements?.map((skill, index) => (
             <span
               key={index}
-              className="px-3 py-1 bg-gradient-to-r from-blue-100 to-purple-100 border border-blue-200 text-xs font-semibold rounded-full hover:scale-105 hover:shadow-sm transition-all duration-200"
+              className="px-3 py-1 bg-linear-to-r from-blue-100 to-purple-100 border border-blue-200 text-xs font-semibold rounded-full hover:scale-105 hover:shadow-sm transition-all duration-200"
             >
               {skill}
             </span>
@@ -52,7 +52,7 @@ const JobCard = ({ job }) => {
 
       <div className="mt-6">
         <Link to={`/jobs/${job._id}`}>
-          <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+          <button className="w-full bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
             More Details
           </button>
         </Link>
