@@ -3,7 +3,7 @@ import { FaSearch, FaMapMarkerAlt } from "react-icons/fa";
 
 const Banner = () => {
   return (
-    <section className="relative bg-gradient-to-br from-white to-indigo-200 flex items-center py-12 lg:py-20 overflow-hidden">
+    <div className="relative bg-linear-to-br from-white to-indigo-200 flex items-center py-12 lg:py-20 overflow-hidden">
       <div className="max-w-6xl mx-auto w-full grid lg:grid-cols-2 gap-20 lg:gap-20 px-6 lg:px-0">
         {/* Left Content */}
         <div className="flex flex-col justify-center text-center lg:text-left">
@@ -47,7 +47,7 @@ const Banner = () => {
           <img
             src="/assets/man-BwOz4zHp.png"
             alt="Businessman"
-            className="relative z-10 max-h-[260px] sm:max-h-[400px] lg:max-h-[700px] object-contain drop-shadow-xl"
+            className="relative z-10 max-h-[260px] sm:max-h-[400px] lg:max-h-[710px] object-contain drop-shadow-xl"
           />
 
           {/* Rotating Dashed Circle + Logos */}
@@ -82,7 +82,7 @@ const Banner = () => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
