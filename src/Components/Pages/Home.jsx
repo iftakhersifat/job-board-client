@@ -2,6 +2,7 @@ import React from 'react';
 import Banner from './Banner.jsx';
 import Jobs from '../Jobs/Jobs.jsx';
 import CategorySection from '../AddJob/CategorySection.jsx';
+import BannerSection from './BannerSection.jsx';
 
 // jobs gula fetch korbo
 const jobsPromise =fetch('http://localhost:3000/jobs')
@@ -10,7 +11,9 @@ const jobsPromise =fetch('http://localhost:3000/jobs')
 const Home = () => {
     return (
         <div>
-            <Banner></Banner>
+            {/* <Banner></Banner> */}
+            <BannerSection></BannerSection>
+            
             <CategorySection></CategorySection>
             <Jobs jobsPromise={jobsPromise}></Jobs>
         </div>

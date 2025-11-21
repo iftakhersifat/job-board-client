@@ -19,6 +19,7 @@ import ViewApplication from './Components/AddJob/ViewApplication.jsx';
 import NotFound from './Components/Pages/NotFound.jsx';
 import { Toaster } from 'react-hot-toast';
 import CategoryJobs from './Components/AddJob/CategoryJobs.jsx';
+import DivisionJobs from './Components/Divison/DivisionJobs.jsx';
 
 
 const router = createBrowserRouter([
@@ -43,6 +44,9 @@ const router = createBrowserRouter([
       },
       {
         path: '/category/:category', element: <CategoryJobs></CategoryJobs>
+      },
+      {
+        path:"/division/:division", element:<DivisionJobs></DivisionJobs>
       },
 
       
