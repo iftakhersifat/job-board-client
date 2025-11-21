@@ -3,11 +3,17 @@ import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 
 const ApplicationList = ({myApplicationList}) => {
+  const [loading, setLoading] = useState(true);
     const [applicationList, setApplicationList] = useState([]);
 
   useEffect(() => {
-    myApplicationList.then(data => setApplicationList(data));
+    setLoading(true);
+    myApplicationList.then(data => {
+      setApplicationList(data);
+      setLoading(false);
+    });
   }, [myApplicationList]);
+
 
     const handleDelete = (id) => {
     Swal.fire({
@@ -32,10 +38,13 @@ const ApplicationList = ({myApplicationList}) => {
     return (
         <div className='max-w-6xl mx-auto px-6 md:px-6 lg:px-0 mt-12'>
 
-           {applicationList.length === 0 ? (<div className="text-center py-20">
+           {loading ? (<div className="flex justify-center items-center py-20">
+          <span className="loading loading-spinner text-info w-8 h-8"></span>
+        </div>) :
+           applicationList.length === 0 ? (<div className="text-center py-20">
       <h1 className="text-3xl md:text-4xl font-extrabold text-gray-500 mb-2">No Applications</h1>
-      <p className="text-gray-400 text-sm sm:text-base"> You haven’t applied to any jobs yet. Once you apply, your applications will appear here.</p> </div>): (
-        <div>
+      <p className="text-gray-400 text-sm sm:text-base"> You haven’t applied to any jobs yet. Once you apply, your applications will appear here.</p> </div>): 
+      (<div>
           <div className="text-center py-6 px-6 relative">
 
           <h1 className="text-4xl md:text-5xl font-extrabold mt-6">

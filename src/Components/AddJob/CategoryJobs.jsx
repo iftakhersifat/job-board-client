@@ -11,7 +11,7 @@ const CategoryJobs = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true); // Start loading
+    setLoading(true);
 
     axios.get("http://localhost:3000/jobs").then((res) => {
       const filtered = res.data.filter(
