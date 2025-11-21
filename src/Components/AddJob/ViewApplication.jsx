@@ -28,8 +28,8 @@ const ViewApplication = () => {
     return (
         <div className='max-w-6xl mx-auto px-6 md:px-6 lg:px-0 mt-12'>
         <div className="mb-8 text-center">
-        <h1 className="text-4xl font-extrabold text-blue-600 relative mb-2"> Applicant Dashboard</h1>
-        <p className="text-gray-500 max-w-2xl mx-auto">Track all applicants, view their resumes, and update the status in real-time.</p>
+        <h1 className="text-4xl font-extrabold text-blue-600 relative mb-2"> Applicant <span className='text-violet-600'>Dashboard</span></h1>
+        <div className="w-38 h-1 bg-linear-to-r from-blue-500 via-purple-500 to-blue-500 mx-auto mt-3 rounded-full"></div>
         </div>
     <div className="overflow-x-auto rounded-xl shadow-lg border border-gray-200">
       <table className="table">

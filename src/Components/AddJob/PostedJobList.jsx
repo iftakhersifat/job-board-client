@@ -4,10 +4,15 @@ import { Link } from 'react-router';
 import Swal from 'sweetalert2';
 
 const PostedJobList = ({postedJobPromise}) => {
+  const [loading, setLoading] = useState(true);
   const [postedJob, setPostedJob] = useState([]);
 
     useEffect(() => {
-      postedJobPromise.then(data => setPostedJob(data));
+      setLoading(true);
+      postedJobPromise.then(data => {
+        setPostedJob(data);
+        setLoading(false);
+      });
     }, [postedJobPromise]);
 
   // for delete button
@@ -39,17 +44,21 @@ const PostedJobList = ({postedJobPromise}) => {
     return (
         <div className='max-w-6xl mx-auto mt-12 px-6 md:px-6 lg:px-0'>
 
-            {postedJob.length === 0 ? (<div className="text-center py-20">
+            {loading ? (<div className="flex justify-center items-center py-20">
+          <span className="loading loading-spinner text-info w-8 h-8"></span>
+        </div>):
+            postedJob.length === 0 ? (<div className="text-center py-20">
       <h1 className="text-3xl md:text-4xl font-extrabold text-gray-500 mb-2">No Jobs Posted</h1>
       <p className="text-gray-400 text-sm sm:text-base"> You haven’t posted any jobs yet. Once you post jobs, they will appear here. </p>
-    </div>) : (<div> 
+    </div>) : 
+    (<div> 
     <div className="text-center py-6 px-6 relative">
 
           <h1 className="text-4xl md:text-5xl font-extrabold mt-6">
             <span className="text-4xl text-center font-extrabold text-blue-600 ">Posted Jobs</span>
           </h1>
         
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 mx-auto mt-3 rounded-full"></div>
+          <div className="w-24 h-1 bg-linear-to-r from-blue-500 via-purple-500 to-blue-500 mx-auto mt-3 rounded-full"></div>
           </div>
     
     <div className="overflow-x-auto rounded-2xl shadow-lg border border-gray-200">
