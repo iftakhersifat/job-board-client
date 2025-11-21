@@ -54,7 +54,7 @@ export const jobCategories = [
   "Marketing/Sales",
   "Mason/ Construction worker",
   "Mechanic/Technician",
-  "Media/Advertisement/Event Mgt.",
+  "Media/Advertisement",
   "NGO/Development",
   "Nurse",
   "Other Special Skilled Jobs",

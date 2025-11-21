@@ -11,10 +11,10 @@ const CategorySection = () => {
     cat.toLowerCase().includes(search.toLowerCase()));
 
   return (
-    <div className="max-w-6xl mx-auto mt-20 px-6 md:px-6 lg:px-0">
+    <div className="max-w-6xl mx-auto mt-12 px-6 md:px-6 lg:px-0">
       
       <div className="flex flex-col md:flex-row items-center justify-between mb-12 gap-6">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-linear-to-r from-blue-700 via-purple-600 to-pink-600">Job Categories</h1>
+        <h1 className="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-linear-to-r from-blue-700 via-purple-600 to-pink-600 md:py-3">Job Categories</h1>
 
         <div className="relative w-full md:w-1/3">
           <input type="text" placeholder="Search category..." value={search} onChange={(e) => setSearch(e.target.value)} 
@@ -23,7 +23,7 @@ const CategorySection = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
         {filteredCategories.length > 0 ? (
           filteredCategories.map((cat, index) => (
             <Link key={index} to={`/category/${encodeURIComponent(cat)}`} 

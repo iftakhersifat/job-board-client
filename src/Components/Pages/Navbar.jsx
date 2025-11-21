@@ -35,7 +35,7 @@ const handleLogOut =() =>{
 
     return (
         <div className="shadow-md sticky top-0 z-50 bg-white">
-            <div className="navbar max-w-6xl mx-auto">
+            <div className="navbar max-w-6xl mx-auto px-6 md:px-6 lg:px-0">
   <div className="navbar-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -55,7 +55,7 @@ const handleLogOut =() =>{
       </ul>
     </div>
     {/* logo */}
-    <div className='ml-5 md:ml-5 lg:ml-0'>
+    <div className='ml-5 md:ml-5 lg:ml-4'>
       <img src="/assets/logo.png" className='w-[200px] -ml-8' alt="" />
     </div>
   </div>
@@ -74,7 +74,8 @@ const handleLogOut =() =>{
     </ul>
   </div>
   <div className="navbar-end">
-    {user? <><img src={user.photoURL} alt={user.displayName || 'User'} className="w-10 h-10 rounded-full mr-2 border-2 border-[#613FE5] object-cover" />
+    {user? <>
+    {/* <img src={user?.photoURL} alt={user?.displayName || 'User'} className="w-10 h-10 rounded-full mr-2 border-2 border-[#613FE5] object-cover" /> */}
     <button onClick={handleLogOut} className='btn bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 shadow-md hover:shadow-lg text-white px-4 py-1 rounded-xl font-medium hover:bg-red-600 transition'>Log Out</button></> : <>
     
     <NavLink className="bg-gradient-to-r from-blue-500 to-indigo-600 shadow-lg hover:shadow-xl text-white px-4 py-1 rounded-lg font-medium hover:bg-blue-700" to="/login">Login</NavLink>
