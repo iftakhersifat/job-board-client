@@ -20,20 +20,31 @@ const Banner = () => {
           </p>
 
           {/* Search Box */}
-          <div className="bg-white rounded-2xl shadow-lg p-3 sm:p-4 flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mt-8">
-            <div className="flex items-center gap-2 flex-1 border border-gray-200 rounded-lg px-3 py-2 focus-within:ring-2 focus-within:ring-blue-500">
-              <FaSearch className="text-gray-400" />
-              <input
-                type="text"
-                placeholder="Job Title, Keywords"
-                aria-label="Job Title or Keywords"
-                className="w-full outline-none text-gray-700 text-sm sm:text-base placeholder-gray-400"
-              />
-            </div>
-            <button className="bg-blue-600 text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg font-medium hover:bg-blue-700 transition text-sm sm:text-base focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-              Find Job
-            </button>
-          </div>
+          <div className="flex flex-col md:flex-row gap-4 items-center justify-center">
+{/* Search Input */}
+<div className="relative w-full md:w-1/2">
+<span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">🏷️</span>
+<input
+type="text"
+placeholder="Search by keyword"
+className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+/>
+</div>
+
+
+{/* Dropdown */}
+<select className="w-full md:w-1/4 px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none">
+<option>Government</option>
+<option>Private</option>
+<option>NGO</option>
+</select>
+
+
+{/* Search Button */}
+<button className="w-full md:w-auto bg-green-400 hover:bg-green-500 text-white font-semibold px-6 py-2 rounded-lg">
+Search
+</button>
+</div>
 
           <p className="text-gray-500 mt-4 text-xs sm:text-sm">
             <span className="font-medium">Popular Searches:</span> Designer,

@@ -1,12 +1,15 @@
-import React, { use } from 'react';
+import React, { use, useState } from 'react';
 import { AuthContext } from '../Firebase/AuthProvider';
 import { jobCategories } from "../../Data/jobCategories";
+import { jobLocations } from "../../Data/jobLocations";
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router';
 
 const JobAdd = () => {
     const {user} = use(AuthContext);
+    const [division, setDivision] = useState("");
+    const [district, setDistrict] = useState("");
 
     // navigate
     const navigate = useNavigate();
@@ -53,12 +56,67 @@ const JobAdd = () => {
                 <label className="label">Company Name</label>
                 <input type="text" className="input input-bordered w-full" name='company' placeholder="Company Name" />
               
-                <label className="label">Location</label>
-                <input type="text" className="input input-bordered w-full" name='location' placeholder="Company Location" />
+                {/* <label className="label">Location</label>
+                <input type="text" className="input input-bordered w-full" name='location' placeholder="Company Location" /> */}
               
                 <label className="label">Company Logo</label>
                 <input type="url" className="input input-bordered w-full" name='company_logo' placeholder="Company URL" />
             </fieldset>
+
+            {/* location */}
+            <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
+      <legend className="fieldset-legend">Job Location</legend>
+
+      {/* Division Select */}
+      <label className="label">Division</label>
+      <select
+        name="division"
+        className="select select-bordered w-full"
+        value={division}
+        onChange={(e) => {
+          setDivision(e.target.value);
+          setDistrict(""); // reset district on division change
+        }}
+        required
+      >
+        <option value="">Select Division</option>
+        {Object.keys(jobLocations).map((div, i) => (
+          <option key={i} value={div}>
+            {div}
+          </option>
+        ))}
+      </select>
+
+      {/* District Select */}
+      <label className="label mt-3">District</label>
+      <select
+        name="district"
+        className="select select-bordered w-full"
+        value={district}
+        onChange={(e) => setDistrict(e.target.value)}
+        disabled={!division}
+        required
+      >
+        <option value="">Select District</option>
+        {division &&
+          jobLocations[division].map((dist, i) => (
+            <option key={i} value={dist}>
+              {dist}
+            </option>
+          ))}
+      </select>
+
+      {/* Specific Area */}
+      <label className="label mt-3">Specific Area / Place</label>
+      <input
+        type="text"
+        name="area"
+        className="input input-bordered w-full"
+        placeholder="e.g., Uttara, Banani, Halishohor"
+        required
+      />
+    </fieldset>
+
 
             {/* job-type */}
             <fieldset className="fieldset max-w-2xl mx-auto bg-base-200 border-base-300 rounded-box  border p-4">
