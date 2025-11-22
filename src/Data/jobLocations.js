@@ -19,7 +19,7 @@ export const jobLocations ={
     "Bandarban",
     "Brahmanbaria",
     "Chandpur",
-    "Chattogram",
+    "Chittagong",
     "Cox's Bazar",
     "Cumilla",
     "Feni",

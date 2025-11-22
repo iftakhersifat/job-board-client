@@ -10,18 +10,18 @@ const Jobs = ({jobsPromise}) => {
             <div className="text-center py-14 px-6 relative">
 
           <h1 className="text-4xl md:text-5xl font-extrabold mt-6">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-purple-600 to-pink-600">Hot Jobs</span></h1>
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-700 via-purple-600 to-pink-600">Hot Jobs</span></h1>
         
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 mx-auto mt-3 rounded-full"></div>
+          <div className="w-24 h-1 bg-linear-to-r from-blue-500 via-purple-500 to-pink-500 mx-auto mt-3 rounded-full"></div>
           
           <p className="text-gray-600 mt-6 max-w-2xl mx-auto text-base md:text-lg"> Discover the latest career opportunities and apply to positions that align with your passion and expertise. Stay ahead of the competition with today’s top openings.</p>
           </div>
           
         <div className='grid grid-cols-1 md:grid-cols-3 px-6 md:px-6 lg:px-0 gap-4'>
         {jobs.map(job=>(
-        <div key={job._id} className="group relative border border-transparent bg-gradient-to-br from-white to-blue-50 hover:from-blue-50 hover:to-white shadow-md hover:shadow-xl rounded-2xl p-6 h-[440px] md:h-[480px] flex flex-col justify-between transition-all duration-500 hover:-translate-y-1">
+        <div key={job._id} className="group relative border border-transparent bg-linear-to-br from-white to-blue-50 hover:from-blue-50 hover:to-white shadow-md hover:shadow-xl rounded-2xl p-6 h-[440px] md:h-[480px] flex flex-col justify-between transition-all duration-500 hover:-translate-y-1">
 
-  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-purple-500 rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+  <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-blue-400 to-purple-500 rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
   {/* company info */}
   <div className="flex gap-4 items-center mb-4">
@@ -39,7 +39,7 @@ const Jobs = ({jobsPromise}) => {
   <div className="flex-1 space-y-3">
     <h2 className="font-bold text-2xl text-gray-800 group-hover:text-blue-700 transition-colors duration-300">{job.title}<span className="text-blue-500 font-medium text-base">({job.jobType})</span></h2>
 
-    <p className="text-sm font-medium text-gray-700 bg-gradient-to-r from-blue-100 to-blue-50 inline-block px-3 py-1 rounded-md shadow-sm">
+    <p className="text-sm font-medium text-gray-700 bg-linear-to-r from-blue-100 to-blue-50 inline-block px-3 py-1 rounded-md shadow-sm">
     {job.salaryRange?.min} - {job.salaryRange?.max} {job.salaryRange?.currency}</p>
 
     <p className="text-gray-600 text-sm">{job.description}</p>
@@ -47,14 +47,14 @@ const Jobs = ({jobsPromise}) => {
     {/* Skills */}
     <div className="flex flex-wrap gap-2 mt-4">
       {job.requirements?.map((skill, index) => (
-        <span key={index} className="px-3 py-1 bg-gradient-to-r from-blue-100 to-purple-100 border border-blue-200 text-xs font-semibold rounded-full hover:scale-105 hover:shadow-sm transition-all duration-200"> {skill}
+        <span key={index} className="px-3 py-1 bg-linear-to-r from-blue-100 to-purple-100 border border-blue-200 text-xs font-semibold rounded-full hover:scale-105 hover:shadow-sm transition-all duration-200"> {skill}
         </span>
       ))}
     </div>
   </div>
 
   <div className="mt-6">
-    <Link to={`/jobs/${job._id}`}><button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">More Details
+    <Link to={`/jobs/${job._id}`}><button className="w-full bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">More Details
     </button></Link>
   </div>
           </div>

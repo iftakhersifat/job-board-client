@@ -44,7 +44,7 @@ const MoreDetails = () => {
     <div>
       <h3 className="text-sm font-semibold text-gray-700 mb-2">Required Skills:</h3>
       <div className="flex flex-wrap gap-2">
-        {job.requirements.map((skill, index) => (
+        {job.requirements?.map((skill, index) => (
           <span
             key={index}
             className="px-3 py-1 bg-gradient-to-r from-blue-100 to-purple-100 text-xs font-medium text-blue-800 border border-blue-200 rounded-full hover:scale-105 transition-transform duration-200">
@@ -58,7 +58,7 @@ const MoreDetails = () => {
     <div>
       <h3 className="text-sm font-semibold text-gray-700 mb-2">Responsibilities:</h3>
       <div className="flex flex-wrap gap-2">
-        {job.responsibilities.map((responsibility, index) => (
+        {job.responsibilities?.map((responsibility, index) => (
           <span
             key={index}
             className="px-3 py-1 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 text-xs rounded-full text-gray-700 hover:text-blue-600 transition-all">
