@@ -20,6 +20,7 @@ import NotFound from './Components/Pages/NotFound.jsx';
 import { Toaster } from 'react-hot-toast';
 import CategoryJobs from './Components/AddJob/CategoryJobs.jsx';
 import DivisionJobs from './Components/Divison/DivisionJobs.jsx';
+import SearchJobsPage from './Components/Pages/SearchJobsPage.jsx';
 
 
 const router = createBrowserRouter([
@@ -47,6 +48,9 @@ const router = createBrowserRouter([
       },
       {
         path:"/division/:division", element:<DivisionJobs></DivisionJobs>
+      },
+      {
+        path:"/search/:searchTerm", element:<SearchJobsPage></SearchJobsPage>
       },
 
       
