@@ -3,7 +3,7 @@ import PostedJobList from './PostedJobList';
 import { AuthContext } from '../Firebase/AuthProvider';
 
 const postedJobPromise =email=>{
-    return fetch(`http://localhost:3000/jobs?email=${email}`)
+    return fetch(`http://localhost:5000/jobs?email=${email}`)
     .then(res=> res.json())
 }
 

@@ -32,7 +32,7 @@ const router = createBrowserRouter([
       {path: '/login', Component:Login},
       {path: '/register', Component:Register},
       {path: '/jobs/:id', Component:MoreDetails,
-        loader: ({params})=> fetch(`http://localhost:3000/jobs/${params.id}`)
+        loader: ({params})=> fetch(`http://localhost:5000/jobs/${params.id}`)
       },
       {path: '/jobApply/:id', element:<Private><ApplyJobs></ApplyJobs></Private>},
       {path: '/myApplications', element:<Private><MyApplications></MyApplications></Private>},
@@ -41,7 +41,7 @@ const router = createBrowserRouter([
       {path: '/addJob', element:<Private><JobAdd></JobAdd></Private>},
       {path: '/myPostedJobs', element:<Private><MyPostedJobs></MyPostedJobs></Private>},
       {path: '/applications/:id', element:<Private><ViewApplication></ViewApplication></Private>,
-        loader: ({params})=> fetch(`http://localhost:3000/applications/job/${params.id}`)
+        loader: ({params})=> fetch(`http://localhost:5000/applications/job/${params.id}`)
       },
       {
         path: '/category/:category', element: <CategoryJobs></CategoryJobs>

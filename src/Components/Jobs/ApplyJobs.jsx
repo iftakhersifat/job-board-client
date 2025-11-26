@@ -37,7 +37,7 @@ const ApplyJobs = () => {
             resume
         }
 
-        axios.post("http://localhost:3000/applications", application)
+        axios.post("http://localhost:5000/applications", application)
         .then(res=> {
             if(res.data.insertedId){
                 Swal.fire({

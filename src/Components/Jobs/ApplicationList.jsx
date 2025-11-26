@@ -24,7 +24,7 @@ const ApplicationList = ({myApplicationList}) => {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:3000/applications/${id}`)
+        axios.delete(`http://localhost:5000/applications/${id}`)
           .then(res => {
             if (res.data.deletedCount > 0) {
               Swal.fire('Deleted!', 'Application has been deleted.', 'success');

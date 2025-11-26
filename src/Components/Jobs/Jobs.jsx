@@ -17,7 +17,7 @@ const Jobs = ({jobsPromise}) => {
           <p className="text-gray-600 mt-6 max-w-2xl mx-auto text-base md:text-lg"> Discover the latest career opportunities and apply to positions that align with your passion and expertise. Stay ahead of the competition with today’s top openings.</p>
           </div>
           
-        <div className='grid grid-cols-1 md:grid-cols-3 px-6 md:px-6 lg:px-0 gap-4'>
+        <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 px-6 md:px-6 lg:px-0 gap-4'>
         {jobs.map(job=>(
         <div key={job._id} className="group relative border border-transparent bg-linear-to-br from-white to-blue-50 hover:from-blue-50 hover:to-white shadow-md hover:shadow-xl rounded-2xl p-6 h-[440px] md:h-[480px] flex flex-col justify-between transition-all duration-500 hover:-translate-y-1">
 

@@ -3,7 +3,7 @@ import ApplicationList from './ApplicationList';
 import { AuthContext } from '../Firebase/AuthProvider';
 
 const myApplicationList =email=>{
-     return fetch(`http://localhost:3000/applications?email=${email}`)
+     return fetch(`http://localhost:5000/applications?email=${email}`)
      .then(res => res.json());
 }
 

@@ -25,7 +25,7 @@ const PostedJobList = ({postedJobPromise}) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:3000/jobs/${id}`)
+        axios.delete(`http://localhost:5000/jobs/${id}`)
           .then((res) => {
             if (res.data.deletedCount > 0) {
               Swal.fire("Deleted!", "Job has been deleted.", "success");

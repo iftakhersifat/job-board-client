@@ -30,7 +30,7 @@ const JobAdd = () => {
         console.log(rest)
         rest.status="active";
 
-        axios.post('http://localhost:3000/jobs',rest)
+        axios.post('http://localhost:5000/jobs',rest)
         .then(result=>{
             if(result.data.insertedId){
                 Swal.fire({

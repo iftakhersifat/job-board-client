@@ -1,5 +1,5 @@
 import React, { use } from 'react';
-import { NavLink } from 'react-router';
+import { Link, NavLink } from 'react-router';
 import { AuthContext } from '../Firebase/AuthProvider';
 import toast from 'react-hot-toast';
 
@@ -55,9 +55,9 @@ const handleLogOut =() =>{
       </ul>
     </div>
     {/* logo */}
-    <div className='ml-5 md:ml-5 lg:ml-4'>
+    <Link to="/"><div className='ml-5 md:ml-5 lg:ml-4'>
       <img src="/assets/logo.png" className='w-[200px] -ml-8' alt="" />
-    </div>
+    </div></Link>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">

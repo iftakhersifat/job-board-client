@@ -14,7 +14,7 @@ const SearchJobsPage = () => {
     setLoading(true);
 
     axios
-      .get("http://localhost:3000/jobs")
+      .get("http://localhost:5000/jobs")
       .then((res) => {
         const filtered = res.data.filter((job) =>
           job.title.toLowerCase().includes(decodedTerm.toLowerCase())

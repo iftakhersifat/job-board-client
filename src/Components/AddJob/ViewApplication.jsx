@@ -9,7 +9,7 @@ const ViewApplication = () => {
 
     const handleStatus =(e, applicationID)=>{
         console.log(e.target.value, applicationID)
-       axios.patch(`http://localhost:3000/applications/${applicationID}`, { status: e.target.value })
+       axios.patch(`http://localhost:5000/applications/${applicationID}`, { status: e.target.value })
     .then(res => {
       if (res.data.modifiedCount) {
         Swal.fire({
