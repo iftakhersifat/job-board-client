@@ -3,7 +3,7 @@ import {FaFacebookF,FaTwitter,FaLinkedinIn,FaInstagram} from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-linear-to-br from-blue-50 to-blue-200  text-gray-700 mt-24 pt-12">
+    <footer className="bg-linear-to-br from-blue-50 to-blue-200  text-gray-700 mt-12 pt-12">
       <div className="max-w-6xl mx-auto px-6 lg:px-0 grid grid-cols-1 md:grid-cols-4 gap-8">
         <div className='space-y-3'>
           <img src="/assets/logo.png" className='w-[300px] -ml-7 lg:-ml-7 md:pl-2' alt="job-box" />

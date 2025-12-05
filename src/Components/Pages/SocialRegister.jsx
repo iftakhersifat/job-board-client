@@ -9,13 +9,16 @@ const SocialRegister = ({from}) => {
     // navigate kore home cole jabo
     const navigate = useNavigate();
     
-    const handleGoogle=()=>{
-        registerWithGoogle().then(result=>{
-            console.log(result);
-            toast.success("Successfully Registered!", { duration: 3000 });
-            navigate(from)
-        }).catch(error=> console.log(error))
+    const handleGoogle = async () => {
+    try {
+      await registerWithGoogle();
+      toast.success("Successfully Logged In!", { duration: 3000 });
+      navigate(from || "/");
+    } catch (error) {
+      toast.error("Login failed!");
+      console.log(error);
     }
+  };
     return (
         <div>
             <div className="divider">OR</div>

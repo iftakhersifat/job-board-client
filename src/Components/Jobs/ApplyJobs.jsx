@@ -13,46 +13,48 @@ const ApplyJobs = () => {
     // navigate 
     const navigate = useNavigate();
 
-    const handleApplyForm=e=>{
-        e.preventDefault();
+    const handleApplyForm = (e) => {
+    e.preventDefault();
 
-        const fullName = e.target.fullName.value;
-        const email = e.target.email.value;
-        const phone = e.target.phone.value;
-        const portfolio = e.target.portfolio.value;
-        const linkedIn = e.target.linkedin.value;
-        const github = e.target.github.value;
-        const resume = e.target.resume.value;
-        console.log(fullName, email, phone, portfolio, linkedIn, github, resume);
+    const fullName = e.target.fullName.value;
+    const email = e.target.email.value;
+    const phone = e.target.phone.value;
+    const portfolio = e.target.portfolio.value;
+    const linkedIn = e.target.linkedin.value;
+    const github = e.target.github.value;
+    const resume = e.target.resume.value;
 
-        const application ={
-            id,
-            applicant : user.email,
-            fullName,
-            email,
-            phone,
-            portfolio,
-            linkedIn,
-            github,
-            resume
-        }
+    const application = {
+        id,  // job ID
+        applicantUID: user.uid,
+        applicant: user.displayName || user.email,
+        applicantEmail: user.email,
+        fullName,
+        email,
+        phone,
+        portfolio,
+        linkedIn,
+        github,
+        resume
+    };
 
-        axios.post("http://localhost:5000/applications", application)
-        .then(res=> {
-            if(res.data.insertedId){
-                Swal.fire({
+    axios.post("http://localhost:5000/applications", application)
+    .then(res => {
+        if(res.data.insertedId){
+            Swal.fire({
                 position: "top-center",
                 icon: "success",
                 title: "Your Application has been Submitted",
                 showConfirmButton: false,
                 timer: 1500
-            }).then(()=>{
+            }).then(() => {
                 navigate('/myApplications');
-            })
-            }
-        })
-        .catch(error=> console.log(error))
-    }
+            });
+        }
+    })
+    .catch(error => console.log(error));
+};
+
     return (
         <div className='mt-24'>
             <form onSubmit={handleApplyForm} className="flex flex-col justify-center items-center px-4 sm:px-6 lg:px-0" >

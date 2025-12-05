@@ -21,6 +21,12 @@ import { Toaster } from 'react-hot-toast';
 import CategoryJobs from './Components/AddJob/CategoryJobs.jsx';
 import DivisionJobs from './Components/Divison/DivisionJobs.jsx';
 import SearchJobsPage from './Components/Pages/SearchJobsPage.jsx';
+import RolePrivate from './Components/Firebase/RolePrivate.jsx';
+import AdminPanel from './Components/Pages/AdminPanel.jsx';
+import AdminPrivate from './Components/Firebase/AdminPrivate.jsx';
+import Dashboard from './Components/Pages/Dashboard.jsx';
+// import AboutUs from './Components/Pages/AboutUs.jsx';
+
 
 
 const router = createBrowserRouter([
@@ -38,7 +44,7 @@ const router = createBrowserRouter([
       {path: '/myApplications', element:<Private><MyApplications></MyApplications></Private>},
 
       // add job
-      {path: '/addJob', element:<Private><JobAdd></JobAdd></Private>},
+      {path: '/addJob', element:<RolePrivate allowedRoles={["admin", "employee"]}><JobAdd></JobAdd></RolePrivate>},
       {path: '/myPostedJobs', element:<Private><MyPostedJobs></MyPostedJobs></Private>},
       {path: '/applications/:id', element:<Private><ViewApplication></ViewApplication></Private>,
         loader: ({params})=> fetch(`http://localhost:5000/applications/job/${params.id}`)
@@ -52,6 +58,10 @@ const router = createBrowserRouter([
       {
         path:"/search/:searchTerm", element:<SearchJobsPage></SearchJobsPage>
       },
+      {path: "/admin", element: (<AdminPrivate><AdminPanel /></AdminPrivate>),},
+      {path:"/dashboard", element:<Dashboard></Dashboard>},
+      // {path:"/about", element:<AboutUs></AboutUs>},
+
 
       
       

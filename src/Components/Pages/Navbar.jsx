@@ -16,15 +16,31 @@ const handleLogOut =() =>{
 
   const links = <>
   <li><NavLink to="/" className={({isActive})=> isActive ? 'text-blue-600 font-medium underline' : 'hover:text-violet-500 font-medium transition'}>Home</NavLink></li>
-  {
-    user && <>
+  {user && <>
     <li><NavLink to="/myApplications" className={({isActive})=> isActive ? 'text-blue-600 font-medium underline' : 'hover:text-violet-500 font-medium transition'}>MyApplications</NavLink></li>
+    </>}
 
-    <li><NavLink to="/addJob" className={({isActive})=> isActive ? 'text-blue-600 font-medium underline' : 'hover:text-violet-500 font-medium transition'}>Add Job</NavLink></li>
+  {/* {user?.role === "employee" && (<>
+  <li><NavLink to="/dashboard" className={({isActive})=> isActive ? 'text-blue-600 font-medium underline' : 'hover:text-violet-500 font-medium transition'}>Dashboard</NavLink></li>
+  </>)}
+  {user?.role === "user" && (<>
+  <li><NavLink to="/dashboard" className={({isActive})=> isActive ? 'text-blue-600 font-medium underline' : 'hover:text-violet-500 font-medium transition'}>Dashboard</NavLink></li>
+  </>)} */}
 
-    <li><NavLink to="/myPostedJobs" className={({isActive})=> isActive ? 'text-blue-600 font-medium underline' : 'hover:text-violet-500 font-medium transition'}>Posted Job</NavLink></li>
-    </>
-  }
+  {user?.role === "admin" && (<>
+  <li><NavLink to="/admin" className={({isActive})=> isActive ? 'text-violet-600 font-medium underline' : 'hover:text-violet-500 font-medium transition'}>Admin Panel</NavLink></li>
+
+  <li><NavLink to="/addJob" className={({isActive})=> isActive ? 'text-blue-600 font-medium underline' : 'hover:text-violet-500 font-medium transition'}>Add Job</NavLink></li>
+
+  <li><NavLink to="/myPostedJobs" className={({isActive})=> isActive ? 'text-blue-600 font-medium underline' : 'hover:text-violet-500 font-medium transition'}>Posted Job</NavLink></li>
+  </>)}
+
+  {user?.role === "employee" && (<>
+  <li><NavLink to="/addJob" className={({isActive})=> isActive ? 'text-blue-600 font-medium underline' : 'hover:text-violet-500 font-medium transition'}>Add Job</NavLink></li>
+
+  <li><NavLink to="/myPostedJobs" className={({isActive})=> isActive ? 'text-blue-600 font-medium underline' : 'hover:text-violet-500 font-medium transition'}>Posted Job</NavLink></li>
+  </>)}
+
   </>
 
   const moreLinks = <>

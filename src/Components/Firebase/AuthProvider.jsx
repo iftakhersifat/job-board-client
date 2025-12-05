@@ -1,77 +1,118 @@
-import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
-import React, { createContext, useEffect, useState } from 'react';
-import { auth } from './Firebase';
+import React, { createContext, useEffect, useState } from "react";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile, GoogleAuthProvider,onAuthStateChanged } from "firebase/auth";
+import { auth, db } from "./Firebase";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 export const AuthContext = createContext(null);
-
-// for register with google
 const provider = new GoogleAuthProvider();
 
-const AuthProvider = ({children}) => {
-    const [loading, setLoading] = useState(true);
-    const [user, setUser]= useState(null);
+const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-    // new user create (register)
-    const createUser =(email, password)=>{
-        setLoading(true)
-        return createUserWithEmailAndPassword(auth, email, password)
-    }
+  // Register with email/password
+  const createUser = (email, password) => {
+    setLoading(true);
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
 
-    // user login (login)
-    const userLogin =(email, password)=>{
-        setLoading(true)
-        return signInWithEmailAndPassword(auth, email, password)
-    }
+  // Login with email/password
+  const userLogin = (email, password) => {
+    setLoading(true);
+    return signInWithEmailAndPassword(auth, email, password);
+  };
 
-    // for check if user stay login or logout
-    useEffect(()=>{
-        const userCheck=onAuthStateChanged(auth, (currentUser)=>{
-            setUser(currentUser);
-            setLoading(false)
+  // Google login/register
+  const registerWithGoogle = async () => {
+    setLoading(true);
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const currentUser = result.user;
+
+      const ref = doc(db, "users", currentUser.uid);
+      const snap = await getDoc(ref);
+
+      if (!snap.exists()) {
+        // New user: create Firestore document
+        await setDoc(ref, {
+          name: currentUser.displayName || "No Name",
+          email: currentUser.email,
+          role: "user",
+          disabled: false,
         });
-        return ()=>{
-            userCheck();
-        }
-    },[])
+        setUser({
+          ...currentUser,
+          name: currentUser.displayName,
+          role: "user",
+          disabled: false,
+        });
+      } else {
+        const userData = snap.data();
+        setUser({
+          ...currentUser,
+          name: userData.name,
+          role: userData.role,
+          disabled: userData.disabled || false,
+        });
+      }
 
-    // log out
-    const logOut =()=>{
-        return signOut(auth);
+      setLoading(false);
+      return result;
+    } catch (err) {
+      setLoading(false);
+      throw err;
     }
+  };
 
-    // register with google 
-    const registerWithGoogle =()=>{
-        setLoading(true);
-        return signInWithPopup(auth, provider);
-    }
+  // Logout
+  const logOut = () => signOut(auth);
 
-    // update user profile
-    const UpdateUser = (updatedData) => {
+  // Update profile
+  const UpdateUser = (updatedData) => {
     return updateProfile(auth.currentUser, updatedData).then(() => {
-      setUser({...auth.currentUser});
+      setUser({ ...auth.currentUser });
     });
   };
 
+  // Listen for auth changes
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        const ref = doc(db, "users", currentUser.uid);
+        const snap = await getDoc(ref);
 
+        if (snap.exists()) {
+          const userData = snap.data();
+          setUser({
+            ...currentUser,
+            name: userData.name,
+            role: userData.role,
+            disabled: userData.disabled || false,
+          });
+        } else {
+          setUser(currentUser);
+        }
+      } else {
+        setUser(null);
+      }
+      setLoading(false);
+    });
 
+    return () => unsubscribe();
+  }, []);
 
-    const authInfo={
-        createUser,
-        userLogin,
-        logOut,
-        registerWithGoogle,
-        UpdateUser,
+  const authInfo = {
+    createUser,
+    userLogin,
+    logOut,
+    registerWithGoogle,
+    UpdateUser,
+    user,
+    loading,
+    setLoading,
+  };
 
-        user,
-
-        loading,
-        setLoading
-    }
-    return (
-        <AuthContext.Provider value={authInfo}>
-            {children}
-        </AuthContext.Provider>
-    );
+  return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
 };
 
 export default AuthProvider;

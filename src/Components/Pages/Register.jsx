@@ -4,6 +4,8 @@ import { AuthContext } from '../Firebase/AuthProvider';
 import toast from 'react-hot-toast';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import SocialRegister from './SocialRegister';
+import { db } from '../Firebase/Firebase';
+import { doc, setDoc } from 'firebase/firestore';
 
 const Register = () => {
     // for create user
@@ -34,24 +36,33 @@ const Register = () => {
         }
 
         // for create new user
-        createUser(email, pass).then(result=>{
-            console.log(result);
-            toast.success("Successfully Registered", { duration: 3000 });
-            navigate("/")
+        createUser(email, pass)
+  .then(async (result) => {
+    toast.success("Successfully Registered", { duration: 3000 });
 
-          UpdateUser({
-          displayName: name,
-          photoURL: photo,
-        })
-          .then(() => {
-            console.log("Profile updated!");
-            navigate(from);
-          })
-          .catch(err => console.error("Profile update failed:", err));
-        }).catch(error=>{
-            toast.error(error.message || "Failed to Register", { duration: 4000 });
+    const userId = result.user.uid;
 
-        })
+    // ✔ Save user to Firestore with default role = "user"
+    await setDoc(doc(db, "users", userId), {
+      name: name,
+      email: email,
+      photo: photo,
+      role: "user",  // Default role
+    });
+
+    // ✔ Update Firebase Auth Profile
+    await UpdateUser({
+      displayName: name,
+      photoURL: photo,
+    });
+
+    navigate(from);
+  })
+  .catch((error) => {
+    // toast.error(error.message || "Failed to Register");
+    console.log(error);
+  });
+
     }
     return (
         <div>

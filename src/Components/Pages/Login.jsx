@@ -29,7 +29,8 @@ const Login = () => {
             toast.success("Login Successfully", { duration: 3000 });
             navigate(from)
         }).catch(error=>{
-            toast.error(error.message || "Login failed", { duration: 4000 });
+            // toast.error(error.message || "Login failed", { duration: 4000 });
+            console.log(error);
         })
     }
     return (

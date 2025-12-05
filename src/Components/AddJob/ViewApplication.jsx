@@ -1,84 +1,169 @@
-import axios from 'axios';
-import React from 'react';
-import { useLoaderData, useParams } from 'react-router';
-import Swal from 'sweetalert2';
+import axios from "axios";
+import React from "react";
+import { useLoaderData, useParams } from "react-router";
+import Swal from "sweetalert2";
+import { db } from "../Firebase/Firebase";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+
+import { FaFileAlt, FaLinkedin, FaGithub, FaGlobe } from "react-icons/fa";
 
 const ViewApplication = () => {
-    const {id}= useParams();
-    const view = useLoaderData();
+  const { id } = useParams();
+  const applications = useLoaderData();
 
-    const handleStatus =(e, applicationID)=>{
-        console.log(e.target.value, applicationID)
-       axios.patch(`http://localhost:5000/applications/${applicationID}`, { status: e.target.value })
-    .then(res => {
+  const handleStatus = async (e, applicationID, applicantUID) => {
+    const newStatus = e.target.value;
+
+    try {
+      // Update MongoDB
+      const res = await axios.patch(
+        `http://localhost:5000/applications/${applicationID}`,
+        { status: newStatus }
+      );
+
       if (res.data.modifiedCount) {
         Swal.fire({
           icon: "success",
           title: "Status Updated!",
           timer: 1500,
-          showConfirmButton: false
+          showConfirmButton: false,
         });
+
+        // Notify user in Firestore
+        if (applicantUID) {
+          await addDoc(
+            collection(db, "notifications", applicantUID, "userNotifications"),
+            {
+              message: `Your application status has been updated to "${newStatus}"`,
+              type: "application",
+              createdAt: serverTimestamp(),
+            }
+          );
+        }
       }
-    })
-    .catch(err => {
-      console.error(err);
-    });
+    } catch (err) {
+      Swal.fire({
+        icon: "error",
+        title: "Failed to update status",
+        text: err.message,
+      });
     }
-    
-    return (
-        <div className='max-w-6xl mx-auto px-6 md:px-6 lg:px-0 mt-12'>
-        <div className="mb-8 text-center">
-        <h1 className="text-4xl font-extrabold text-blue-600 relative mb-2"> Applicant <span className='text-violet-600'>Dashboard</span></h1>
-        <div className="w-38 h-1 bg-linear-to-r from-blue-500 via-purple-500 to-blue-500 mx-auto mt-3 rounded-full"></div>
-        </div>
-    <div className="overflow-x-auto rounded-xl shadow-lg border border-gray-200">
-      <table className="table">
-    {/* head */}
-    <thead className="bg-blue-100">
-      <tr>
-        <th>List</th>
-        <th>Email</th>
-        <th>Resume & Others Link</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-       {
-        view.map((post, index)=>
-            <tr key={post._id}>
-        <th> {index+1} </th>
-        <td>
-          <div className="flex items-center gap-3">
-            <div>
-              <div className="font-bold">{post.applicant}</div>
+  };
+
+  return (
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 mt-20">
+
+      {/* Title */}
+      <div className="text-center mb-10">
+        <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text 
+        bg-gradient-to-r from-blue-600 to-violet-600">
+          Applicants Overview
+        </h1>
+        <p className="text-gray-600 mt-2">Manage and review all applications at one place.</p>
+      </div>
+
+      {/* Applicants List */}
+      <div className="grid grid-cols-1 gap-6">
+        {applications.map((app, index) => (
+          <div
+            key={app._id}
+            className="bg-white dark:bg-gray-800 shadow-md rounded-2xl p-6 border border-gray-200"
+          >
+            <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+
+              {/* Left Info */}
+              <div>
+                <h2 className="text-xl font-bold text-gray-800 dark:text-white">
+                  Applicant #{index + 1}
+                </h2>
+                <p className="text-gray-600 dark:text-gray-300 mt-1">
+                  <span className="font-semibold">Name:</span> {app.applicant}
+                </p>
+                <p className="text-gray-600 dark:text-gray-300">
+                  <span className="font-semibold">Email:</span> {app.applicantEmail}
+                </p>
+              </div>
+
+              {/* Status Dropdown */}
+              <div>
+                <select
+                  defaultValue={app.status}
+                  onChange={(e) => handleStatus(e, app._id, app.applicantUID)}
+                  className="select select-bordered select-md rounded-xl bg-white dark:bg-gray-700"
+                >
+                  <option disabled value="">
+                    Update Status
+                  </option>
+                  <option>Pending</option>
+                  <option>Call For Interview</option>
+                  <option>Hired</option>
+                  <option>Rejected</option>
+                </select>
+              </div>
+            </div>
+
+            {/* Links Section */}
+            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+              {/* Resume */}
+              <a
+                href={app.resume}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 p-3 rounded-xl bg-blue-50 text-blue-700 
+                hover:bg-blue-100 transition"
+              >
+                <FaFileAlt />
+                <span className="font-semibold">Resume</span>
+              </a>
+
+              {/* LinkedIn */}
+              {app.linkedIn && (
+                <a
+                  href={app.linkedIn}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 p-3 rounded-xl bg-blue-50 text-blue-700
+                  hover:bg-blue-100 transition"
+                >
+                  <FaLinkedin />
+                  <span className="font-semibold">LinkedIn</span>
+                </a>
+              )}
+
+              {/* GitHub */}
+              {app.github && (
+                <a
+                  href={app.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 p-3 rounded-xl bg-gray-100 text-gray-900
+                  hover:bg-gray-200 transition"
+                >
+                  <FaGithub />
+                  <span className="font-semibold">GitHub</span>
+                </a>
+              )}
+
+              {/* Portfolio */}
+              {app.portfolio && (
+                <a
+                  href={app.portfolio}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 p-3 rounded-xl bg-purple-50 text-purple-700
+                  hover:bg-purple-100 transition"
+                >
+                  <FaGlobe />
+                  <span className="font-semibold">Portfolio</span>
+                </a>
+              )}
             </div>
           </div>
-        </td>
-        <td> <a href={post.resume} target='_blank'className="text-blue-600 underline hover:text-blue-800 text-[16px]">View Resume</a> </td>
-        <td>
-        <select  defaultValue={post.status} onChange={(e)=>handleStatus(e, post._id)} className='border border-gray-300 rounded-lg px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500'>
-          <option disabled value="">Updated Status</option>
-          <option>Pending</option>
-          <option>Call For Interview</option>
-          <option>Hired</option>
-          <option>Rejected</option>
-        </select>
-        </td>
-        
-      </tr>
-        
-        )
-       }
-      
-      
-      
-    </tbody>
-
-  </table>
+        ))}
+      </div>
     </div>
-        </div> 
-
-    );
+  );
 };
 
 export default ViewApplication;
