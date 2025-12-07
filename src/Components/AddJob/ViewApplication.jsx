@@ -51,15 +51,13 @@ const ViewApplication = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 mt-20">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 mt-12">
 
       {/* Title */}
       <div className="text-center mb-10">
         <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text 
-        bg-gradient-to-r from-blue-600 to-violet-600">
-          Applicants Overview
-        </h1>
-        <p className="text-gray-600 mt-2">Manage and review all applications at one place.</p>
+        bg-linear-to-r from-blue-600 to-violet-600 py-4 md:py-6">Applicants Overview</h1>
+        <p className="text-gray-600">Manage and review all applications at one place.</p>
       </div>
 
       {/* Applicants List */}

@@ -84,7 +84,7 @@ const PostedJobList = ({postedJobPromise}) => {
                     </div>
                   </div>
                 </td>
-                <td> {post.title} <br /> <span className="badge badge-ghost badge-sm"> {post.location} </span>
+                <td> {post.title} <br /> <span className="badge badge-ghost badge-sm"> {post?.division} </span>
                 </td>
                 <td>{post.deadline}</td>
                 <td>
@@ -100,7 +100,8 @@ const PostedJobList = ({postedJobPromise}) => {
               </tr>
             ))}
           </tbody>
-  </table></div>
+  </table>
+  </div>
   
 </div>)}
         </div>
