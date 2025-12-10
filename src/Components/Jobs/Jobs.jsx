@@ -1,67 +1,104 @@
-import React, { use } from 'react';
-import { FaLocationDot } from 'react-icons/fa6';
-import { Link } from 'react-router';
+import React, { use } from "react";
+import { FaLocationDot } from "react-icons/fa6";
+import { Link } from "react-router";
 
-const Jobs = ({jobsPromise}) => {
-    const jobs = use(jobsPromise)
-    console.log(jobs)
-    return (
-        <div className='max-w-6xl mx-auto'>
-            <div className="text-center py-14 px-6 relative">
+const Jobs = ({ jobsPromise }) => {
+  const jobs = use(jobsPromise);
 
-          <h1 className="text-4xl md:text-5xl font-extrabold mt-6">
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-700 via-purple-600 to-pink-600">Hot Jobs</span></h1>
-        
-          <div className="w-24 h-1 bg-linear-to-r from-blue-500 via-purple-500 to-pink-500 mx-auto mt-3 rounded-full"></div>
-          
-          <p className="text-gray-600 mt-6 max-w-2xl mx-auto text-base md:text-lg"> Discover the latest career opportunities and apply to positions that align with your passion and expertise. Stay ahead of the competition with today’s top openings.</p>
-          </div>
-          
-        <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 px-6 md:px-6 lg:px-0 gap-4'>
-        {jobs.map(job=>(
-        <div key={job._id} className="group relative border border-transparent bg-linear-to-br from-white to-blue-50 hover:from-blue-50 hover:to-white shadow-md hover:shadow-xl rounded-2xl p-6 h-[440px] md:h-[480px] flex flex-col justify-between transition-all duration-500 hover:-translate-y-1">
+  return (
+    <div className="max-w-6xl mx-auto">
+      {/* Header Section */}
+      <div className="text-center py-16 px-6">
+        <h1 className="text-4xl md:text-5xl font-extrabold mt-6 tracking-tight">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 via-red-500 to-yellow-500 drop-shadow-sm">
+            Hot Jobs
+          </span>
+        </h1>
 
-  <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-blue-400 to-purple-500 rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div className="w-28 h-1 bg-gradient-to-r from-orange-500 via-red-500 to-yellow-500 mx-auto mt-4 rounded-full shadow-sm"></div>
 
-  {/* company info */}
-  <div className="flex gap-4 items-center mb-4">
-    <div className="w-16 h-16 rounded-xl bg-white border border-gray-200 flex items-center justify-center">
-      <img src={job.company_logo} alt="Company Logo" className="w-12 h-12 object-contain transition-transform duration-300 group-hover:scale-105"/>
-    </div>
+        <p className="text-gray-600 mt-6 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
+          Discover top opportunities tailored to your skills. Apply now and take
+          your career to the next level with today’s hottest job openings.
+        </p>
+      </div>
 
-    <div>
-      <h2 className="font-semibold text-lg text-gray-800 group-hover:text-blue-600 transition-colors duration-300">{job.company}</h2>
-      <p className="flex gap-1 items-center text-sm text-gray-500 mt-1"><FaLocationDot className="text-blue-500" />{job.location}</p>
-    </div>
-  </div>
+      {/* Job Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 px-6 lg:px-0">
+        {jobs
+          .filter((job) => job.status === "Active")
+          .map((job) => (
+            <div
+              key={job._id}
+              className="group relative bg-gradient-to-br from-white/80 to-orange-50/60 backdrop-blur-md hover:from-orange-50/80 hover:to-white/90 border border-transparent shadow-md hover:shadow-xl rounded-2xl p-6 h-[450px] md:h-[480px] flex flex-col justify-between transition-all duration-500 hover:-translate-y-2 hover:border-orange-300"
+            >
+              {/* Top gradient bar */}
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-400 via-red-500 to-yellow-500 rounded-t-2xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
 
-  {/* job details */}
-  <div className="flex-1 space-y-3">
-    <h2 className="font-bold text-2xl text-gray-800 group-hover:text-blue-700 transition-colors duration-300">{job.title}<span className="text-blue-500 font-medium text-base">({job.jobType})</span></h2>
+              {/* Company Info */}
+              <div className="flex gap-4 items-center mb-5">
+                <div className="w-16 h-16 rounded-xl bg-white border border-gray-200 shadow-sm flex items-center justify-center">
+                  <img
+                    src={job.company_logo}
+                    alt="Company Logo"
+                    className="w-12 h-12 object-contain transition-transform duration-300 group-hover:scale-110"
+                  />
+                </div>
 
-    <p className="text-sm font-medium text-gray-700 bg-linear-to-r from-blue-100 to-blue-50 inline-block px-3 py-1 rounded-md shadow-sm">
-    {job.salaryRange?.min} - {job.salaryRange?.max} {job.salaryRange?.currency}</p>
+                <div>
+                  <h2 className="font-semibold text-lg text-gray-800 group-hover:text-orange-600 transition-colors duration-300">
+                    {job.company}
+                  </h2>
+                  <p className="flex gap-1 items-center text-sm text-gray-500 mt-1">
+                    <FaLocationDot className="text-orange-500" /> {job.location}
+                  </p>
+                </div>
+              </div>
 
-    <p className="text-gray-600 text-sm">{job.description}</p>
+              {/* Job Details */}
+              <div className="flex-1 space-y-3">
+                <h2 className="font-bold text-xl text-gray-800 group-hover:text-orange-600 transition-colors duration-300 leading-snug">
+                  {job.title}
+                  <span className="text-orange-500 font-medium text-base ml-1">
+                    ({job.jobType})
+                  </span>
+                </h2>
 
-    {/* Skills */}
-    <div className="flex flex-wrap gap-2 mt-4">
-      {job.requirements?.map((skill, index) => (
-        <span key={index} className="px-3 py-1 bg-linear-to-r from-blue-100 to-purple-100 border border-blue-200 text-xs font-semibold rounded-full hover:scale-105 hover:shadow-sm transition-all duration-200"> {skill}
-        </span>
-      ))}
-    </div>
-  </div>
+                <p className="text-sm font-medium text-gray-700 bg-gradient-to-r from-orange-100 to-yellow-100 inline-block px-3 py-1 rounded-md shadow-sm border border-orange-200">
+                  {job.salaryRange?.min} - {job.salaryRange?.max}{" "}
+                  {job.salaryRange?.currency}
+                </p>
 
-  <div className="mt-6">
-    <Link to={`/jobs/${job._id}`}><button className="w-full bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">More Details
-    </button></Link>
-  </div>
-          </div>
-                ))}
+                <p className="text-gray-600 text-sm line-clamp-3 leading-relaxed">
+                  {job.description}
+                </p>
+
+                {/* Skills */}
+                <div className="flex flex-wrap gap-2 mt-3">
+                  {job.requirements?.map((skill, index) => (
+                    <span
+                      key={index}
+                      className="px-3 py-1 bg-gradient-to-r from-orange-100 to-yellow-100 border border-orange-200 text-xs font-semibold rounded-full shadow-sm hover:shadow-md hover:scale-105 transition-all duration-200"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Button */}
+              <div className="mt-6">
+                <Link to={`/jobs/${job._id}`}>
+                  <button className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white font-semibold py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+                    More Details
+                  </button>
+                </Link>
+              </div>
             </div>
-        </div>
-    );
+          ))}
+      </div>
+    </div>
+  );
 };
 
 export default Jobs;

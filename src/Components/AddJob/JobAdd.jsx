@@ -7,211 +7,141 @@ import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router';
 
 const JobAdd = () => {
-    const {user} = use(AuthContext);
-    const [division, setDivision] = useState("");
-    const [district, setDistrict] = useState("");
+  const { user } = use(AuthContext);
+  const [division, setDivision] = useState("");
+  const [district, setDistrict] = useState("");
+  const navigate = useNavigate();
 
-    // navigate
-    const navigate = useNavigate();
+  const handleJobAdd = e => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
 
-    const handleJobAdd =e=>{
-        e.preventDefault();
-        const form = e.target;
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
-        // console.log(data)
+    const { min, max, currency, ...rest } = data;
+    rest.salaryRange = { min, max, currency };
+    rest.requirements = rest.requirements.split(',').map(req => req.trim());
+    rest.responsibilities = rest.responsibilities.split(',').map(req => req.trim());
+    rest.userRole = user.role || "employee";
 
-        const {min, max, currency, ...rest} = data
-        rest.salaryRange = {min,max,currency}
-        // console.log(rest)
-        rest.requirements=rest.requirements.split(',').map(req=>req.trim())
-        // console.log(rest)
-        rest.responsibilities = rest.responsibilities.split(',').map(req=>req.trim())
-        console.log(rest)
-        rest.status="active";
+    axios.post('http://localhost:5000/jobs', rest)
+      .then(result => {
+        if (result.data.insertedId) {
+          Swal.fire({
+            title: "Job Added Successfully!",
+            text: "This new job has been added and published successfully.",
+            icon: "success",
+            confirmButtonColor: "#4f46e5",
+          }).then(() => navigate('/myPostedJobs'));
+        }
+      })
+      .catch(error => console.log(error));
+  };
 
-        axios.post('http://localhost:5000/jobs',rest)
-        .then(result=>{
-            if(result.data.insertedId){
-                Swal.fire({
-                title: "This New Job has been Added and Published Successfully",
-                icon: "success",
-                draggable: true
-              }).then(()=>{navigate('/')})
-            }
-        })
-        .catch(error=>console.log(error))
-    }
-    return (
-        <div className='max-w-6xl mx-auto mt-12'>
-            {/* form for add a job */}
-            <form onSubmit={handleJobAdd} className='max-w-2xl mx-auto'>
+  return (
+    <div className='max-w-6xl mx-auto mt-12 px-4 md:px-6'>
+      <h1 className='text-4xl md:text-5xl font-bold text-center text-indigo-600 mb-8'>
+        Add New Job
+      </h1>
 
-            <fieldset className="fieldset bg-base-200 border-base-300 rounded-box  border p-4">
-                <legend className="fieldset-legend">Basic Info</legend>
-              
-                <label className="label">Job Title</label>
-                <input type="text" name='title' placeholder="Job title" className="input input-bordered w-full" required />
-              
-                <label className="label">Company Name</label>
-                <input type="text" className="input input-bordered w-full" name='company' placeholder="Company Name" />
-              
-                {/* <label className="label">Location</label>
-                <input type="text" className="input input-bordered w-full" name='location' placeholder="Company Location" /> */}
-              
-                <label className="label">Company Logo</label>
-                <input type="url" className="input input-bordered w-full" name='company_logo' placeholder="Company URL" />
-            </fieldset>
+      <form onSubmit={handleJobAdd} className='space-y-6'>
 
-            {/* location */}
-            <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
-      <legend className="fieldset-legend">Job Location</legend>
-
-      {/* Division Select */}
-      <label className="label">Division</label>
-      <select
-        name="division"
-        className="select select-bordered w-full"
-        value={division}
-        onChange={(e) => {
-          setDivision(e.target.value);
-          setDistrict(""); // reset district on division change
-        }}
-        required
-      >
-        <option value="">Select Division</option>
-        {Object.keys(jobLocations).map((div, i) => (
-          <option key={i} value={div}>
-            {div}
-          </option>
-        ))}
-      </select>
-
-      {/* District Select */}
-      <label className="label mt-3">District</label>
-      <select
-        name="district"
-        className="select select-bordered w-full"
-        value={district}
-        onChange={(e) => setDistrict(e.target.value)}
-        disabled={!division}
-        required
-      >
-        <option value="">Select District</option>
-        {division &&
-          jobLocations[division].map((dist, i) => (
-            <option key={i} value={dist}>
-              {dist}
-            </option>
-          ))}
-      </select>
-
-      {/* Specific Area */}
-      <label className="label mt-3">Specific Area / Place</label>
-      <input
-        type="text"
-        name="area"
-        className="input input-bordered w-full"
-        placeholder="e.g., Uttara, Banani, Halishohor"
-        required
-      />
-    </fieldset>
-
-
-            {/* job-type */}
-            <fieldset className="fieldset max-w-2xl mx-auto bg-base-200 border-base-300 rounded-box  border p-4">
-                <legend className="fieldset-legend">Job Type</legend>
-            <div className="filter">
-                <input className="btn filter-reset" type="radio" name="jobType" aria-label="All"/>
-                <input className="btn" type="radio" name="jobType" value="On-Site" aria-label="On-Site"/>
-                <input className="btn" type="radio" name="jobType" value="Remote" aria-label="Remote"/>
-                <input className="btn" type="radio" name="jobType" value="Hybrid" aria-label="Hybrid"/>
-            </div>
-            </fieldset>
-
-            {/* job-categories */}
-            <fieldset className="fieldset max-w-2xl mx-auto bg-base-200 border-base-300 rounded-box  border p-4">
-                <legend className="fieldset-legend">Job Categories</legend>
-            <select className="select w-full" name="category" required>
-            <option disabled value="">Select a Job Category</option>
-              {jobCategories.map((c, i) => (
-                <option key={i} value={c}>{c}</option>
-              ))}
-            </select>
-            </fieldset>
-
-            {/* application-deadline */}
-            <fieldset className="fieldset max-w-2xl mx-auto bg-base-200 border-base-300 rounded-box  border p-4">
-                <legend className="fieldset-legend">Application Deadline</legend>
-                <input type="date" name='deadline' className="input" />
-            </fieldset>
-
-            {/* job salary range */}
-            <fieldset className="fieldset max-w-2xl mx-auto bg-base-200 border-base-300 rounded-box  border p-4">
-                <legend className="fieldset-legend">Application Deadline</legend>
-            <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
-
-             {/* Minimum Salary */}
-             <div>
-               <label className="label font-medium">Minimum Salary</label>
-               <input type="text" name='min' placeholder="Enter minimum salary" className="input input-bordered w-full" required />
-             </div>
-         
-             {/* Maximum Salary */}
-             <div>
-               <label className="label font-medium">Maximum Salary</label>
-               <input   type="text"   name='max'   placeholder="Enter maximum salary"   className="input input-bordered w-full" />
-             </div>
-         
-             {/* Currency Selection */}
-             <div>
-               <label className="label font-medium">Currency</label>
-               <select   defaultValue=""   className="select select-bordered w-full"   name="currency"  required>
-                 <option disabled value="">Select a Currency</option>
-                 <option>BDT</option>
-                 <option>USD</option>
-                 <option>EU</option>
-               </select>
-             </div>
-           </div>
-            </fieldset>
-
-            {/* Description */}
-            <fieldset className="fieldset bg-base-200 border-base-300 rounded-box  border p-4">
-              <legend className="fieldset-legend">Job Description</legend>
-              <textarea className="textarea w-full" name='description' placeholder="Job Description"></textarea>
-            </fieldset>
-
-            {/* requirements: */}
-            <fieldset className="fieldset bg-base-200 border-base-300 rounded-box  border p-4">
-            <legend className="fieldset-legend">Job Requirements:</legend>
-            <textarea className="textarea w-full" name='requirements' placeholder="requirements (separate by comma)"></textarea>
-            </fieldset>
-        
-            {/* responsibilities */}
-            <fieldset className="fieldset bg-base-200 border-base-300 rounded-box  border p-4">
-            <legend className="fieldset-legend">Responsibilities</legend>
-            <textarea className="textarea w-full" name='responsibilities' placeholder="responsibilities (separate by comma)"></textarea>
-            </fieldset>
-
-            {/* hr name & email */}
-            <fieldset className="fieldset bg-base-200 border-base-300 rounded-box  border p-4">
-              <legend className="fieldset-legend">HR Info</legend>
-            
-              <label className="label">HR Name</label>
-              <input type="text" name='hr_name'  placeholder="HR Name..." className="input input-bordered w-full" required />
-            
-              <label className="label">HR Email</label>
-              <input type="text" className="input input-bordered w-full" name='hr_email' defaultValue={user.email} placeholder="HR Email..." />
-            </fieldset>
-
-            {/* job add button */}
-            {/* button */}
-            <button type="submit" className="btn mt-4 rounded-xl w-full bg-gradient-to-r from-purple-500 via-blue-500 to-indigo-500  text-white  px-6">Add Job </button>
-
-            </form>
+        {/* Basic Info */}
+        <div className="bg-white shadow-lg rounded-xl p-6 border border-gray-200">
+          <h2 className="text-xl font-semibold mb-4 text-gray-700">Basic Information</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <input type="text" name='title' placeholder="Job Title" className="input input-bordered w-full" required />
+            <input type="text" name='company' placeholder="Company Name" className="input input-bordered w-full" />
+            <input type="url" name='company_logo' placeholder="Company Logo URL" className="input input-bordered w-full md:col-span-2" />
+          </div>
         </div>
-    );
+
+        {/* Job Location */}
+        <div className="bg-white shadow-lg rounded-xl p-6 border border-gray-200">
+          <h2 className="text-xl font-semibold mb-4 text-gray-700">Job Location</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <select name="division" className="select select-bordered w-full" value={division}
+              onChange={e => { setDivision(e.target.value); setDistrict(""); }} required>
+              <option value="">Select Division</option>
+              {Object.keys(jobLocations).map((div, i) => <option key={i} value={div}>{div}</option>)}
+            </select>
+
+            <select name="district" className="select select-bordered w-full" value={district}
+              onChange={e => setDistrict(e.target.value)} disabled={!division} required>
+              <option value="">Select District</option>
+              {division && jobLocations[division].map((dist, i) => <option key={i} value={dist}>{dist}</option>)}
+            </select>
+
+            <input type="text" name="area" placeholder="Specific Area / Place" className="input input-bordered w-full" required />
+          </div>
+        </div>
+
+        {/* Job Type & Category */}
+        <div className="bg-white shadow-lg rounded-xl p-6 border border-gray-200 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="font-semibold mb-1 block">Job Type</label>
+            <select name="jobType" className="select select-bordered w-full">
+              <option>On-Site</option>
+              <option>Remote</option>
+              <option>Hybrid</option>
+            </select>
+          </div>
+          <div>
+            <label className="font-semibold mb-1 block">Job Category</label>
+            <select name="category" className="select select-bordered w-full" required>
+              <option value="" disabled>Select a Category</option>
+              {jobCategories.map((c, i) => <option key={i} value={c}>{c}</option>)}
+            </select>
+          </div>
+        </div>
+
+        {/* Application Deadline & Salary */}
+        <div className="bg-white shadow-lg rounded-xl p-6 border border-gray-200 grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+            <label className="font-semibold mb-1 block">Application Deadline</label>
+            <input type="date" name='deadline' className="input input-bordered w-full" />
+          </div>
+          <div>
+            <label className="font-semibold mb-1 block">Minimum Salary</label>
+            <input type="text" name='min' className="input input-bordered w-full" required />
+          </div>
+          <div>
+            <label className="font-semibold mb-1 block">Maximum Salary</label>
+            <input type="text" name='max' className="input input-bordered w-full" />
+          </div>
+          <div>
+            <label className="font-semibold mb-1 block">Currency</label>
+            <select name="currency" className="select select-bordered w-full" required>
+              <option value="" disabled>Select Currency</option>
+              <option>BDT</option>
+              <option>USD</option>
+              <option>EU</option>
+            </select>
+          </div>
+        </div>
+
+        {/* Description, Requirements, Responsibilities */}
+        <div className="bg-white shadow-lg rounded-xl p-6 border border-gray-200 space-y-4">
+          <textarea name='description' placeholder="Job Description" className="textarea textarea-bordered w-full h-28"></textarea>
+          <textarea name='requirements' placeholder="Requirements (comma separated)" className="textarea textarea-bordered w-full h-24"></textarea>
+          <textarea name='responsibilities' placeholder="Responsibilities (comma separated)" className="textarea textarea-bordered w-full h-24"></textarea>
+        </div>
+
+        {/* HR Info */}
+        <div className="bg-white shadow-lg rounded-xl p-6 border border-gray-200 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input type="text" name='hr_name' placeholder="HR Name" className="input input-bordered w-full" required />
+          <input type="email" name='hr_email' defaultValue={user.email} placeholder="HR Email" className="input input-bordered w-full" />
+        </div>
+
+        {/* Submit Button */}
+        <button type="submit"
+          className="w-full md:w-auto px-6 py-3 text-white font-semibold rounded-xl bg-gradient-to-r from-purple-500 via-blue-500 to-indigo-500 hover:scale-105 transition-transform">
+          Add Job
+        </button>
+
+      </form>
+    </div>
+  );
 };
 
 export default JobAdd;

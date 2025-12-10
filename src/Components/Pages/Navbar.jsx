@@ -20,15 +20,17 @@ const handleLogOut =() =>{
     <li><NavLink to="/myApplications" className={({isActive})=> isActive ? 'text-blue-600 font-medium underline' : 'hover:text-violet-500 font-medium transition'}>MyApplications</NavLink></li>
     </>}
 
-  {/* {user?.role === "employee" && (<>
+  {user?.role === "employee" && (<>
   <li><NavLink to="/dashboard" className={({isActive})=> isActive ? 'text-blue-600 font-medium underline' : 'hover:text-violet-500 font-medium transition'}>Dashboard</NavLink></li>
   </>)}
   {user?.role === "user" && (<>
   <li><NavLink to="/dashboard" className={({isActive})=> isActive ? 'text-blue-600 font-medium underline' : 'hover:text-violet-500 font-medium transition'}>Dashboard</NavLink></li>
-  </>)} */}
+  </>)}
 
   {user?.role === "admin" && (<>
   <li><NavLink to="/admin" className={({isActive})=> isActive ? 'text-violet-600 font-medium underline' : 'hover:text-violet-500 font-medium transition'}>Admin Panel</NavLink></li>
+
+  <li><NavLink to="/pending-jobs" className={({isActive})=> isActive ? 'text-violet-600 font-medium underline' : 'hover:text-violet-500 font-medium transition'}>Pending Jobs</NavLink></li>
 
   <li><NavLink to="/addJob" className={({isActive})=> isActive ? 'text-blue-600 font-medium underline' : 'hover:text-violet-500 font-medium transition'}>Add Job</NavLink></li>
 
