@@ -1,95 +1,125 @@
-import React from 'react';
-import { FaLocationDot } from 'react-icons/fa6';
-import { Link, useLoaderData } from 'react-router';
+import React from "react";
+import { FaLocationDot } from "react-icons/fa6";
+import { Link, useLoaderData } from "react-router";
 
 const MoreDetails = () => {
-    const job = useLoaderData();
-    console.log(job)
-    return (
-        <div className='max-w-6xl mx-auto px-6 md:px-6 lg:px-0 mt-24'>
-        <div className="group relative border border-transparent bg-gradient-to-br from-white via-blue-50 to-blue-100 hover:from-blue-100 hover:to-white rounded-2xl p-6 h-[580px] md:h-[520px] flex flex-col justify-between shadow-md  transition-all duration-500">
+  const job = useLoaderData();
 
-  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+  return (
+    <div className="max-w-4xl mx-auto px-5 md:px-6 lg:px-0 mt-12">
 
-  {/* Company Info */}
-  <div className="flex justify-between items-center mb-4">
-    <div className="flex gap-4 items-center">
-      <div className="w-16 h-16 bg-white border border-gray-200 rounded-xl flex items-center justify-center shadow-sm">
-        <img
-          src={job.company_logo}
-          className="w-12 h-12 object-contain transition-transform duration-300 group-hover:scale-105"
-          alt="Company Logo"
-        />
-      </div>
-      <div>
-        <h2 className="font-semibold text-gray-800 text-lg">{job.company}</h2>
-        <p className="text-sm text-gray-500 flex items-center gap-1"><FaLocationDot className="text-blue-500" />{job.location}</p>
-      </div>
-    </div>
-    <button className="px-4 py-2 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white rounded-lg text-sm font-medium shadow hover:shadow-md transition-all duration-200">{job.jobType}
-    </button>
-  </div>
+      {/* Main Card */}
+      <div className="relative bg-white/80 backdrop-blur-xl rounded-3xl border border-orange-200 shadow-xl p-8 md:p-10 space-y-8">
 
-  {/* job details */}
-  <div className="flex-1 space-y-4">
-    <h2 className="font-bold text-2xl text-gray-800 group-hover:text-blue-700 transition-colors">{job.title}</h2>
-    <p className="text-sm font-medium text-gray-700 bg-blue-50 inline-block px-3 py-1 rounded-md shadow-sm">
-       Salary: {job.salaryRange?.min} - {job.salaryRange?.max} {job.salaryRange?.currency}
-    </p>
-    <p className="text-gray-600 text-sm leading-relaxed line-clamp-3">
-      {job.description}
-    </p>
+        {/* Top Accent Line */}
+        <div className="absolute top-0 left-0 w-full h-1 rounded-t-3xl 
+          bg-gradient-to-r from-orange-500 via-red-500 to-yellow-500"></div>
 
-    {/* skills */}
-    <div>
-      <h3 className="text-sm font-semibold text-gray-700 mb-2">Required Skills:</h3>
-      <div className="flex flex-wrap gap-2">
-        {job.requirements?.map((skill, index) => (
-          <span
-            key={index}
-            className="px-3 py-1 bg-gradient-to-r from-blue-100 to-purple-100 text-xs font-medium text-blue-800 border border-blue-200 rounded-full hover:scale-105 transition-transform duration-200">
-            {skill}
-          </span>
-        ))}
-      </div>
-    </div>
+        {/* Company & Job Type */}
+        <div className="flex flex-col md:flex-row justify-between gap-6 mb-4">
 
-    {/* responsibilities */}
-    <div>
-      <h3 className="text-sm font-semibold text-gray-700 mb-2">Responsibilities:</h3>
-      <div className="flex flex-wrap gap-2">
-        {job.responsibilities?.map((responsibility, index) => (
-          <span
-            key={index}
-            className="px-3 py-1 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 text-xs rounded-full text-gray-700 hover:text-blue-600 transition-all">
-            {responsibility}
-          </span>
-        ))}
-      </div>
-    </div>
+          {/* Company Info */}
+          <div className="flex items-center gap-4">
+            <div className="w-16 h-16 rounded-2xl bg-white border border-orange-200 shadow flex items-center justify-center">
+              <img
+                src={job.company_logo}
+                alt="Company Logo"
+                className="w-12 h-12 object-contain"
+              />
+            </div>
+            <div>
+              <h2 className="text-xl font-bold text-gray-900">{job.company}</h2>
+              <p className="flex items-center gap-1 text-gray-600 text-sm mt-1">
+                <FaLocationDot className="text-orange-600" /> {job.location}
+              </p>
+            </div>
+          </div>
 
-    {/* HR Info */}
-    <div className="pt-2 text-sm text-gray-700 space-y-1">
-      <p>
-        <strong>HR Name:</strong>{' '}
-        <span className="text-blue-600 font-medium">{job.hr_name}</span>
-      </p>
-      <p>
-        <strong>Email:</strong>{' '}
-        <span className="text-blue-600 font-medium">{job.hr_email}</span>
-      </p>
-    </div>
-  </div>
-
-  {/* Apply Button */}
-  <div className="mt-4 text-right">
-    <Link to={`/jobApply/${job._id}`}><button className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:via-indigo-700 hover:to-purple-700 text-white px-6 py-2.5 rounded-lg font-semibold  shadow-md hover:shadow-lg transition-all duration-300">Apply Now
-    </button></Link>
-  </div>
-</div>
-
+          {/* Job Type Tag */}
+          <div>
+            <span className="px-4 py-2 text-sm rounded-xl font-medium bg-gradient-to-r
+              from-orange-600 to-red-500 text-white shadow-md">
+              {job.jobType}
+            </span>
+          </div>
         </div>
-    );
+
+        {/* Job Title */}
+        <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 leading-tight">
+          {job.title}
+        </h1>
+
+        {/* Salary */}
+        <div>
+          <p className="inline-block bg-orange-100 text-orange-700 px-4 py-1.5 rounded-lg 
+            text-sm font-semibold border border-orange-200">
+            💰 Salary: {job.salaryRange?.min} - {job.salaryRange?.max} {job.salaryRange?.currency}
+          </p>
+        </div>
+
+        {/* Description */}
+        <section className="space-y-2">
+          <h3 className="text-lg font-bold text-gray-900">Job Description</h3>
+          <p className="text-gray-700 leading-relaxed text-sm md:text-base">
+            {job.description}
+          </p>
+        </section>
+
+        {/* Skills */}
+        <section className="space-y-2">
+          <h3 className="text-lg font-bold text-gray-900">Required Skills</h3>
+          <div className="flex flex-wrap gap-2">
+            {job.requirements?.map((skill, index) => (
+              <span
+                key={index}
+                className="px-3 py-1 bg-orange-100 text-orange-700 border border-orange-300 
+                text-xs rounded-full font-medium hover:bg-orange-200 transition"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+        </section>
+
+        {/* Responsibilities */}
+        <section className="space-y-2">
+          <h3 className="text-lg font-bold text-gray-900">Responsibilities</h3>
+          <ul className="list-disc ml-6 space-y-1 text-gray-700 text-sm md:text-base">
+            {job.responsibilities?.map((res, index) => (
+              <li key={index}>{res}</li>
+            ))}
+          </ul>
+        </section>
+
+        {/* HR Section */}
+        <section className="bg-orange-50 border border-orange-200 rounded-xl p-5 space-y-2">
+          <h3 className="text-lg font-bold text-gray-900">HR Contact</h3>
+
+          <p className="text-sm text-gray-700">
+            <strong>Name:</strong>{" "}
+            <span className="text-orange-700 font-medium">{job.hr_name}</span>
+          </p>
+
+          <p className="text-sm text-gray-700">
+            <strong>Email:</strong>{" "}
+            <span className="text-orange-700 font-medium">{job.hr_email}</span>
+          </p>
+        </section>
+
+        {/* Apply Button */}
+        <div className="pt-4">
+          <Link to={`/jobApply/${job._id}`}>
+            <button className="w-full md:w-auto px-8 py-3 rounded-xl font-semibold text-white
+              bg-gradient-to-r from-orange-600 to-red-500 hover:from-orange-700 hover:to-red-600
+              shadow-lg hover:shadow-xl transition-all duration-300">
+              Apply Now
+            </button>
+          </Link>
+        </div>
+
+      </div>
+    </div>
+  );
 };
 
 export default MoreDetails;
