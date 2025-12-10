@@ -24,8 +24,8 @@ const CategoryJobs = () => {
   }, [decodedCategory]);
 
   return (
-    <div className="max-w-6xl mx-auto mt-16 px-6 md:px-6 lg:px-0">
-      <h1 className="text-3xl font-bold text-blue-600 mb-2">{decodedCategory}</h1>
+    <div className="max-w-6xl mx-auto mt-12 px-6 md:px-6 lg:px-0">
+      <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-red-500 to-yellow-400 mb-2">{decodedCategory}</h1>
       <p className="text-gray-600 mb-8">Showing jobs under this category</p>
 
       {loading ? (

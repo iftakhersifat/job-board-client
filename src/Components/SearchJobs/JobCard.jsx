@@ -4,45 +4,51 @@ import { Link } from "react-router";
 
 const JobCard = ({ job }) => {
   return (
-    <div className="group relative border border-transparent bg-linear-to-br from-white to-blue-50 hover:from-blue-50 hover:to-white shadow-md hover:shadow-xl rounded-2xl p-6 h-[440px] md:h-[480px] flex flex-col justify-between transition-all duration-500 hover:-translate-y-1">
+    <div className="group relative flex flex-col justify-between bg-white/60 backdrop-blur-md rounded-3xl shadow-lg hover:shadow-2xl p-6 h-[450px] md:h-[480px] transition-all duration-500 hover:-translate-y-2 border border-transparent hover:border-orange-300">
+      
+      {/* Top Gradient Line */}
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-400 via-red-500 to-yellow-400 rounded-t-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
-      <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-blue-400 to-purple-500 rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-      {/* company info */}
-      <div className="flex gap-4 items-center mb-4">
-        <div className="w-16 h-16 rounded-xl bg-white border border-gray-200 flex items-center justify-center">
-          <img src={job.company_logo} alt="Company Logo" className="w-12 h-12 object-contain transition-transform duration-300 group-hover:scale-105" />
+      {/* Company Info */}
+      <div className="flex gap-4 items-center mb-5">
+        <div className="w-16 h-16 rounded-xl bg-white/80 border border-gray-200 shadow-sm flex items-center justify-center overflow-hidden transition-transform duration-300 group-hover:scale-110">
+          <img
+            src={job.company_logo}
+            alt={`${job.company} Logo`}
+            className="w-12 h-12 object-contain"
+          />
         </div>
-
         <div>
-          <h2 className="font-semibold text-lg text-gray-800 group-hover:text-blue-600 transition-colors duration-300">
+          <h2 className="font-semibold text-lg text-gray-800 group-hover:text-orange-600 transition-colors duration-300">
             {job.company}
           </h2>
           <p className="flex gap-1 items-center text-sm text-gray-500 mt-1">
-            <FaLocationDot className="text-blue-500" /> {job.location}
+            <FaLocationDot className="text-orange-500" /> {job.location}
           </p>
         </div>
       </div>
 
-      {/* job details */}
+      {/* Job Details */}
       <div className="flex-1 space-y-3">
-        <h2 className="font-bold text-2xl text-gray-800 group-hover:text-blue-700 transition-colors duration-300">
+        <h2 className="font-bold text-xl text-gray-800 group-hover:text-orange-600 transition-colors duration-300 leading-snug">
           {job.title}{" "}
-          <span className="text-blue-500 font-medium text-base">({job.jobType})</span>
+          <span className="text-orange-500 font-medium text-base ml-1">
+            ({job.jobType})
+          </span>
         </h2>
 
-        <p className="text-sm font-medium text-gray-700 bg-gradient-to-r from-blue-100 to-blue-50 inline-block px-3 py-1 rounded-md shadow-sm">
-          {job.salaryRange?.min} - {job.salaryRange?.max} {job.salaryRange?.currency}
+        <p className="flex items-center gap-2 text-sm font-medium text-gray-700 bg-orange-50/80 inline-block px-3 py-1 rounded-lg border border-orange-200 shadow-sm">
+           {job.salaryRange?.min} - {job.salaryRange?.max} {job.salaryRange?.currency}
         </p>
 
-        <p className="text-gray-600 text-sm">{job.description}</p>
+        <p className="text-gray-700 text-sm line-clamp-3">{job.description}</p>
 
         {/* Skills */}
-        <div className="flex flex-wrap gap-2 mt-4">
+        <div className="flex flex-wrap gap-2 mt-3 max-h-24 overflow-y-auto scrollbar-thin scrollbar-thumb-orange-200 scrollbar-track-orange-50">
           {job.requirements?.map((skill, index) => (
             <span
               key={index}
-              className="px-3 py-1 bg-linear-to-r from-blue-100 to-purple-100 border border-blue-200 text-xs font-semibold rounded-full hover:scale-105 hover:shadow-sm transition-all duration-200"
+              className="px-3 py-1 bg-orange-50/80 border border-orange-200 text-xs font-semibold rounded-full shadow-sm hover:shadow-md hover:scale-105 transition-all duration-200"
             >
               {skill}
             </span>
@@ -50,9 +56,10 @@ const JobCard = ({ job }) => {
         </div>
       </div>
 
+      {/* Button */}
       <div className="mt-6">
         <Link to={`/jobs/${job._id}`}>
-          <button className="w-full bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+          <button className="w-full py-2.5 rounded-xl bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-semibold shadow-md hover:shadow-lg transition-all duration-300">
             More Details
           </button>
         </Link>
