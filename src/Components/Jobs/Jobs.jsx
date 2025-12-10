@@ -30,7 +30,7 @@ const Jobs = ({ jobsPromise }) => {
           .map((job) => (
             <div
               key={job._id}
-              className="group relative flex flex-col justify-between bg-white/60 backdrop-blur-md rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 p-6 border border-transparent hover:border-orange-300"
+              className="group relative flex flex-col justify-between bg-white/60 backdrop-blur-md rounded-3xl shadow-lg hover:shadow-2xl h-[400px] transition-all duration-500 p-6 border border-transparent hover:border-orange-300"
             >
               {/* Featured Badge */}
               {job.featured && (

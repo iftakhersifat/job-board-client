@@ -6,10 +6,15 @@ import { MdErrorOutline } from "react-icons/md";
 
 const CategorySection = () => {
   const [search, setSearch] = useState("");
+  const [visibleCount, setVisibleCount] = useState(8); // initial visible categories
 
   const filteredCategories = jobCategories.filter((cat) =>
     cat.toLowerCase().includes(search.toLowerCase())
   );
+
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => prev + 8); // show 8 more categories on each click
+  };
 
   return (
     <div className="max-w-6xl mx-auto mt-12 px-6 md:px-6 lg:px-0">
@@ -34,7 +39,7 @@ const CategorySection = () => {
       {/* Category Grid */}
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
         {filteredCategories.length > 0 ? (
-          filteredCategories.map((cat, index) => (
+          filteredCategories.slice(0, visibleCount).map((cat, index) => (
             <Link
               key={index}
               to={`/category/${encodeURIComponent(cat)}`}
@@ -54,6 +59,18 @@ const CategorySection = () => {
           </p>
         )}
       </div>
+
+      {/* Load More Button */}
+      {visibleCount < filteredCategories.length && (
+        <div className="flex justify-center mt-6">
+          <button
+            onClick={handleLoadMore}
+            className="px-6 py-2 bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold rounded-full shadow-md hover:shadow-lg transition-all duration-300"
+          >
+            Load More
+          </button>
+        </div>
+      )}
     </div>
   );
 };
