@@ -65,7 +65,7 @@ const ApplyJobs = () => {
                                     id="fullName"
                                     name="fullName"
                                     placeholder="Your Full Name"
-                                    className="w-full pl-12 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-2xl focus:ring-2 focus:ring-orange-400 focus:outline-none dark:bg-gray-700 dark:text-gray-100 transition-all duration-300"
+                                    className="w-full pl-12 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-2xl focus:ring-2 focus:ring-orange-400 focus:outline-none transition-all duration-300"
                                 />
                             </div>
                         </div>
@@ -81,7 +81,7 @@ const ApplyJobs = () => {
                                     id="email"
                                     name="email"
                                     placeholder="Your Email"
-                                    className="w-full pl-12 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-2xl focus:ring-2 focus:ring-orange-400 focus:outline-none dark:bg-gray-700 dark:text-gray-100 transition-all duration-300"
+                                    className="w-full pl-12 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-2xl focus:ring-2 focus:ring-orange-400 focus:outline-none transition-all duration-300"
                                 />
                             </div>
                         </div>
@@ -96,7 +96,7 @@ const ApplyJobs = () => {
                                     id="phone"
                                     name="phone"
                                     placeholder="Your Phone Number"
-                                    className="w-full pl-12 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-2xl focus:ring-2 focus:ring-orange-400 focus:outline-none dark:bg-gray-700 dark:text-gray-100 transition-all duration-300"
+                                    className="w-full pl-12 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-2xl focus:ring-2 focus:ring-orange-400 focus:outline-none transition-all duration-300"
                                 />
                             </div>
                         </div>
@@ -112,7 +112,7 @@ const ApplyJobs = () => {
                                     id="linkedin"
                                     name="linkedin"
                                     placeholder="LinkedIn profile link"
-                                    className="w-full pl-12 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-2xl focus:ring-2 focus:ring-orange-400 focus:outline-none dark:bg-gray-700 dark:text-gray-100 transition-all duration-300"
+                                    className="w-full pl-12 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-2xl focus:ring-2 focus:ring-orange-400 focus:outline-none transition-all duration-300"
                                 />
                             </div>
                         </div>
@@ -128,7 +128,7 @@ const ApplyJobs = () => {
                                     id="github"
                                     name="github"
                                     placeholder="GitHub profile link"
-                                    className="w-full pl-12 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-2xl focus:ring-2 focus:ring-orange-400 focus:outline-none dark:bg-gray-700 dark:text-gray-100 transition-all duration-300"
+                                    className="w-full pl-12 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-2xl focus:ring-2 focus:ring-orange-400 focus:outline-none transition-all duration-300"
                                 />
                             </div>
                         </div>
@@ -143,7 +143,7 @@ const ApplyJobs = () => {
                                     id="portfolio"
                                     name="portfolio"
                                     placeholder="Portfolio website link"
-                                    className="w-full pl-12 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-2xl focus:ring-2 focus:ring-orange-400 focus:outline-none dark:bg-gray-700 dark:text-gray-100 transition-all duration-300"
+                                    className="w-full pl-12 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-2xl focus:ring-2 focus:ring-orange-400 focus:outline-none transition-all duration-300"
                                 />
                             </div>
                         </div>
@@ -159,7 +159,7 @@ const ApplyJobs = () => {
                                     id="resume"
                                     name="resume"
                                     placeholder="Your Resume link"
-                                    className="w-full pl-12 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-2xl focus:ring-2 focus:ring-orange-400 focus:outline-none dark:bg-gray-700 dark:text-gray-100 transition-all duration-300"
+                                    className="w-full pl-12 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-2xl focus:ring-2 focus:ring-orange-400 focus:outline-none transition-all duration-300"
                                 />
                             </div>
                         </div>
