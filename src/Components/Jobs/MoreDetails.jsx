@@ -5,6 +5,18 @@ import { Link, useLoaderData } from "react-router";
 const MoreDetails = () => {
   const job = useLoaderData();
 
+  // Check if deadline is over
+  const today = new Date();
+  const deadlineDate = new Date(job.deadline);
+  const isDeadlineOver = deadlineDate < today;
+
+  // Format deadline nicely
+  const formattedDeadline = new Date(job.deadline).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
   return (
     <div className="max-w-4xl mx-auto px-5 md:px-6 lg:px-0 mt-12">
 
@@ -19,7 +31,7 @@ const MoreDetails = () => {
         <div className="flex flex-col md:flex-row justify-between gap-6 mb-4">
 
           {/* Company Info */}
-          <div className="flex items-center gap-4">
+          <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
             <div className="w-16 h-16 rounded-2xl bg-white border border-orange-200 shadow flex items-center justify-center">
               <img
                 src={job.company_logo}
@@ -30,7 +42,10 @@ const MoreDetails = () => {
             <div>
               <h2 className="text-xl font-bold text-gray-900">{job.company}</h2>
               <p className="flex items-center gap-1 text-gray-600 text-sm mt-1">
-                <FaLocationDot className="text-orange-600" /> {job.location}
+                <FaLocationDot className="text-orange-600" /> {job?.location}
+              </p>
+              <p className={`text-sm font-semibold mt-1 ${isDeadlineOver ? "text-red-600" : "text-green-600"}`}>
+                Deadline: {formattedDeadline} {isDeadlineOver && "(Passed)"}
               </p>
             </div>
           </div>
@@ -53,7 +68,7 @@ const MoreDetails = () => {
         <div>
           <p className="inline-block bg-orange-100 text-orange-700 px-4 py-1.5 rounded-lg 
             text-sm font-semibold border border-orange-200">
-            💰 Salary: {job.salaryRange?.min} - {job.salaryRange?.max} {job.salaryRange?.currency}
+            Salary: {job.salaryRange?.min} - {job.salaryRange?.max} {job.salaryRange?.currency}
           </p>
         </div>
 
@@ -108,13 +123,23 @@ const MoreDetails = () => {
 
         {/* Apply Button */}
         <div className="pt-4">
-          <Link to={`/jobApply/${job._id}`}>
-            <button className="w-full md:w-auto px-8 py-3 rounded-xl font-semibold text-white
-              bg-gradient-to-r from-orange-600 to-red-500 hover:from-orange-700 hover:to-red-600
-              shadow-lg hover:shadow-xl transition-all duration-300">
-              Apply Now
+          {isDeadlineOver ? (
+            <button
+              disabled
+              className="w-full md:w-auto px-8 py-3 rounded-xl font-semibold text-white
+                bg-gray-400 cursor-not-allowed shadow-lg transition-all duration-300"
+            >
+              Deadline Passed
             </button>
-          </Link>
+          ) : (
+            <Link to={`/jobApply/${job._id}`}>
+              <button className="w-full md:w-auto px-8 py-3 rounded-xl font-semibold text-white
+                bg-gradient-to-r from-orange-600 to-red-500 hover:from-orange-700 hover:to-red-600
+                shadow-lg hover:shadow-xl transition-all duration-300">
+                Apply Now
+              </button>
+            </Link>
+          )}
         </div>
 
       </div>

@@ -53,7 +53,7 @@ const Jobs = ({ jobsPromise }) => {
                     {job.company}
                   </h2>
                   <p className="flex gap-1 items-center text-sm text-gray-500 mt-1">
-                    <FaLocationDot className="text-orange-500" /> {job.location}
+                    <FaLocationDot className="text-orange-500" /> {job?.location}
                   </p>
                 </div>
               </div>

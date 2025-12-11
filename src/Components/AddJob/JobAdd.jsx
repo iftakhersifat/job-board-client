@@ -23,6 +23,7 @@ const JobAdd = () => {
     rest.requirements = rest.requirements.split(',').map(req => req.trim());
     rest.responsibilities = rest.responsibilities.split(',').map(req => req.trim());
     rest.userRole = user.role || "employee";
+    
 
     axios.post('http://localhost:5000/jobs', rest)
       .then(result => {
@@ -31,7 +32,7 @@ const JobAdd = () => {
             title: "Job Added Successfully!",
             text: "This new job has been added and published successfully.",
             icon: "success",
-            confirmButtonColor: "#f97316", // orange
+            confirmButtonColor: "#f97316",
           }).then(() => navigate('/myPostedJobs'));
         }
       })
@@ -72,7 +73,7 @@ const JobAdd = () => {
               {division && jobLocations[division].map((dist, i) => <option key={i} value={dist}>{dist}</option>)}
             </select>
 
-            <input type="text" name="area" placeholder="Specific Area / Place" className="input input-bordered w-full rounded-xl focus:border-orange-400 focus:ring-1 focus:ring-orange-400 focus:outline-none" required />
+            <input type="text" name="location" placeholder="Specific Area / Place" className="input input-bordered w-full rounded-xl focus:border-orange-400 focus:ring-1 focus:ring-orange-400 focus:outline-none" required />
           </div>
         </div>
 
