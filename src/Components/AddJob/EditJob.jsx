@@ -46,7 +46,7 @@ const EditJob = () => {
     const updatedJob = {
       ...job,
       requirements: job.requirements.split(",").map(req => req.trim()).filter(req => req),
-      responsibility: job.responsibility.split(",").map(resp => resp.trim()).filter(resp => resp),
+      responsibilities: job.responsibilities.split(",").map(resp => resp.trim()).filter(resp => resp),
       hr_name: job.hr
     };
 
@@ -135,10 +135,10 @@ const EditJob = () => {
             className="textarea textarea-bordered w-full h-24 focus:border-blue-500 focus:ring focus:ring-blue-200 transition"></textarea>
         </div>
 
-        {/* Responsibility */}
+        {/* Responsibilities */}
         <div className="form-control md:col-span-2">
-          <label className="label font-semibold">Job Responsibility <span className="text-sm text-gray-400">(Separate by commas)</span></label>
-          <textarea name="responsibility" value={job.responsibility || ""} onChange={handleChange}
+          <label className="label font-semibold">Job Responsibilities <span className="text-sm text-gray-400">(Separate by commas)</span></label>
+          <textarea name="responsibilities" value={job.responsibilities || ""} onChange={handleChange}
             className="textarea textarea-bordered w-full h-24 focus:border-blue-500 focus:ring focus:ring-blue-200 transition"></textarea>
         </div>
 

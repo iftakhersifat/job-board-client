@@ -1,5 +1,5 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { useLoaderData, useParams } from "react-router";
 import Swal from "sweetalert2";
 import { db } from "../Firebase/Firebase";
@@ -9,54 +9,66 @@ import { FaFileAlt, FaLinkedin, FaGithub, FaGlobe } from "react-icons/fa";
 
 const ViewApplication = () => {
   const { id } = useParams();
-  const applications = useLoaderData();
+  const loaderApplications = useLoaderData();
+  const [applications, setApplications] = useState(loaderApplications);
 
-  const handleStatus = async (e, applicationID, applicantUID) => {
-    const newStatus = e.target.value;
+  const handleStatus = async (e, applicationID, applicantUID, index) => {
+  const newStatus = e.target.value;
 
-    try {
-      // Update MongoDB
-      const res = await axios.patch(
-        `http://localhost:5000/applications/${applicationID}`,
-        { status: newStatus }
-      );
+  try {
+    // Update MongoDB (backend fetches email from DB)
+    const res = await axios.patch(
+      `http://localhost:5000/applications/${applicationID}`,
+      { status: newStatus, applicantUID }
+    );
 
-      if (res.data.modifiedCount) {
-        Swal.fire({
-          icon: "success",
-          title: "Status Updated!",
-          timer: 1500,
-          showConfirmButton: false,
-        });
+    if (res.data.modifiedCount) {
+      // Update UI after success
+      const updatedApplications = [...applications];
+      updatedApplications[index] = {
+        ...updatedApplications[index],
+        status: newStatus,
+      };
+      setApplications(updatedApplications);
 
-        // Notify user in Firestore
-        if (applicantUID) {
-          await addDoc(
-            collection(db, "notifications", applicantUID, "userNotifications"),
-            {
-              message: `Your application status has been updated to "${newStatus}"`,
-              type: "application",
-              createdAt: serverTimestamp(),
-            }
-          );
-        }
+      Swal.fire({
+        icon: "success",
+        title: "Status Updated!",
+        timer: 1500,
+        showConfirmButton: false,
+      });
+
+      // Firestore notification
+      if (applicantUID) {
+        await addDoc(
+          collection(db, "notifications", applicantUID, "userNotifications"),
+          {
+            message: `Your application status has been updated to "${newStatus}"`,
+            type: "application",
+            createdAt: serverTimestamp(),
+          }
+        );
       }
-    } catch (err) {
+    } else {
       Swal.fire({
         icon: "error",
         title: "Failed to update status",
-        text: err.message,
+        text: "No changes were made in the backend.",
       });
     }
-  };
+  } catch (err) {
+    console.log(err);
+  }
+};
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 mt-12">
-
       {/* Title */}
       <div className="text-center mb-10">
         <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text 
-        bg-linear-to-r from-blue-600 to-violet-600 py-4 md:py-6">Applicants Overview</h1>
+        bg-linear-to-r from-blue-600 to-violet-600 py-4 md:py-6">
+          Applicants Overview
+        </h1>
         <p className="text-gray-600">Manage and review all applications at one place.</p>
       </div>
 
@@ -68,7 +80,6 @@ const ViewApplication = () => {
             className="bg-white dark:bg-gray-800 shadow-md rounded-2xl p-6 border border-gray-200"
           >
             <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
-
               {/* Left Info */}
               <div>
                 <h2 className="text-xl font-bold text-gray-800 dark:text-white">
@@ -85,8 +96,8 @@ const ViewApplication = () => {
               {/* Status Dropdown */}
               <div>
                 <select
-                  defaultValue={app.status}
-                  onChange={(e) => handleStatus(e, app._id, app.applicantUID)}
+                  value={app.status || ""}
+                  onChange={(e) => handleStatus(e, app._id, app.applicantUID, index)}
                   className="select select-bordered select-md rounded-xl bg-white dark:bg-gray-700"
                 >
                   <option disabled value="">
@@ -102,7 +113,6 @@ const ViewApplication = () => {
 
             {/* Links Section */}
             <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-
               {/* Resume */}
               <a
                 href={app.resume}

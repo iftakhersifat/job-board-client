@@ -38,7 +38,7 @@ const ApplicationList = ({ myApplicationList }) => {
   };
 
   return (
-    <div className='max-w-6xl mx-auto px-6 mt-12'>
+    <div className='max-w-6xl mx-auto px-6 mt-8'>
 
       {/* Loading */}
       {loading && (
