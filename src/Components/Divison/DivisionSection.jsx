@@ -1,47 +1,46 @@
 import React from "react";
 import { jobLocations } from "../../Data/jobLocations";
 import { Link } from "react-router";
-import { FiMapPin } from "react-icons/fi";
+import { FiChevronRight, FiMapPin } from "react-icons/fi";
 
 const DivisionSection = () => {
   const divisions = Object.keys(jobLocations);
 
   return (
-    <div className="w-full mt-6">
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+    <div className="w-full">
+      {/* Grid Layout - Optimized for Sidebars or Banner integration */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {divisions.map((d, index) => (
           <Link
             key={index}
             to={`/division/${encodeURIComponent(d)}`}
-            className="group relative bg-white border border-slate-200 hover:border-indigo-400 p-3 rounded-2xl transition-all duration-300 hover:shadow-[0_10px_25px_-5px_rgba(79,70,229,0.1)] hover:-translate-y-1 flex items-center gap-3 overflow-hidden"
+            className="group relative flex items-center justify-between p-3.5 bg-white border border-slate-200/60 rounded-2xl transition-all duration-300 hover:border-indigo-500/50 hover:shadow-[0_12px_24px_-8px_rgba(79,70,229,0.12)] hover:-translate-y-0.5 overflow-hidden"
           >
-            {/* Background Accent on Hover */}
-            <div className="absolute inset-0 bg-indigo-50/50 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+            {/* Soft Hover Background */}
+            <div className="absolute inset-0 bg-indigo-50/40 opacity-0 group-hover:opacity-100 transition-opacity" />
 
-            {/* Icon & Text */}
-            <div className="relative z-10 flex items-center justify-between w-full">
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-slate-300 group-hover:bg-indigo-500 transition-colors"></div>
-                <span className="font-bold text-[13px] md:text-sm text-slate-600 group-hover:text-indigo-700 transition-colors">
+            <div className="relative z-10 flex items-center gap-3">
+              {/* Modern Minimalist Icon Box */}
+              {/* <div className="w-10 h-10 flex items-center justify-center bg-slate-50 rounded-xl group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
+                <FiMapPin size={18} className="group-hover:scale-110 transition-transform" />
+              </div> */}
+
+              <div className="flex flex-col">
+                <span className="font-bold text-[14px] text-slate-800 group-hover:text-indigo-700 transition-colors">
                   {d}
                 </span>
+                <span className="text-[10px] font-medium text-slate-400 group-hover:text-indigo-500/70 uppercase tracking-widest transition-colors">
+                  Jobs Near You
+                </span>
               </div>
-              
-              {/* Count Indicator (Mockup - looks real) */}
-              <div className="opacity-0 group-hover:opacity-100 transition-opacity">
-                <FiMapPin size={12} className="text-indigo-500" />
-              </div>
+            </div>
+
+            {/* Action Arrow - Only shows on hover or subtle always */}
+            <div className="relative z-10 p-1 rounded-full bg-slate-50 text-slate-400 group-hover:bg-indigo-100 group-hover:text-indigo-600 transition-all">
+              <FiChevronRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
             </div>
           </Link>
         ))}
-      </div>
-      
-      {/* Dynamic Tagline below divisions */}
-      <div className="mt-6 flex items-center gap-2 px-2">
-         <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
-         <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none">
-           Regional job markets are updated every hour
-         </p>
       </div>
     </div>
   );
