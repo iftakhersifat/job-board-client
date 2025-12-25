@@ -66,6 +66,8 @@ const router = createBrowserRouter([
       {path:"/pending-jobs", element: <AdminPrivate><AdminPendingJobs></AdminPendingJobs></AdminPrivate>},
       {path:"/jobs/edit/:id", element:<EditJob></EditJob>},
 
+      
+
 
       
       

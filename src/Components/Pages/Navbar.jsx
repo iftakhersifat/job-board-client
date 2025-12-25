@@ -70,11 +70,62 @@ const Navbar = () => {
     </>
   );
 
+//   const Logo = () => (
+//   <div className="flex items-center gap-4 select-none group cursor-pointer relative py-1">
+//     {/* THE ICON: Multi-Layered Kinetic Squircle */}
+//     <div className="relative flex items-center justify-center">
+      
+//       {/* Dynamic Indigo Depth Aura */}
+//       <div className="absolute inset-0 bg-indigo-600/20 rounded-full blur-2xl group-hover:bg-indigo-500/40 group-hover:scale-150 transition-all duration-700"></div>
+      
+//       {/* Main Chassis */}
+//       <div className="relative w-12 h-12 bg-gradient-to-br from-indigo-600 to-indigo-900 rounded-[15px] flex items-center justify-center overflow-hidden border border-white/10 shadow-xl shadow-indigo-900/20 transition-all duration-500 group-hover:shadow-indigo-500/40 group-hover:-translate-y-1">
+        
+//         {/* Animated Precision Scanning Beam (Perfect for a Job Search feel) */}
+//         <div className="absolute inset-0 w-full h-full bg-gradient-to-t from-transparent via-white/30 to-transparent -translate-y-full group-hover:translate-y-full transition-transform duration-[1.5s] ease-in-out"></div>
+
+//         {/* The Letter J: Forward-Leaning Italic */}
+//         <span className="relative z-10 text-white font-[1000] text-2xl italic tracking-tighter drop-shadow-md transition-transform duration-500 group-hover:scale-110 group-hover:rotate-[-4deg]">
+//           J
+//         </span>
+
+//         {/* Internal Architectural Grid (Subtle Detail) */}
+//         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:4px_4px]"></div>
+//       </div>
+//     </div>
+
+//     {/* THE TEXT: Split-Weight Prestige Branding */}
+//     <div className="flex flex-col -space-y-1.5">
+//       <div className="flex items-center">
+//         {/* JOB: Solid Foundation */}
+//         <span className="text-2xl font-[1000] text-slate-800 dark:text-white tracking-tighter uppercase transition-colors duration-300 group-hover:text-indigo-600">
+//           JOB
+//         </span>
+//         {/* BOX: Precision Cut */}
+//         <span className="text-2xl font-extralight text-indigo-500 tracking-tighter uppercase transition-all duration-500 group-hover:text-indigo-400">
+//           BOX
+//         </span>
+        
+//         {/* The "Placement" Dot - Signifies landing a job */}
+//         <span className="w-1.5 h-1.5 bg-indigo-600 rounded-full ml-1.5 shadow-[0_0_12px_rgba(79,70,229,0.6)] group-hover:scale-150 group-hover:bg-indigo-400 transition-all duration-300"></span>
+//       </div>
+      
+//       {/* Unique Tagline: Architectural & Future-Focused */}
+//       <div className="flex items-center gap-2">
+//         <div className="h-[1px] w-4 bg-slate-300 dark:bg-slate-700 group-hover:w-8 group-hover:bg-indigo-500 transition-all duration-700"></div>
+//         <h1 className="text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.45em] transition-colors group-hover:text-indigo-600">
+//           Future Pathway
+//         </h1>
+//       </div>
+//     </div>
+//   </div>
+// );
+
   return (
     <nav className={`sticky top-0 z-50 w-full transition-all duration-300 ${
       scrolled ? 'bg-white/80 backdrop-blur-lg shadow-sm py-2' : 'bg-white py-4'
     }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-14">
           
           {/* LOGO AREA */}
