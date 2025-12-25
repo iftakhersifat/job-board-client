@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { FiSearch } from "react-icons/fi";
-import { MdWork } from "react-icons/md";
+import { FiSearch, FiMapPin, FiTrendingUp } from "react-icons/fi";
 import DivisionSection from "../Divison/DivisionSection";
 import { useNavigate } from "react-router";
 
@@ -9,75 +8,99 @@ const BannerSection = () => {
   const navigate = useNavigate();
 
   const handleSearch = () => {
-    if (!searchTerm) return;
+    if (!searchTerm.trim()) return;
     navigate(`/search/${encodeURIComponent(searchTerm)}`);
   };
 
   return (
-    <div
-      className="relative bg-cover bg-center py-20"
-      style={{ backgroundImage: "url('/assets/banner.jpg')" }}>
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-linear-to-br from-black/70 via-black/50 to-black/40"></div>
-
+    <div className="relative pt-12 min-h-[600px] flex items-center bg-white overflow-hidden">
+      
+      {/* Background Decor - Abstract professional shapes instead of dark overlay */}
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-indigo-50/50 -skew-x-12 translate-x-20 rounded-l-[100px] hidden lg:block"></div>
+      <div className="absolute -top-24 -left-24 w-96 h-96 bg-indigo-100/30 rounded-full blur-3xl"></div>
+      
       {/* Content Container */}
-      <div className="relative max-w-6xl mx-auto px-6 flex flex-col items-center lg:items-start">
-        
-        {/* Small Top Tag */}
-        <p className="font-semibold text-sm uppercase tracking-wide text-blue-300">
-          We Have 208,000+ Live Jobs
-        </p>
-
-        {/* Title */}
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mt-4 text-white text-center lg:text-left drop-shadow-xl">
-          Your <span className="text-yellow-400">Dream</span> Job Is <br />
-          Waiting For You
-        </h1>
-
-        {/* Description */}
-        <p className="text-gray-200 mt-5 text-center lg:text-left max-w-2xl text-sm">
-          Type your keyword, then click search to find your perfect job
-            among thousands of opportunities worldwide.
-        </p>
-
-        {/* Search Box */}
-        <div className="w-full mt-8 bg-white/10 backdrop-blur-xl p-5 rounded-2xl shadow-2xl border border-white/20">
-          <div className="flex flex-col md:flex-row gap-4 items-center">
-
-            {/* Search Input */}
-            <div className="relative w-full md:flex-1">
-              <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-white/70 text-xl" />
-              <input
-               onChange={(e) => setSearchTerm(e.target.value)}
-                type="text"
-                placeholder="Search job title or keyword"
-                className="w-full pl-12 pr-4 py-3 rounded-xl bg-white/20 text-white placeholder-white/70 border border-white/30 focus:ring-2 focus:ring-yellow-300 focus:outline-none"
-              />
+      <div className="relative max-w-6xl mx-auto px-6 md:px-6 lg:px-0 w-full py-16">
+        <div className="grid lg:grid-cols-12 gap-16 items-center">
+          
+          {/* LEFT: Content & Search */}
+          <div className="lg:col-span-7">
+            {/* Live Jobs Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 rounded-full mb-8">
+              <span className="flex h-2 w-2 rounded-full bg-indigo-600 animate-pulse"></span>
+              <p className="text-[11px] font-extrabold uppercase tracking-widest text-indigo-600">
+                Over 208,000+ jobs are waiting
+              </p>
             </div>
 
-            {/* Dropdown */}
-            {/* <div className="relative w-full md:w-1/4">
-              <MdWork className="absolute left-3 top-1/2 -translate-y-1/2 text-white/70 text-xl" />
-              <select className="w-full pl-12 pr-4 py-3 rounded-xl bg-white/20 text-white border border-white/30 focus:ring-2 focus:ring-yellow-300 focus:outline-none">
-                <option className="text-black">Government</option>
-                <option className="text-black">Private</option>
-                <option className="text-black">NGO Jobs</option>
-              </select>
-            </div> */}
+            {/* Typography - Real world professional look */}
+            <h1 className="text-5xl md:text-7xl font-[1000] text-slate-900 tracking-tighter leading-[1.1] mb-6">
+              Find your next <br />
+              <span className="text-indigo-600 italic">Career Goal</span> here.
+            </h1>
 
-            {/* Search Button */}
-            <button onClick={handleSearch} className="w-full md:w-auto bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-8 py-3 rounded-xl shadow-xl transition duration-200">
-              Search
-            </button>
+            <p className="text-slate-500 text-lg max-w-lg mb-10 font-medium leading-relaxed italic">
+              Explore thousands of job opportunities from top-rated companies with 
+              personalized recommendations just for you.
+            </p>
+
+            {/* THE SEARCH BOX: Clean, High-Contrast Design */}
+            <div className="w-full max-w-2xl bg-white p-2.5 rounded-[28px] shadow-[0_20px_60px_-15px_rgba(99,102,241,0.15)] border border-slate-100 flex flex-col md:flex-row items-center gap-2 transition-all hover:shadow-[0_25px_70px_-15px_rgba(99,102,241,0.25)]">
+              <div className="relative flex-1 w-full group">
+                <FiSearch className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-600 transition-colors" size={20} />
+                <input
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+                  type="text"
+                  placeholder="Job title, keyword or company..."
+                  className="w-full pl-14 pr-4 py-4 rounded-2xl text-slate-800 placeholder-slate-400 outline-none font-bold text-base"
+                />
+              </div>
+
+              <button 
+                onClick={handleSearch} 
+                className="w-full md:w-auto bg-indigo-600 hover:bg-slate-900 text-white font-black px-10 py-4.5 rounded-[20px] transition-all duration-300 shadow-lg shadow-indigo-100 active:scale-95"
+              >
+                Search
+              </button>
+            </div>
+
+            {/* Trending Tags */}
+            <div className="mt-8 flex flex-wrap gap-4 items-center">
+               <span className="text-slate-400 text-[11px] font-black uppercase tracking-widest">Trending:</span>
+               {['Remote', 'Finance', 'Software', 'Designer'].map(tag => (
+                 <button key={tag} className="px-3 py-1 bg-slate-50 border border-slate-100 rounded-lg text-[12px] font-bold text-slate-600 hover:border-indigo-200 hover:text-indigo-600 transition-all">
+                   {tag}
+                 </button>
+               ))}
+            </div>
           </div>
+
+          {/* RIGHT: Explore by Division - Redesigned as modern Grid Cards */}
+          <div className="lg:col-span-5">
+            <div className="bg-slate-50/80 rounded-[40px] p-8 border border-slate-100 shadow-sm relative">
+              <div className="flex items-center gap-4 mb-8">
+                 <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm border border-slate-100">
+                    <FiMapPin className="text-indigo-600 text-2xl" />
+                 </div>
+                 <div>
+                    <h3 className="text-slate-900 font-black text-lg tracking-tight uppercase">Quick Explore</h3>
+                    <p className="text-slate-400 text-[10px] font-black uppercase tracking-widest">Browse by division</p>
+                 </div>
+              </div>
+
+              {/* division-wrapper - target this class in your DivisionSection component */}
+              <div className="division-container overflow-hidden rounded-3xl">
+                  {/* Note: Ensure DivisionSection uses a clean grid for Dhaka, Sylhet, etc. */}
+                  <DivisionSection />
+              </div>
+
+              {/* Decorative side accent */}
+              <div className="absolute -right-2 top-1/2 -translate-y-1/2 w-1 h-20 bg-indigo-600 rounded-full"></div>
+            </div>
+          </div>
+
         </div>
-
-        <div className="w-full mt-2">
-          <DivisionSection />
-        </div>
-
-        
-
       </div>
     </div>
   );
