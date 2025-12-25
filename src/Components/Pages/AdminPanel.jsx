@@ -122,7 +122,7 @@ const AdminPanel = () => {
   );
 
   return (
-    <div className="px-6 md:px-6 lg:px-2 max-w-6xl mx-auto mt-12">
+    <div className="px-6 md:px-6 lg:px-2 max-w-6xl mx-auto mt-28">
       {/* Title */}
       <motion.h1
         initial={{ opacity: 0, y: -15 }}

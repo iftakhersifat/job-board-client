@@ -1,45 +1,49 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { Link } from 'react-router';
 import Swal from 'sweetalert2';
+import { FaTrashAlt, FaEdit, FaUsers, FaCalendarAlt, FaBriefcase, FaPlus, FaFilter, FaCheckCircle, FaClock } from 'react-icons/fa';
 
 const PostedJobList = ({ postedJobPromise }) => {
   const [loading, setLoading] = useState(true);
-  const [postedJob, setPostedJob] = useState([]);
+  const [allJobs, setAllJobs] = useState([]);
+  const [filter, setFilter] = useState('All'); // 'All', 'Pending', 'Active'
 
-  // Fetch jobs from promise
   useEffect(() => {
     setLoading(true);
     postedJobPromise.then(data => {
-      // Show both Pending & Active
       const userJobs = data.filter(job =>
         job.status === "Pending" || job.status === "Active"
       );
-      setPostedJob(userJobs);
+      setAllJobs(userJobs);
       setLoading(false);
     });
   }, [postedJobPromise]);
 
-  // Delete job handler
+  // Filtering Logic
+  const filteredJobs = useMemo(() => {
+    if (filter === 'All') return allJobs;
+    return allJobs.filter(job => job.status === filter);
+  }, [allJobs, filter]);
+
   const handleDelete = (id) => {
     Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      title: "Archive this listing?",
+      text: "All candidate applications for this role will be permanently removed.",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonColor: '#1e293b',
+      cancelButtonColor: '#f1f5f9',
+      confirmButtonText: "Yes, delete",
+      customClass: { popup: 'rounded-[2rem]', confirmButton: 'text-white font-bold' }
     }).then((result) => {
       if (result.isConfirmed) {
         axios.delete(`http://localhost:5000/jobs/${id}`)
           .then((res) => {
             if (res.data.deletedCount > 0) {
-              Swal.fire("Deleted!", "Job has been deleted.", "success");
-              // Remove deleted job from state
-              setPostedJob(prev => prev.filter(job => job._id !== id));
+              setAllJobs(prev => prev.filter(job => job._id !== id));
+              Swal.fire({ title: "Deleted", text: "Listing removed successfully.", icon: "success", customClass: { popup: 'rounded-[2rem]' } });
             }
-          })
-          .catch(() => {
-            Swal.fire("Error!", "Something went wrong.", "error");
           });
       }
     });
@@ -47,104 +51,126 @@ const PostedJobList = ({ postedJobPromise }) => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center py-20">
-        <span className="loading loading-spinner text-info w-8 h-8"></span>
-      </div>
-    );
-  }
-
-  if (postedJob.length === 0) {
-    return (
-      <div className="text-center py-20">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-gray-500 mb-2">
-          No Jobs Posted
-        </h1>
-        <p className="text-gray-400 text-sm sm:text-base">
-          You haven’t posted any jobs yet. Once you post jobs, they will appear here.
-        </p>
+      <div className="flex flex-col justify-center items-center h-screen bg-[#F8FAFC]">
+        <span className="loading loading-spinner loading-lg text-indigo-600"></span>
+        <p className="mt-4 text-slate-400 font-black text-[10px] uppercase tracking-widest">Fetching Listings...</p>
       </div>
     );
   }
 
   return (
-    <div className='max-w-6xl mx-auto mt-8 px-6 md:px-6 lg:px-0'>
-      {/* Section Title */}
-      <div className="text-center py-6 px-6 relative">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-blue-600">Posted Jobs</h1>
-        <div className="w-24 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 mx-auto mt-3 rounded-full"></div>
-      </div>
+    <div className='min-h-screen bg-[#F8FAFC] pt-24 pb-20 px-4 md:px-10 lg:px-16'>
+      <div className='max-w-7xl mx-auto'>
+        
+        {/* Top Header Section */}
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 mb-12">
+            <div>
+                <h1 className="text-4xl font-[1000] text-slate-900 tracking-tighter">Recruitment Dashboard</h1>
+                <p className="text-slate-500 font-bold mt-1 uppercase text-[11px] tracking-widest">Manage your organization's open roles</p>
+            </div>
+            
+            <Link to="/addJob" className="group flex items-center gap-3 bg-indigo-600 text-white px-8 py-4 rounded-2xl font-black text-[11px] uppercase tracking-widest hover:bg-indigo-600 transition-all shadow-xl shadow-slate-200 active:scale-95">
+                <FaPlus className="group-hover:rotate-90 transition-transform" />
+            </Link>
+        </div>
 
-      {/* Jobs Table */}
-      <div className="overflow-x-auto rounded-2xl shadow-lg border border-gray-200">
-        <table className="table">
-          <thead className="bg-blue-50 text-gray-700">
-            <tr>
-              <th>#</th>
-              <th>Company</th>
-              <th>Job & Location</th>
-              <th>Deadline & Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {postedJob.map((post, index) => (
-              <tr key={post._id}>
-                <th>{index + 1}</th>
-                <td>
-                  <div className="font-bold">{post.company}</div>
-                </td>
-                <td>
-                  {post.title} <br />
-                  <span className="badge badge-ghost badge-sm">{post?.division}</span>
-                </td>
-                <td>
-                  <p>{post.deadline}</p>
-                  {post.status === "Pending" && (
-                    <span className="mt-1 inline-block px-2 py-1 text-xs bg-yellow-100 text-yellow-700 rounded-md font-semibold">
-                      Pending Approval
-                    </span>
-                  )}
-                  {post.status === "Active" && (
-                    <span className="mt-1 inline-block px-2 py-1 text-xs bg-green-100 text-green-700 rounded-md font-semibold">
-                      Approved
-                    </span>
-                  )}
-                </td>
-                <td>
-                  <div className='md:space-x-2 space-y-2'>
-                    {/* Delete button always visible */}
+        {/* --- Advanced Filtering Tabs --- */}
+        <div className="flex items-center justify-between mb-8 bg-white p-2 rounded-[1.5rem] border border-slate-200 shadow-sm overflow-x-auto">
+            <div className="flex items-center gap-1">
+                {[
+                    { label: 'All Posted', value: 'All', icon: <FaBriefcase /> },
+                    { label: 'Approval Required', value: 'Pending', icon: <FaClock /> },
+                    { label: 'Live Approved', value: 'Active', icon: <FaCheckCircle /> }
+                ].map((tab) => (
                     <button
-                      className="btn mt-2 btn-xs py-4 px-3 md:py-2 text-white bg-red-500 hover:bg-red-600 rounded-lg md:text-xs text-sm transition"
-                      onClick={() => handleDelete(post._id)}
+                        key={tab.value}
+                        onClick={() => setFilter(tab.value)}
+                        className={`flex items-center gap-2 px-6 py-3 rounded-xl text-[11px] font-black uppercase tracking-widest transition-all ${
+                            filter === tab.value 
+                            ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-100' 
+                            : 'text-slate-400 hover:bg-slate-50 hover:text-slate-600'
+                        }`}
                     >
-                      Delete
+                        {tab.icon} {tab.label}
+                        <span className={`ml-2 px-2 py-0.5 rounded-md text-[9px] ${
+                            filter === tab.value ? 'bg-white/20' : 'bg-slate-100 text-slate-500'
+                        }`}>
+                            {tab.value === 'All' ? allJobs.length : allJobs.filter(j => j.status === tab.value).length}
+                        </span>
                     </button>
+                ))}
+            </div>
+            <div className="hidden md:flex items-center gap-2 px-6 text-slate-300">
+                <FaFilter size={12} />
+                <span className="text-[10px] font-black uppercase tracking-widest">Filter active</span>
+            </div>
+        </div>
 
-                    {/* Edit button only for Pending jobs */}
-                    {post.status === "Pending" && (
-                      <Link to={`/jobs/edit/${post._id}`}>
-                        <button className="btn btn-xs py-4 px-3 md:py-2 text-white bg-yellow-500 hover:bg-yellow-600 rounded-lg md:text-xs text-sm transition">
-                          Edit
-                        </button>
-                      </Link>
-                    )}
+        {/* --- Job List --- */}
+        <div className="space-y-4">
+            {filteredJobs.length > 0 ? filteredJobs.map((post) => (
+                <div key={post._id} className="group bg-white border border-slate-200 rounded-[2.2rem] p-6 transition-all hover:shadow-xl hover:shadow-slate-200/50 hover:border-indigo-100">
+                    <div className="flex flex-col lg:flex-row items-center gap-8">
+                        
+                        {/* Company & Identity */}
+                        <div className="flex items-center gap-5 lg:w-[35%]">
+                            <div className="w-16 h-16 bg-slate-50 border border-slate-100 rounded-[1.4rem] overflow-hidden p-3 flex items-center justify-center group-hover:bg-white transition-colors">
+                                {post.company_logo ? (
+                                    <img src={post.company_logo} alt="logo" className="w-full h-full object-contain" />
+                                ) : (
+                                    <FaBriefcase className="text-slate-300 text-xl" />
+                                )}
+                            </div>
+                            <div>
+                                <h3 className="text-lg font-black text-slate-900 tracking-tight group-hover:text-indigo-600 transition-colors">{post.title}</h3>
+                                <p className="text-slate-500 font-bold text-xs mt-1">{post.company} <span className="mx-2 text-slate-200">•</span> <span className="text-indigo-500">{post?.division || "Global"}</span></p>
+                            </div>
+                        </div>
 
-                    {/* View Applications button only for Active jobs */}
-                    {post.status === "Active" && (
-                      <Link to={`/applications/${post._id}`}>
-                        <button className="px-3 py-1 text-white rounded-lg md:text-xs text-sm bg-blue-500 hover:bg-blue-700 transition">
-                          View Application
-                        </button>
-                      </Link>
-                    )}
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
+                        {/* Status & Deadline */}
+                        <div className="flex flex-col lg:items-center lg:w-[25%]">
+                            {post.status === "Pending" ? (
+                                <span className="px-4 py-1.5 bg-amber-50 text-amber-600 text-[10px] font-black uppercase tracking-widest rounded-full border border-amber-100">
+                                    Pending Approval
+                                </span>
+                            ) : (
+                                <span className="flex items-center gap-2 px-4 py-1.5 bg-emerald-50 text-emerald-600 text-[10px] font-black uppercase tracking-widest rounded-full border border-emerald-100">
+                                    <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span> Published Live
+                                </span>
+                            )}
+                            <p className="flex items-center gap-2 text-slate-400 text-[11px] font-bold mt-3">
+                                <FaCalendarAlt className="text-slate-300" /> Deadline: {post.deadline}
+                            </p>
+                        </div>
 
-        </table>
+                        {/* Interactive Actions */}
+                        <div className="flex items-center justify-end gap-3 lg:w-[40%] ml-auto w-full">
+                            {post.status === "Active" ? (
+                                <Link to={`/applications/${post._id}`} className="flex-1 lg:flex-none text-center px-8 py-3.5 bg-slate-900 text-white rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-indigo-600 transition-all shadow-lg shadow-slate-100 hover:shadow-indigo-100">
+                                   <FaUsers className="inline mr-2 mt-[-2px]" /> View Applications
+                                </Link>
+                            ) : (
+                                <Link to={`/jobs/edit/${post._id}`} className="flex-1 lg:flex-none text-center px-8 py-3.5 bg-white border border-slate-200 text-slate-600 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-amber-500 hover:text-white hover:border-amber-500 transition-all">
+                                   <FaEdit className="inline mr-2 mt-[-2px]" /> Modify Listing
+                                </Link>
+                            )}
+
+                            <button
+                                onClick={() => handleDelete(post._id)}
+                                className="p-4 bg-slate-50 text-slate-400 hover:bg-red-50 hover:text-red-600 rounded-2xl transition-all border border-transparent hover:border-red-100"
+                            >
+                                <FaTrashAlt size={14} />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )) : (
+                <div className="bg-white border-2 border-dashed border-slate-200 rounded-[3rem] py-24 text-center">
+                    <FaBriefcase className="text-slate-200 text-5xl mx-auto mb-4" />
+                    <p className="text-slate-400 font-black uppercase tracking-[0.2em] text-xs">No {filter !== 'All' ? filter.toLowerCase() : ''} positions found</p>
+                </div>
+            )}
+        </div>
       </div>
     </div>
   );
