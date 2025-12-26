@@ -38,7 +38,7 @@ const PostedJobList = ({ postedJobPromise }) => {
       customClass: { popup: 'rounded-[2rem]', confirmButton: 'text-white font-bold' }
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:5000/jobs/${id}`)
+        axios.delete(`https://job-board-server-five.vercel.app/jobs/${id}`)
           .then((res) => {
             if (res.data.deletedCount > 0) {
               setAllJobs(prev => prev.filter(job => job._id !== id));
@@ -59,7 +59,7 @@ const PostedJobList = ({ postedJobPromise }) => {
   }
 
   return (
-    <div className='min-h-screen bg-[#F8FAFC] pt-24 pb-20 px-6 md:px-6 lg:px-0'>
+    <div className='min-h-screen -mb-20 bg-[#F8FAFC] pt-24 pb-20 px-6 md:px-6 lg:px-0'>
       <div className='max-w-6xl mx-auto'>
         
         {/* Top Header Section */}

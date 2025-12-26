@@ -26,7 +26,7 @@ const JobAdd = () => {
     rest.userRole = user.role || "employee";
     rest.status = "Pending"; 
 
-    axios.post('http://localhost:5000/jobs', rest)
+    axios.post('https://job-board-server-five.vercel.app/jobs', rest)
       .then(result => {
         if (result.data.insertedId) {
           Swal.fire({
@@ -42,7 +42,7 @@ const JobAdd = () => {
   };
 
   return (
-    <div className='min-h-screen bg-[#F8FAFC] pt-28 pb-24 px-4 md:px-10 lg:px-20'>
+    <div className='min-h-screen bg-[#F8FAFC] -mb-20 pt-28 pb-24 px-6 md:px-6 lg:px-20'>
       <div className='max-w-4xl mx-auto'>
         
         {/* Navigation & Header */}
@@ -208,8 +208,9 @@ const JobAdd = () => {
           </div>
 
           {/* 5. HR Authority (Contrast Card) */}
-          <div className="bg-slate-900 border border-slate-800 rounded-[3rem] p-12 shadow-2xl shadow-indigo-200/20 text-white overflow-hidden relative">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl -mr-20 -mt-20"></div>
+          <div className="bg-white border border-slate-200 rounded-[3rem] p-12 shadow-[0_20px_60px_-15px_rgba(79,70,229,0.1)] overflow-hidden relative">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-50 rounded-full blur-3xl -mr-20 -mt-20 opacity-60"></div>
+    <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-50 rounded-full blur-3xl -ml-10 -mb-10 opacity-60"></div>
             <div className="flex items-center gap-4 mb-10 relative">
                 <div className="w-12 h-12 bg-white/10 text-indigo-400 rounded-2xl flex items-center justify-center border border-white/10">
                     <FaUserTie size={20} />
@@ -222,7 +223,7 @@ const JobAdd = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 relative">
                 <div className="space-y-2">
                     <label className="text-[11px] font-black text-slate-500 uppercase tracking-widest ml-1">Legal HR Name</label>
-                    <input type="text" name='hr_name' placeholder="Full Legal Name" className="w-full px-6 py-5 bg-white/5 border border-white/10 rounded-2xl focus:bg-white/10 focus:border-indigo-400 outline-none font-bold text-white transition-all shadow-sm" required />
+                    <input type="text" name='hr_name' placeholder="Full Legal Name" className="w-full px-6 py-5 bg-white/80 border border-white/10 rounded-2xl focus:bg-white/10 focus:border-indigo-400 outline-none font-bold text-slate-400 transition-all shadow-sm" required />
                 </div>
                 <div className="space-y-2">
                     <label className="text-[11px] font-black text-slate-500 uppercase tracking-widest ml-1">Contact Email</label>
@@ -235,7 +236,7 @@ const JobAdd = () => {
           <div className="pt-10 flex flex-col items-center">
             <button type="submit"
               className="group relative flex items-center gap-4 px-16 py-6 bg-indigo-600 text-white font-black text-sm uppercase tracking-[0.4em] rounded-full shadow-2xl shadow-indigo-200 hover:bg-indigo-700 hover:-translate-y-2 transition-all duration-300 active:scale-95">
-              <FaPlus className="group-hover:rotate-180 transition-transform duration-500" /> Post Position
+              <FaPlus className="group-hover:rotate-180 transition-transform duration-500" /> Add Job
             </button>
             <p className="text-slate-400 text-[10px] font-black uppercase tracking-widest mt-10 opacity-60">By clicking, you confirm this listing follows company policy</p>
           </div>

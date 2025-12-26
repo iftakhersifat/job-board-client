@@ -15,7 +15,7 @@ const AdminPendingJobs = () => {
   const [search, setSearch] = useState('');
 
   useEffect(() => {
-    axios.get('http://localhost:5000/jobs?status=Pending')
+    axios.get('https://job-board-server-five.vercel.app/jobs?status=Pending')
       .then(res => {
         setPendingJobs(res.data);
         setFilteredJobs(res.data);
@@ -29,7 +29,7 @@ const AdminPendingJobs = () => {
   };
 
   const approveJob = (id) => {
-    axios.patch(`http://localhost:5000/jobs/${id}/approve`)
+    axios.patch(`https://job-board-server-five.vercel.app/jobs/${id}/approve`)
       .then(() => {
         Swal.fire({
             title: 'Approved!',
@@ -56,7 +56,7 @@ const AdminPendingJobs = () => {
       customClass: { popup: 'rounded-[2rem]' }
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.patch(`http://localhost:5000/jobs/${id}/reject`)
+        axios.patch(`https://job-board-server-five.vercel.app/jobs/${id}/reject`)
           .then(() => {
             Swal.fire('Rejected', 'The listing has been removed.', 'error');
             setPendingJobs(prev => prev.filter(job => job._id !== id));
@@ -87,7 +87,7 @@ const AdminPendingJobs = () => {
   );
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] pt-24 pb-20 px-4 md:px-10 lg:px-16">
+    <div className="min-h-screen -mb-20 bg-[#F8FAFC] pt-24 pb-20 px-4 md:px-10 lg:px-16">
       <div className="max-w-6xl mx-auto">
         
         {/* Header & Search */}

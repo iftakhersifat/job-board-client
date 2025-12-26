@@ -57,11 +57,12 @@ const Navbar = () => {
       <NavLink to="/" className={navLinkStyles} onClick={() => setIsOpen(false)}>
         <Home size={16} /> Home
       </NavLink>
-      <Link to="/dashboard" className="py-3 px-4 lg:hidden flex gap-2 font-bold text-slate-600 rounded-xl hover:text-indigo-600"><LayoutDashboard size={18} className="text-indigo-500 mt-1"/> Dashboard</Link>
-      {user && (
+      {user && (<>
         <NavLink to="/myApplications" className={navLinkStyles} onClick={() => setIsOpen(false)}>
           <BriefcaseBusiness size={16} /> My Applications
         </NavLink>
+        <Link to="/dashboard" className="py-3 px-4 lg:hidden flex gap-2 font-bold text-slate-600 rounded-xl hover:text-indigo-600"><LayoutDashboard size={18} className="text-indigo-500 mt-1"/> Dashboard</Link>
+        </>
       )}
       {user?.role === "admin" && (
         <>

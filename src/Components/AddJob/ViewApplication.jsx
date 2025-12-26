@@ -29,7 +29,7 @@ const ViewApplication = () => {
     const newStatus = e.target.value;
     try {
       const res = await axios.patch(
-        `http://localhost:5000/applications/${applicationID}`,
+        `https://job-board-server-five.vercel.app/applications/${applicationID}`,
         { status: newStatus, applicantUID }
       );
 

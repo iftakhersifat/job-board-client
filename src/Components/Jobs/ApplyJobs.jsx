@@ -12,7 +12,7 @@ const ApplyJobs = () => {
     const [job, setJob] = useState(null);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/jobs/${id}`)
+        axios.get(`https://job-board-server-five.vercel.app/jobs/${id}`)
             .then(res => setJob(res.data))
             .catch(err => console.error(err));
     }, [id]);
@@ -34,7 +34,7 @@ const ApplyJobs = () => {
             resume: e.target.resume.value
         };
 
-        axios.post("http://localhost:5000/applications", formData)
+        axios.post("https://job-board-server-five.vercel.app/applications", formData)
             .then(res => {
                 if (res.data.insertedId) {
                     Swal.fire({

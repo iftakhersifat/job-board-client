@@ -42,7 +42,7 @@ const SearchJobsPage = () => {
     setLoading(true);
     setCurrentPage(1);
 
-    axios.get("http://localhost:5000/jobs")
+    axios.get("https://job-board-server-five.vercel.app/jobs")
       .then(res => {
         const data = Array.isArray(res.data) ? res.data : [];
         const filtered = data.filter(job => String(job.title ?? "").toLowerCase().includes(decodedTerm.toLowerCase()));

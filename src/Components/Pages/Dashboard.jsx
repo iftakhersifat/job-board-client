@@ -28,7 +28,6 @@ const Dashboard = () => {
   const [currentView, setCurrentView] = useState("profile");
   const prevRoleRef = useRef("");
 
-  // ১. ইউজার ডাটা এবং রোল ফেচ করা
   useEffect(() => {
     if (!user) return;
     const fetchUserRole = async () => {
@@ -44,7 +43,6 @@ const Dashboard = () => {
     setName(user.displayName || user.name || "");
   }, [user]);
 
-  // ২. রিয়েল-টাইম নোটিফিকেশন লিসেনার
   useEffect(() => {
     if (!user?.uid) return;
     const q = collection(db, "notifications", user.uid, "userNotifications");

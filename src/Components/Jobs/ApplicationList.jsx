@@ -86,7 +86,7 @@ const ApplicationList = ({ myApplicationList }) => {
             confirmButtonText: 'Yes, delete'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`http://localhost:5000/applications/${id}`)
+                axios.delete(`https://job-board-server-five.vercel.app/applications/${id}`)
                     .then(res => {
                         if (res.data.deletedCount > 0) {
                             setOriginalList(prev => prev.filter(app => app._id !== id));

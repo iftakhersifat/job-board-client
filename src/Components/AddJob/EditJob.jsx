@@ -11,7 +11,7 @@ const EditJob = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/jobs/${id}`)
+    axios.get(`https://job-board-server-five.vercel.app/jobs/${id}`)
       .then(res => {
         if (res.data.status === "Active") {
           Swal.fire({
@@ -50,7 +50,7 @@ const EditJob = () => {
       hr_name: job.hr
     };
 
-    axios.put(`http://localhost:5000/jobs/update/${id}`, updatedJob)
+    axios.put(`https://job-board-server-five.vercel.app/jobs/update/${id}`, updatedJob)
       .then(() => {
         Swal.fire({
             title: "Listing Updated",

@@ -38,7 +38,7 @@ const DivisionJobs = () => {
   // API Data Fetching
   useEffect(() => {
     setLoading(true);
-    axios.get("http://localhost:5000/jobs")
+    axios.get("https://job-board-server-five.vercel.app/jobs")
       .then((res) => {
         const data = Array.isArray(res.data) ? res.data : [];
         const divisionJobs = data.filter((job) => job?.division === decodedDivision);

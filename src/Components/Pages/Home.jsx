@@ -5,7 +5,7 @@ import CategorySection from '../AddJob/CategorySection.jsx';
 import BannerSection from './BannerSection.jsx';
 
 // jobs gula fetch korbo
-const jobsPromise =fetch('http://localhost:5000/jobs')
+const jobsPromise =fetch('https://job-board-server-five.vercel.app/jobs')
 .then(res=>res.json())
 
 const Home = () => {

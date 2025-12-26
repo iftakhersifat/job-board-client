@@ -40,7 +40,7 @@ const router = createBrowserRouter([
       {path: '/login', Component:Login},
       {path: '/register', Component:Register},
       {path: '/jobs/:id', Component:MoreDetails,
-        loader: ({params})=> fetch(`http://localhost:5000/jobs/${params.id}`)
+        loader: ({params})=> fetch(`https://job-board-server-five.vercel.app/jobs/${params.id}`)
       },
       {path: '/jobApply/:id', element:<Private><ApplyJobs></ApplyJobs></Private>},
       {path: '/myApplications', element:<Private><MyApplications></MyApplications></Private>},
@@ -49,7 +49,7 @@ const router = createBrowserRouter([
       {path: '/addJob', element:<RolePrivate allowedRoles={["admin", "employee"]}><JobAdd></JobAdd></RolePrivate>},
       {path: '/myPostedJobs', element:<Private><MyPostedJobs></MyPostedJobs></Private>},
       {path: '/applications/:id', element:<Private><ViewApplication></ViewApplication></Private>,
-        loader: ({params})=> fetch(`http://localhost:5000/applications/job/${params.id}`)
+        loader: ({params})=> fetch(`https://job-board-server-five.vercel.app/applications/job/${params.id}`)
       },
       {
         path: '/category/:category', element: <CategoryJobs></CategoryJobs>

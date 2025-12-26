@@ -13,7 +13,7 @@ const CategoryJobs = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get("http://localhost:5000/jobs").then((res) => {
+    axios.get("https://job-board-server-five.vercel.app/jobs").then((res) => {
       const filtered = res.data.filter(
         (job) => job.category === decodedCategory
       );
