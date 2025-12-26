@@ -57,6 +57,7 @@ const Navbar = () => {
       <NavLink to="/" className={navLinkStyles} onClick={() => setIsOpen(false)}>
         <Home size={16} /> Home
       </NavLink>
+      <Link to="/dashboard" className="py-3 px-4 lg:hidden flex gap-2 font-bold text-slate-600 rounded-xl hover:text-indigo-600"><LayoutDashboard size={18} className="text-indigo-500 mt-1"/> Dashboard</Link>
       {user && (
         <NavLink to="/myApplications" className={navLinkStyles} onClick={() => setIsOpen(false)}>
           <BriefcaseBusiness size={16} /> My Applications
@@ -189,6 +190,7 @@ const Navbar = () => {
 
             <div className="flex-grow py-8 px-4 space-y-1.5">
                <p className="px-4 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4">Navigation</p>
+               
                <NavLinks />
             </div>
 

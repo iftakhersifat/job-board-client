@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo } from "react";
-import { collection, getDocs, updateDoc, doc, deleteDoc } from "firebase/firestore";
+import { collection, getDocs, updateDoc, doc, deleteDoc, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../Firebase/Firebase";
 import toast from "react-hot-toast";
 import { motion, AnimatePresence } from "framer-motion";
@@ -25,17 +25,29 @@ const AdminPanel = () => {
   }, []);
 
   const changeRole = async (id, newRole) => {
-    try {
-      await updateDoc(doc(db, "users", id), { role: newRole });
-      setUsers((prev) =>
-        prev.map((u) => (u.id === id ? { ...u, role: newRole } : u))
-      );
-      toast.success(`Role updated to ${newRole}`);
-    } catch {
-      toast.error("Failed to update role");
-    }
-  };
+  try {
+    // ১. ইউজারের রোল আপডেট করা
+    await updateDoc(doc(db, "users", id), { role: newRole });
 
+    // ২. ড্যাশবোর্ডের জন্য নোটিফিকেশন পাঠানো
+    // পাথ: notifications -> (target user id) -> userNotifications
+    await addDoc(collection(db, "notifications", id, "userNotifications"), {
+      message: `Admin has updated your role to "${newRole.toUpperCase()}".`,
+      type: "role_update",
+      status: newRole, // admin/employee/user
+      createdAt: serverTimestamp(),
+    });
+
+    setUsers((prev) =>
+      prev.map((u) => (u.id === id ? { ...u, role: newRole } : u))
+    );
+    
+    toast.success(`User is now an ${newRole}`);
+  } catch (error) {
+    console.error("Error updating role:", error);
+    toast.error("Failed to update role or send notification");
+  }
+};
   const deleteUser = async (id) => {
     try {
       await deleteDoc(doc(db, "users", id));

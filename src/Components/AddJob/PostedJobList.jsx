@@ -59,19 +59,31 @@ const PostedJobList = ({ postedJobPromise }) => {
   }
 
   return (
-    <div className='min-h-screen bg-[#F8FAFC] pt-24 pb-20 px-4 md:px-10 lg:px-16'>
-      <div className='max-w-7xl mx-auto'>
+    <div className='min-h-screen bg-[#F8FAFC] pt-24 pb-20 px-6 md:px-6 lg:px-0'>
+      <div className='max-w-6xl mx-auto'>
         
         {/* Top Header Section */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 mb-12">
+        <div className="flex flex-row lg:items-center justify-between gap-8 mb-12">
             <div>
                 <h1 className="text-4xl font-[1000] text-slate-900 tracking-tighter">Recruitment Dashboard</h1>
                 <p className="text-slate-500 font-bold mt-1 uppercase text-[11px] tracking-widest">Manage your organization's open roles</p>
             </div>
             
-            <Link to="/addJob" className="group flex items-center gap-3 bg-indigo-600 text-white px-8 py-4 rounded-2xl font-black text-[11px] uppercase tracking-widest hover:bg-indigo-600 transition-all shadow-xl shadow-slate-200 active:scale-95">
-                <FaPlus className="group-hover:rotate-90 transition-transform" />
-            </Link>
+            <Link 
+    to="/addJob" 
+    className="group relative flex items-center justify-center bg-indigo-600 text-white w-14 h-14 md:w-auto md:px-8 md:py-4 rounded-2xl shadow-lg shadow-indigo-200 hover:bg-indigo-700 hover:shadow-indigo-300 transition-all duration-300 active:scale-95 overflow-hidden"
+>
+    {/* Desktop Text */}
+    <span className="hidden md:inline-block font-black text-xs uppercase tracking-widest mr-3">
+        Post New Job
+    </span>
+    
+    {/* Icon with Animation */}
+    <FaPlus className="text-xl group-hover:rotate-90 transition-transform duration-500" />
+
+    {/* Subtle Glow Effect */}
+    <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+</Link>
         </div>
 
         {/* --- Advanced Filtering Tabs --- */}
