@@ -1,16 +1,79 @@
-# React + Vite
+# JobBox – Trusted Job Portal Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🔗 **Live Application:** https://jobbox-bd.netlify.app/
 
-Currently, two official plugins are available:
+JobBox is a reliable and user-focused job portal platform designed to connect job seekers with verified employment opportunities. The system allows users to apply for jobs based on their skills, preferred categories, and divisions, while employers and administrators carefully review applications before making selections.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 📌 Project Overview
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+JobBox provides a structured and transparent recruitment process where:
 
-## Expanding the ESLint configuration
+- Job seekers can easily find relevant jobs
+- Employers can review applications efficiently
+- Administrators ensure platform reliability and trust
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+The platform is built with a strong focus on usability, organization, and trustworthiness.
+
+---
+
+## ✨ Key Features
+
+### 👤 Job Seeker
+
+- Apply for jobs based on personal skills
+- Find jobs category-wise and division-wise
+- View detailed job descriptions
+- Access trusted and verified job postings
+
+### 🏢 Employer / Admin
+
+- Review job applications carefully
+- Evaluate candidates based on skills and qualifications
+- Select suitable employees through a structured process
+- Manage job categories and postings
+
+### 🔍 Job Discovery
+
+- Category-based job search
+- Division-wise job filtering
+- Skill-based job matching system
+
+---
+
+## 🛠️ Technology Stack
+
+- **Frontend:** HTML, CSS, JavaScript
+- **Framework:** React.js
+- **Styling:** Tailwind CSS
+- **Deployment:** Netlify
+
+---
+
+## 🎯 Purpose of the Project
+
+The primary purpose of JobBox is to create a trusted and efficient job portal that simplifies the recruitment process for both job seekers and employers. This project focuses on:
+
+- Providing skill-based job opportunities for candidates
+- Ensuring transparency in job application and selection
+- Helping employers find suitable candidates efficiently
+- Offering category-wise and division-wise job discovery
+- Building a reliable and user-friendly employment platform
+
+JobBox aims to bridge the gap between talent and opportunity through a structured and trustworthy system.
+
+---
+
+## 👨‍💻 Developer
+
+**Iftakher Hossen Sifat**  
+Computer Science & Engineering Student  
+Digital Marketer & SEO Expert  
+Bangladesh
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**.
