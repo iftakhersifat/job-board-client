@@ -33,8 +33,7 @@ const SocialRegister = ({ from }) => {
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={handleGoogle}
-                className="w-full group relative flex items-center justify-center gap-3 bg-white border-2 border-slate-100 py-3.5 rounded-2xl transition-all hover:border-indigo-100 hover:shadow-[0_10px_20px_-10px_rgba(79,70,229,0.1)]"
-            >
+                className="w-full group relative flex items-center justify-center gap-3 bg-white border-2 border-slate-100 py-3.5 rounded-2xl transition-all hover:border-indigo-100 hover:shadow-[0_10px_20px_-10px_rgba(79,70,229,0.1)]">
                 <div className="bg-white p-1 rounded-lg">
                     <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
@@ -47,7 +46,6 @@ const SocialRegister = ({ from }) => {
                     Continue with Google
                 </span>
                 
-                {/* Subtle Glow Effect on Hover */}
                 <div className="absolute inset-0 rounded-2xl bg-indigo-50 opacity-0 group-hover:opacity-10 transition-opacity pointer-events-none"></div>
             </motion.button>
         </div>
