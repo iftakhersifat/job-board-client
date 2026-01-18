@@ -1,22 +1,22 @@
 import React, { use } from "react";
-import { FaLocationDot, FaMoneyBillWave } from "react-icons/fa6";
+import { FaLocationDot } from "react-icons/fa6";
 import { FiArrowUpRight, FiClock, FiLayers, FiCheckCircle } from "react-icons/fi";
 import { Link } from "react-router";
-import { motion } from "framer-motion";
 
 const Jobs = ({ jobsPromise }) => {
+  // ডাটা লোড না হওয়া পর্যন্ত এখানে কোডটি পজ হয়ে থাকবে
   const jobs = use(jobsPromise);
+
+  // যদি ডাটা না থাকে বা খালি অ্যারে হয়
+  if (!jobs || jobs.length === 0) {
+    return <div className="text-center py-20 text-slate-500">No jobs available right now.</div>;
+  }
 
   return (
     <div className="max-w-6xl mx-auto mt-32 mb-24 px-6 md:px-6 lg:px-0">
       {/* --- Section Header --- */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-        <motion.div 
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          className="max-w-2xl"
-        >
+        <div className="max-w-2xl">
           <div className="flex items-center gap-2 mb-4">
             <span className="w-10 h-[2px] bg-indigo-600"></span>
             <span className="text-indigo-600 font-black text-xs uppercase tracking-[0.2em]">Latest Opportunities</span>
@@ -24,28 +24,20 @@ const Jobs = ({ jobsPromise }) => {
           <h1 className="text-4xl md:text-6xl font-black text-slate-900 leading-[1.1] tracking-tight">
             Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-blue-600 to-cyan-500">Career Paths</span>
           </h1>
-        </motion.div>
+        </div>
         
-        <motion.p 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          className="text-slate-500 font-medium text-lg max-w-sm md:text-right"
-        >
+        <p className="text-slate-500 font-medium text-lg max-w-sm md:text-right">
           Connecting ambitious talent with world-class companies. Your next step starts here.
-        </motion.p>
+        </p>
       </div>
 
       {/* --- Job Cards Grid --- */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {jobs
           .filter((job) => job.status === "Active")
-          .map((job, index) => (
-            <motion.div
+          .map((job) => (
+            <div
               key={job._id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
               className="group relative flex flex-col bg-white border border-slate-200 rounded-[2.5rem] p-8 transition-all duration-500 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] hover:border-indigo-100"
             >
               {/* Card Decoration */}
@@ -118,13 +110,13 @@ const Jobs = ({ jobsPromise }) => {
               {/* Action Button */}
               <div className="mt-auto relative z-10">
                 <Link to={`/jobs/${job._id}`} className="block">
-                  <button className="w-full flex items-center justify-between px-6 py-4 bg-slate-900 group-hover:bg-indigo-600 text-white rounded-2xl font-black text-sm transition-all shadow-xl shadow-slate-200 active:scale-95 overflow-hidden relative">
-                    <span className="relative z-10">Explore Opportunity</span>
+                  <button className="w-full flex items-center justify-between px-6 py-4 bg-slate-900 group-hover:bg-indigo-600 text-white rounded-2xl font-black text-sm transition-all shadow-xl shadow-slate-200 active:scale-95 overflow-hidden">
+                    <span>Explore Opportunity</span>
                     <FiArrowUpRight size={20} className="group-hover:rotate-45 transition-transform duration-300" />
                   </button>
                 </Link>
               </div>
-            </motion.div>
+            </div>
           ))}
       </div>
     </div>

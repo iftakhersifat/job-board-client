@@ -7,7 +7,7 @@ const Private = ({children}) => {
     const location = useLocation();
     console.log(location.pathname)
     if (loading) {
-    return <div className="text-center mt-10 text-lg">Loading user info...</div>;
+    return <div className="text-center mt-24 text-lg">Loading user info...</div>;
   }
     if(!user){
         return <Navigate to='/login' state={location.pathname}></Navigate>

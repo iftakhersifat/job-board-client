@@ -27,6 +27,8 @@ import AdminPrivate from './Components/Firebase/AdminPrivate.jsx';
 import Dashboard from './Components/Pages/Dashboard.jsx';
 import AdminPendingJobs from './Components/Pages/AdminPendingJobs.jsx';
 import EditJob from './Components/AddJob/EditJob.jsx';
+import JobsPage from './Components/Jobs/JobsPage.jsx';
+import ContactSection from './Components/Pages/ContactSection.jsx';
 // import AboutUs from './Components/Pages/AboutUs.jsx';
 
 
@@ -37,6 +39,7 @@ const router = createBrowserRouter([
     Component: Root,
     children: [
       {index: true, Component:Home},
+      {path: "/jobs", element: <JobsPage />,},
       {path: '/login', Component:Login},
       {path: '/register', Component:Register},
       {path: '/jobs/:id', Component:MoreDetails,
@@ -65,6 +68,7 @@ const router = createBrowserRouter([
       // {path:"/about", element:<AboutUs></AboutUs>},
       {path:"/pending-jobs", element: <AdminPrivate><AdminPendingJobs></AdminPendingJobs></AdminPrivate>},
       {path:"/jobs/edit/:id", element:<EditJob></EditJob>},
+      {path:"/contact", Component:ContactSection}
 
       
 

@@ -68,7 +68,6 @@ const MoreDetails = () => {
         {/* Salary Badge - Indigo Styled */}
         <div className="flex items-center gap-2 w-fit bg-indigo-50 text-indigo-700 px-5 py-2.5 rounded-2xl 
           text-sm font-black border border-indigo-100 shadow-sm">
-          <FiDollarSign className="text-indigo-500" size={18} />
           Salary: {job.salaryRange?.min} - {job.salaryRange?.max} {job.salaryRange?.currency}
         </div>
 
