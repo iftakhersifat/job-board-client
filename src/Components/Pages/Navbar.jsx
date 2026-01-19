@@ -68,13 +68,17 @@ const Navbar = () => {
         <Link to="/profile" className="py-4 px-5 lg:hidden text-[13px] flex gap-2 font-bold text-slate-600 rounded-xl hover:text-indigo-600"><User size={18} /> Profile</Link>
 
         <Link to="/notification" className="py-4 px-5 lg:hidden text-[13px] flex gap-2 font-bold text-slate-600 rounded-xl hover:text-indigo-600"><Bell size={18} /> Notification</Link>
+
+        {user?.role === "admin" &&(
+        <>
+        <Link to="/jobs-view" className="py-4 px-5 lg:hidden text-[13px] flex gap-2 font-bold text-slate-600 rounded-xl hover:text-indigo-600"><FaLayerGroup size={18} /> Jobs View</Link>
+        </>)}
         </>
       )}
       {user?.role === "admin" && (
         <>
           <NavLink to="/admin" className={navLinkStyles} onClick={() => setIsOpen(false)}><ShieldCheck size={16}/> Admin</NavLink>
           <NavLink to="/pending-jobs" className={navLinkStyles} onClick={() => setIsOpen(false)}>Pending Jobs</NavLink>
-          <NavLink to="/jobs-view" className={navLinkStyles} onClick={() => setIsOpen(false)}><FaLayerGroup size={16}/>Jobs View</NavLink>
         </>
       )}
       {(user?.role === "admin" || user?.role === "employee") && (
