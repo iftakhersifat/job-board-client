@@ -30,6 +30,7 @@ import EditJob from './Components/AddJob/EditJob.jsx';
 import JobsPage from './Components/Jobs/JobsPage.jsx';
 import ContactSection from './Components/Pages/ContactSection.jsx';
 import TopBrands from './Components/Pages/TopBrands.jsx';
+import JobStats from './Components/Pages/JobStats.jsx';
 // import AboutUs from './Components/Pages/AboutUs.jsx';
 
 
@@ -71,6 +72,7 @@ const router = createBrowserRouter([
       {path:"/jobs/edit/:id", element:<EditJob></EditJob>},
       {path:"/contact", Component:ContactSection},
       {path:"/brands", Component:TopBrands},
+      {path:"/stats", Component:JobStats},
 
       
 
