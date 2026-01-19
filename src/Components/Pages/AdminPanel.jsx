@@ -2,8 +2,9 @@ import { useEffect, useState, useMemo } from "react";
 import { collection, getDocs, updateDoc, doc, deleteDoc, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../Firebase/Firebase";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 import { motion, AnimatePresence } from "framer-motion";
-import { Users, ShieldCheck, Briefcase, Trash2, Search, Filter, MoreVertical } from "lucide-react";
+import { Users, ShieldCheck, Briefcase, Trash2, Search, Filter, MoreVertical, User } from "lucide-react";
 
 const AdminPanel = () => {
   const [users, setUsers] = useState([]);
@@ -46,15 +47,37 @@ const AdminPanel = () => {
   };
 
   const deleteUser = async (id) => {
-    if (window.confirm("Are you sure you want to delete this user?")) {
-      try {
-        await deleteDoc(doc(db, "users", id));
-        setUsers((prev) => prev.filter((u) => u.id !== id));
-        toast.success("User removed from system");
-      } catch {
-        toast.error("Deletion failed");
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This user will be permanently removed from the system!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#ef4444",
+      cancelButtonColor: "#1e293b",
+      confirmButtonText: "Yes, delete it!",
+      background: "#fff",
+      customClass: {
+        popup: 'rounded-[2rem]',
+        confirmButton: 'rounded-xl px-6 py-3 font-bold',
+        cancelButton: 'rounded-xl px-6 py-3 font-bold'
       }
-    }
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await deleteDoc(doc(db, "users", id));
+          setUsers((prev) => prev.filter((u) => u.id !== id));
+          Swal.fire({
+            title: "Deleted!",
+            text: "User has been removed.",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1500
+          });
+        } catch {
+          toast.error("Deletion failed");
+        }
+      }
+    });
   };
 
   const stats = useMemo(() => {
@@ -85,8 +108,6 @@ const AdminPanel = () => {
   return (
     <div className="min-h-screen bg-[#f8fafc] pb-20 -mb-20 pt-28 px-6 md:px-6 lg:px-0">
       <div className="max-w-6xl mx-auto">
-        
-        {/* Header Section */}
         <div className="mb-10 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
             <motion.h1 
@@ -98,8 +119,6 @@ const AdminPanel = () => {
             </motion.h1>
             <p className="mt-2 text-slate-500 font-medium italic">Manage user permissions and access levels across the platform.</p>
           </div>
-          
-          {/* Action Stats Overview */}
           <div className="flex gap-3 justify-center">
              <div className="px-4 py-2 bg-indigo-50 border border-indigo-100 rounded-2xl">
                 <span className="text-xs font-bold text-indigo-400 uppercase tracking-widest block">Activity</span>
@@ -108,14 +127,12 @@ const AdminPanel = () => {
           </div>
         </div>
 
-        {/* Stats Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           <StatCard label="Platform Total" value={stats.total} icon={Users} color="bg-blue-600" loading={loading} />
           <StatCard label="System Admins" value={stats.admins} icon={ShieldCheck} color="bg-rose-500" loading={loading} />
           <StatCard label="Core Employees" value={stats.employees} icon={Briefcase} color="bg-emerald-500" loading={loading} />
         </div>
 
-        {/* Controls Bar */}
         <div className="bg-white p-4 rounded-[2rem] shadow-sm border border-slate-200 mb-8 flex flex-col md:flex-row gap-4 items-center">
           <div className="relative w-full">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
@@ -144,7 +161,6 @@ const AdminPanel = () => {
           </div>
         </div>
 
-        {/* Sections Container */}
         <AnimatePresence mode="wait">
           {loading ? (
             <div className="space-y-4">
@@ -187,8 +203,6 @@ const AdminPanel = () => {
     </div>
   );
 };
-
-// --- Sub Components ---
 
 const StatCard = ({ label, value, icon: Icon, color, loading }) => (
   <motion.div 
@@ -245,11 +259,20 @@ const UserSection = ({ title, type, data, changeRole, deleteUser }) => {
                 <tr key={user.id} className="group hover:bg-slate-50/30 transition-colors">
                   <td className="px-8 py-5">
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center font-black text-slate-500 border border-white shadow-sm">
-                        {user.name?.charAt(0) || "U"}
+                      <div className="w-12 h-12 rounded-2xl overflow-hidden bg-slate-100 flex items-center justify-center border border-white shadow-sm transition-transform group-hover:scale-110">
+                        {user.photoURL ? (
+                          <img 
+                            src={user.photoURL} 
+                            alt={user.name} 
+                            className="w-full h-full object-cover"
+                            onError={(e) => { e.target.src = ""; e.target.onerror = null; }}
+                          />
+                        ) : (
+                          <User size={20} className="text-slate-400" />
+                        )}
                       </div>
                       <div>
-                        <p className="font-black text-slate-800 leading-none mb-1">{user.name}</p>
+                        <p className="font-black text-slate-800 leading-none mb-1">{user.name || "Anonymous"}</p>
                         <p className="text-xs font-bold text-slate-400">{user.email}</p>
                       </div>
                     </div>
