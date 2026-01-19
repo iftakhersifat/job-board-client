@@ -32,6 +32,10 @@ import ContactSection from './Components/Pages/ContactSection.jsx';
 import TopBrands from './Components/Pages/TopBrands.jsx';
 import JobStats from './Components/Pages/JobStats.jsx';
 import CandidateTestimonials from './Components/Pages/CandidateTestimonials.jsx';
+import HowItWorks from './Components/Pages/HowItWorks.jsx';
+import ProfileView from './Components/Dashboard/ProfileView.jsx';
+import NotificationView from './Components/Dashboard/NotificationsView.jsx';
+import NotificationsView from './Components/Dashboard/NotificationsView.jsx';
 // import AboutUs from './Components/Pages/AboutUs.jsx';
 
 
@@ -75,6 +79,10 @@ const router = createBrowserRouter([
       {path:"/brands", Component:TopBrands},
       {path:"/stats", Component:JobStats},
       {path:"/testimonials", Component:CandidateTestimonials},
+      {path:"/how-it-works", Component:HowItWorks},
+
+      {path:'/profile', element:<ProfileView></ProfileView>},
+      {path:'/notification', element:<NotificationsView></NotificationsView>},
 
       
 

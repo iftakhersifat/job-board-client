@@ -65,6 +65,10 @@ const Navbar = () => {
           <BriefcaseBusiness size={16} /> My Applications
         </NavLink>
         <Link to="/dashboard" className="py-4 px-5 lg:hidden text-[13px] flex gap-2 font-bold text-slate-600 rounded-xl hover:text-indigo-600"><LayoutDashboard size={16} className="text-indigo-500 mt-1"/> Dashboard</Link>
+
+        <Link to="/profile" className="py-4 px-5 lg:hidden text-[13px] flex gap-2 font-bold text-slate-600 rounded-xl hover:text-indigo-600"><LayoutDashboard size={16} className="text-indigo-500 mt-1"/> Profile</Link>
+
+        <Link to="/notification" className="py-4 px-5 lg:hidden text-[13px] flex gap-2 font-bold text-slate-600 rounded-xl hover:text-indigo-600"><LayoutDashboard size={16} className="text-indigo-500 mt-1"/> Notification</Link>
         </>
       )}
       {user?.role === "admin" && (
@@ -132,6 +136,10 @@ const Navbar = () => {
                   </div>
                   <ul tabIndex={0} className="dropdown-content z-[110] menu p-2 shadow-2xl bg-white rounded-2xl w-60 border border-slate-100 mt-4 animate-in fade-in slide-in-from-top-3">
                       <li><Link to="/dashboard" className="py-3 px-4 font-bold text-slate-600 rounded-xl hover:text-indigo-600"><LayoutDashboard size={18} className="text-indigo-500"/> Dashboard</Link></li>
+
+                      <li><Link to="/profile" className="py-3 px-4 font-bold text-slate-600 rounded-xl hover:text-indigo-600"><LayoutDashboard size={18} className="text-indigo-500"/> Profile</Link></li>
+
+                      <li><Link to="/notification" className="py-3 px-4 font-bold text-slate-600 rounded-xl hover:text-indigo-600"><LayoutDashboard size={18} className="text-indigo-500"/> Notification</Link></li>
                       <div className="divider my-1 opacity-50 px-4"></div>
                       <li><button onClick={handleLogOut} className="text-rose-600 hover:bg-rose-50 font-black py-3 px-4 rounded-xl"><LogOut size={18} /> Sign Out</button></li>
                   </ul>

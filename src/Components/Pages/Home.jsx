@@ -6,6 +6,7 @@ import BannerSection from './BannerSection.jsx';
 import TopBrands from './TopBrands.jsx';
 import JobStats from './JobStats.jsx';
 import CandidateTestimonials from './CandidateTestimonials.jsx';
+import HowItWorks from './HowItWorks.jsx';
 
 // jobs gula fetch korbo
 const jobsPromise =fetch('https://job-board-server-five.vercel.app/jobs')
@@ -24,6 +25,8 @@ const Home = () => {
 
             <JobStats></JobStats>
             <CandidateTestimonials></CandidateTestimonials>
+
+            <HowItWorks></HowItWorks>
         </div>
     );
 };
