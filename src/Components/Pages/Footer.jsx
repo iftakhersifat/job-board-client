@@ -4,7 +4,6 @@ import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from "react-icons/f
 import { FiMail, FiPhone, FiMapPin } from "react-icons/fi";
 
 const Footer = () => {
-  // Your Custom Logo Component integrated here
   const Logo = () => (
     <Link to="/" className="flex items-center gap-3 outline-none group">
       <div className="relative w-10 h-10 md:w-11 md:h-11 bg-slate-900 rounded-[12px] md:rounded-[14px] flex items-center justify-center overflow-hidden transition-all duration-500 group-hover:bg-indigo-600 group-hover:rounded-[18px] group-hover:rotate-[10deg] shadow-lg shadow-slate-200 group-hover:shadow-indigo-200">
@@ -33,7 +32,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-gradient-to-b from-slate-50 via-white to-white border-t border-slate-100 mt-20">
-      {/* Upper Footer: Links & Branding */}
+      {/* Links & Branding */}
       <div className="max-w-6xl mx-auto px-6 md:px-6 lg:px-0 pt-16 pb-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
           
@@ -53,8 +52,7 @@ const Footer = () => {
                 <a
                   key={idx}
                   href={social.link}
-                  className="w-9 h-9 flex items-center justify-center rounded-xl bg-slate-50 text-slate-400 hover:bg-indigo-600 hover:text-white hover:-translate-y-1 transition-all duration-300 border border-slate-100 shadow-sm"
-                >
+                  className="w-9 h-9 flex items-center justify-center rounded-xl bg-slate-50 text-slate-400 hover:bg-indigo-600 hover:text-white hover:-translate-y-1 transition-all duration-300 border border-slate-100 shadow-sm">
                   {social.icon}
                 </a>
               ))}

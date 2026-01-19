@@ -77,25 +77,31 @@ const ApplicationList = ({ myApplicationList }) => {
     };
 
     const handleDelete = (id) => {
-        Swal.fire({
-            title: 'Delete Record?',
-            text: "This action is permanent.",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#6366f1',
-            confirmButtonText: 'Yes, delete'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                axios.delete(`https://job-board-server-five.vercel.app/applications/${id}`)
-                    .then(res => {
-                        if (res.data.deletedCount > 0) {
-                            setOriginalList(prev => prev.filter(app => app._id !== id));
-                            Swal.fire('Deleted!', 'Record removed.', 'success');
-                        }
-                    });
-            }
-        });
-    };
+    Swal.fire({
+        title: 'Delete Record?',
+        text: "This action is permanent.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#ef4444', // Red color for delete
+        confirmButtonText: 'Yes, delete'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            axios.delete(`https://job-board-server-five.vercel.app/applications/${id}`)
+                .then(res => {
+                    if (res.data.deletedCount > 0) {
+                        setOriginalList(prev => prev.filter(app => app._id !== id));
+                        setDisplayList(prev => prev.filter(app => app._id !== id));
+                        
+                        Swal.fire('Deleted!', 'Record removed.', 'success');
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    Swal.fire('Error!', 'Something went wrong.', 'error');
+                });
+        }
+    });
+};
 
     const getStatusStyles = (status) => {
         const s = (status || "Pending").toLowerCase();

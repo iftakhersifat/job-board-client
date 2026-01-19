@@ -29,6 +29,7 @@ import AdminPendingJobs from './Components/Pages/AdminPendingJobs.jsx';
 import EditJob from './Components/AddJob/EditJob.jsx';
 import JobsPage from './Components/Jobs/JobsPage.jsx';
 import ContactSection from './Components/Pages/ContactSection.jsx';
+import TopBrands from './Components/Pages/TopBrands.jsx';
 // import AboutUs from './Components/Pages/AboutUs.jsx';
 
 
@@ -68,7 +69,8 @@ const router = createBrowserRouter([
       // {path:"/about", element:<AboutUs></AboutUs>},
       {path:"/pending-jobs", element: <AdminPrivate><AdminPendingJobs></AdminPendingJobs></AdminPrivate>},
       {path:"/jobs/edit/:id", element:<EditJob></EditJob>},
-      {path:"/contact", Component:ContactSection}
+      {path:"/contact", Component:ContactSection},
+      {path:"/brands", Component:TopBrands},
 
       
 

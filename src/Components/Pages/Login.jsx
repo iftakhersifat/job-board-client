@@ -53,7 +53,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFF] flex items-center justify-center p-4 md:p-8 font-sans overflow-hidden relative">
+    <div className="min-h-screen bg-[#F8FAFF] flex items-center justify-center -mb-24  pt-38 pb-24 p-6  font-sans overflow-hidden relative">
       
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
         <motion.div 
