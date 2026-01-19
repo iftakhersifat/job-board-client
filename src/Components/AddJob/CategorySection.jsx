@@ -31,7 +31,7 @@ const CategorySection = () => {
           </h1>
         </div>
 
-        {/* Modern Search Bar */}
+        {/* Search Bar */}
         <div className="relative w-full md:w-96 group">
           <div className="absolute inset-0 bg-indigo-500/10 blur-xl rounded-full opacity-0 group-focus-within:opacity-100 transition-opacity"></div>
           <input
@@ -47,7 +47,7 @@ const CategorySection = () => {
         </div>
       </div>
 
-      {/* Grid Container */}
+      {/* Container */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         <AnimatePresence>
           {filteredCategories.length > 0 ? (
@@ -56,13 +56,11 @@ const CategorySection = () => {
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05 }}
-              >
+                transition={{ delay: index * 0.05 }}>
                 <Link
                   to={`/category/${encodeURIComponent(cat)}`}
-                  className="group relative h-40 flex flex-col items-center justify-center bg-white border border-slate-100 rounded-[2.5rem] p-6 transition-all duration-500 hover:shadow-[0_20px_50px_rgba(79,70,229,0.1)] hover:-translate-y-2 overflow-hidden"
-                >
-                  {/* Background Decoration */}
+                  className="group relative h-40 flex flex-col items-center justify-center bg-white border border-slate-100 rounded-[2.5rem] p-6 transition-all duration-500 hover:shadow-[0_20px_50px_rgba(79,70,229,0.1)] hover:-translate-y-2 overflow-hidden">
+
                   <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-indigo-50 rounded-full group-hover:scale-[3] transition-transform duration-700 ease-in-out opacity-50"></div>
                   
                   {/* Icon Wrapper */}
@@ -80,8 +78,6 @@ const CategorySection = () => {
                       <FiArrowRight size={10} className="text-indigo-500" />
                     </div>
                   </div>
-
-                  {/* Top Animated Border */}
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-0 h-1 bg-gradient-to-r from-indigo-500 to-blue-400 group-hover:w-full transition-all duration-500"></div>
                 </Link>
               </motion.div>
@@ -102,7 +98,7 @@ const CategorySection = () => {
         </AnimatePresence>
       </div>
 
-      {/* Premium Load More Button */}
+      {/* More Button */}
       {visibleCount < filteredCategories.length && (
         <div className="flex justify-center mt-20 relative">
           <div className="absolute inset-0 flex items-center">
@@ -110,8 +106,7 @@ const CategorySection = () => {
           </div>
           <button
             onClick={handleLoadMore}
-            className="relative px-10 py-4 bg-white border border-slate-200 hover:border-indigo-500 text-slate-900 font-black rounded-full shadow-xl hover:shadow-indigo-100 transition-all duration-300 hover:scale-105 active:scale-95 flex items-center gap-3 group"
-          >
+            className="relative px-10 py-4 bg-white border border-slate-200 hover:border-indigo-500 text-slate-900 font-black rounded-full shadow-xl hover:shadow-indigo-100 transition-all duration-300 hover:scale-105 active:scale-95 flex items-center gap-3 group">
             <span className="bg-indigo-600 text-white w-6 h-6 rounded-full flex items-center justify-center group-hover:rotate-90 transition-transform">
               +
             </span>

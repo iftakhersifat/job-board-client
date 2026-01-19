@@ -8,25 +8,22 @@ import JobStats from './JobStats.jsx';
 import CandidateTestimonials from './CandidateTestimonials.jsx';
 import HowItWorks from './HowItWorks.jsx';
 
-// jobs gula fetch korbo
+
 const jobsPromise =fetch('https://job-board-server-five.vercel.app/jobs')
 .then(res=>res.json())
 
 const Home = () => {
     return (
         <div>
-            {/* <Banner></Banner> */}
-            <BannerSection></BannerSection>
+            <BannerSection />
+            <JobStats />
             
             <CategorySection></CategorySection>
             <Jobs jobsPromise={jobsPromise}></Jobs>
 
-            <TopBrands></TopBrands>
-
-            <JobStats></JobStats>
-            <CandidateTestimonials></CandidateTestimonials>
-
-            <HowItWorks></HowItWorks>
+            <HowItWorks />
+            <TopBrands />
+            <CandidateTestimonials />     
         </div>
     );
 };

@@ -82,8 +82,7 @@ const EditJob = () => {
         <div className="flex items-center justify-between mb-10">
             <button 
                 onClick={() => navigate(-1)} 
-                className="flex items-center gap-2 text-slate-400 hover:text-indigo-600 font-bold text-xs uppercase tracking-widest transition-all"
-            >
+                className="flex items-center gap-2 text-slate-400 hover:text-indigo-600 font-bold text-xs uppercase tracking-widest transition-all">
                 <FaArrowLeft /> Back to List
             </button>
             <div className="text-right">
@@ -103,7 +102,7 @@ const EditJob = () => {
 
           <form onSubmit={handleUpdate} className="p-8 md:p-12 space-y-10">
             
-            {/* --- Section 1: Basic Information --- */}
+            {/* Info */}
             <div>
                 <div className="flex items-center gap-3 mb-6 border-b border-slate-50 pb-4">
                     <FaBriefcase className="text-indigo-500" />
@@ -138,7 +137,6 @@ const EditJob = () => {
                 </div>
             </div>
 
-            {/* --- Section 2: Logistics --- */}
             <div>
                 <div className="flex items-center gap-3 mb-6 border-b border-slate-50 pb-4">
                     <FaMapMarkerAlt className="text-indigo-500" />
@@ -160,7 +158,7 @@ const EditJob = () => {
                 </div>
             </div>
 
-            {/* --- Section 3: Detailed Content --- */}
+            {/* Detailed Content */}
             <div>
                 <div className="flex items-center gap-3 mb-6 border-b border-slate-50 pb-4">
                     <FaClipboardList className="text-indigo-500" />
@@ -185,7 +183,6 @@ const EditJob = () => {
                 </div>
             </div>
 
-            {/* --- Section 4: Point of Contact --- */}
             <div className="bg-indigo-50/50 p-8 rounded-[2rem] border border-indigo-100/50">
                 <div className="flex items-center gap-3 mb-4">
                     <FaRegCheckCircle className="text-indigo-600" />
@@ -202,16 +199,12 @@ const EditJob = () => {
             <div className="pt-6 flex flex-col md:flex-row gap-4">
                 <button 
                     type="submit" 
-                    className="flex-1 bg-indigo-600 hover:bg-slate-900 text-white font-black text-[11px] uppercase tracking-[0.2em] py-5 rounded-2xl transition-all shadow-xl shadow-indigo-100 active:scale-95"
-                >
-                    Update Listing & Notify Team
+                    className="flex-1 bg-indigo-600 hover:bg-slate-900 text-white font-black text-[11px] uppercase tracking-[0.2em] py-5 rounded-2xl transition-all shadow-xl shadow-indigo-100 active:scale-95">Update Listing & Notify Team
                 </button>
                 <button 
                     type="button" 
                     onClick={() => navigate(-1)}
-                    className="px-10 bg-slate-100 hover:bg-slate-200 text-slate-500 font-black text-[11px] uppercase tracking-[0.2em] py-5 rounded-2xl transition-all"
-                >
-                    Cancel
+                    className="px-10 bg-slate-100 hover:bg-slate-200 text-slate-500 font-black text-[11px] uppercase tracking-[0.2em] py-5 rounded-2xl transition-all">Cancel
                 </button>
             </div>
 

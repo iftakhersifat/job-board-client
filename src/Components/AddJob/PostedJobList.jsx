@@ -7,7 +7,7 @@ import { FaTrashAlt, FaEdit, FaUsers, FaCalendarAlt, FaBriefcase, FaPlus, FaFilt
 const PostedJobList = ({ postedJobPromise }) => {
   const [loading, setLoading] = useState(true);
   const [allJobs, setAllJobs] = useState([]);
-  const [filter, setFilter] = useState('All'); // 'All', 'Pending', 'Active'
+  const [filter, setFilter] = useState('All');
 
   useEffect(() => {
     setLoading(true);
@@ -20,7 +20,6 @@ const PostedJobList = ({ postedJobPromise }) => {
     });
   }, [postedJobPromise]);
 
-  // Filtering Logic
   const filteredJobs = useMemo(() => {
     if (filter === 'All') return allJobs;
     return allJobs.filter(job => job.status === filter);
@@ -62,7 +61,7 @@ const PostedJobList = ({ postedJobPromise }) => {
     <div className='min-h-screen -mb-20 bg-[#F8FAFC] pt-24 pb-20 px-6 md:px-6 lg:px-0'>
       <div className='max-w-6xl mx-auto'>
         
-        {/* Top Header Section */}
+        {/* Header Section */}
         <div className="flex flex-row lg:items-center justify-between gap-8 mb-12">
             <div>
                 <h1 className="text-4xl font-[1000] text-slate-900 tracking-tighter">Recruitment Dashboard</h1>
@@ -71,22 +70,18 @@ const PostedJobList = ({ postedJobPromise }) => {
             
             <Link 
     to="/addJob" 
-    className="group relative flex items-center justify-center bg-indigo-600 text-white w-14 h-14 md:w-auto md:px-8 md:py-4 rounded-2xl shadow-lg shadow-indigo-200 hover:bg-indigo-700 hover:shadow-indigo-300 transition-all duration-300 active:scale-95 overflow-hidden"
->
-    {/* Desktop Text */}
+    className="group relative flex items-center justify-center bg-indigo-600 text-white w-14 h-14 md:w-auto md:px-8 md:py-4 rounded-2xl shadow-lg shadow-indigo-200 hover:bg-indigo-700 hover:shadow-indigo-300 transition-all duration-300 active:scale-95 overflow-hidden">
     <span className="hidden md:inline-block font-black text-xs uppercase tracking-widest mr-3">
         Post New Job
     </span>
-    
-    {/* Icon with Animation */}
+
     <FaPlus className="text-xl group-hover:rotate-90 transition-transform duration-500" />
 
-    {/* Subtle Glow Effect */}
     <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
 </Link>
         </div>
 
-        {/* --- Advanced Filtering Tabs --- */}
+        {/* Filtering Tabs */}
         <div className="flex items-center justify-between mb-8 bg-white p-2 rounded-[1.5rem] border border-slate-200 shadow-sm overflow-x-auto">
             <div className="flex items-center gap-1">
                 {[
@@ -101,8 +96,7 @@ const PostedJobList = ({ postedJobPromise }) => {
                             filter === tab.value 
                             ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-100' 
                             : 'text-slate-400 hover:bg-slate-50 hover:text-slate-600'
-                        }`}
-                    >
+                        }`}>
                         {tab.icon} {tab.label}
                         <span className={`ml-2 px-2 py-0.5 rounded-md text-[9px] ${
                             filter === tab.value ? 'bg-white/20' : 'bg-slate-100 text-slate-500'
@@ -118,7 +112,7 @@ const PostedJobList = ({ postedJobPromise }) => {
             </div>
         </div>
 
-        {/* --- Job List --- */}
+        {/* Job List */}
         <div className="space-y-4">
             {filteredJobs.length > 0 ? filteredJobs.map((post) => (
                 <div key={post._id} className="group bg-white border border-slate-200 rounded-[2.2rem] p-6 transition-all hover:shadow-xl hover:shadow-slate-200/50 hover:border-indigo-100">
@@ -155,7 +149,7 @@ const PostedJobList = ({ postedJobPromise }) => {
                             </p>
                         </div>
 
-                        {/* Interactive Actions */}
+                        {/* Actions */}
                         <div className="flex items-center justify-end gap-3 lg:w-[40%] ml-auto w-full">
                             {post.status === "Active" ? (
                                 <Link to={`/applications/${post._id}`} className="flex-1 lg:flex-none text-center px-8 py-3.5 bg-slate-900 text-white rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-indigo-600 transition-all shadow-lg shadow-slate-100 hover:shadow-indigo-100">
@@ -169,8 +163,7 @@ const PostedJobList = ({ postedJobPromise }) => {
 
                             <button
                                 onClick={() => handleDelete(post._id)}
-                                className="p-4 bg-slate-50 text-slate-400 hover:bg-red-50 hover:text-red-600 rounded-2xl transition-all border border-transparent hover:border-red-100"
-                            >
+                                className="p-4 bg-slate-50 text-slate-400 hover:bg-red-50 hover:text-red-600 rounded-2xl transition-all border border-transparent hover:border-red-100">
                                 <FaTrashAlt size={14} />
                             </button>
                         </div>

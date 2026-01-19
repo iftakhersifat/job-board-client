@@ -28,8 +28,7 @@ const CategoryJobs = () => {
       {/* Breadcrumb / Back Navigation */}
       <Link 
         to="/" 
-        className="flex items-center gap-2 text-slate-500 hover:text-indigo-600 transition-colors mb-6 font-semibold text-sm group"
-      >
+        className="flex items-center gap-2 text-slate-500 hover:text-indigo-600 transition-colors mb-6 font-semibold text-sm group">
         <FiArrowLeft className="group-hover:-translate-x-1 transition-transform" />
         Back to Categories
       </Link>

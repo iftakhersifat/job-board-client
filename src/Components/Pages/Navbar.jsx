@@ -5,15 +5,16 @@ import toast from 'react-hot-toast';
 import { 
   LayoutDashboard, PlusCircle, Briefcase, Settings, 
   LogOut, ChevronDown, User, Menu, X, Home, Info, PhoneCall,
-  ShieldCheck, BriefcaseBusiness
+  ShieldCheck, BriefcaseBusiness,
+  Bell
 } from 'lucide-react';
+import { FaBriefcase, FaLayerGroup } from 'react-icons/fa';
 
 const Navbar = () => {
   const { user, logOut } = use(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Scroll effect detection
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 20) {
@@ -26,7 +27,6 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Prevent background scroll when mobile menu is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -64,17 +64,17 @@ const Navbar = () => {
         <NavLink to="/myApplications" className={navLinkStyles} onClick={() => setIsOpen(false)}>
           <BriefcaseBusiness size={16} /> My Applications
         </NavLink>
-        <Link to="/dashboard" className="py-4 px-5 lg:hidden text-[13px] flex gap-2 font-bold text-slate-600 rounded-xl hover:text-indigo-600"><LayoutDashboard size={16} className="text-indigo-500 mt-1"/> Dashboard</Link>
 
-        <Link to="/profile" className="py-4 px-5 lg:hidden text-[13px] flex gap-2 font-bold text-slate-600 rounded-xl hover:text-indigo-600"><LayoutDashboard size={16} className="text-indigo-500 mt-1"/> Profile</Link>
+        <Link to="/profile" className="py-4 px-5 lg:hidden text-[13px] flex gap-2 font-bold text-slate-600 rounded-xl hover:text-indigo-600"><User size={18} /> Profile</Link>
 
-        <Link to="/notification" className="py-4 px-5 lg:hidden text-[13px] flex gap-2 font-bold text-slate-600 rounded-xl hover:text-indigo-600"><LayoutDashboard size={16} className="text-indigo-500 mt-1"/> Notification</Link>
+        <Link to="/notification" className="py-4 px-5 lg:hidden text-[13px] flex gap-2 font-bold text-slate-600 rounded-xl hover:text-indigo-600"><Bell size={18} /> Notification</Link>
         </>
       )}
       {user?.role === "admin" && (
         <>
           <NavLink to="/admin" className={navLinkStyles} onClick={() => setIsOpen(false)}><ShieldCheck size={16}/> Admin</NavLink>
           <NavLink to="/pending-jobs" className={navLinkStyles} onClick={() => setIsOpen(false)}>Pending Jobs</NavLink>
+          <NavLink to="/jobs-view" className={navLinkStyles} onClick={() => setIsOpen(false)}><FaLayerGroup size={16}/>Jobs View</NavLink>
         </>
       )}
       {(user?.role === "admin" || user?.role === "employee") && (
@@ -106,7 +106,6 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Main Navbar - Increased Z-index to 100 */}
       <nav className={`fixed top-0 left-0 w-full transition-all duration-300 z-[100] ${
         scrolled ? 'py-2 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100' : 'py-4 bg-white md:bg-transparent'
       }`}>
@@ -117,12 +116,10 @@ const Navbar = () => {
               <Logo />
             </div>
 
-            {/* Desktop Nav */}
             <div className="hidden lg:flex items-center bg-slate-100/50 border border-slate-200/30 p-1 rounded-2xl">
               <NavLinks />
             </div>
 
-            {/* Desktop Profile/Auth */}
             <div className="hidden lg:flex items-center gap-4">
               {user ? (
                 <div className="dropdown dropdown-end">
@@ -135,11 +132,17 @@ const Navbar = () => {
                     <ChevronDown size={14} className="text-slate-400" />
                   </div>
                   <ul tabIndex={0} className="dropdown-content z-[110] menu p-2 shadow-2xl bg-white rounded-2xl w-60 border border-slate-100 mt-4 animate-in fade-in slide-in-from-top-3">
-                      <li><Link to="/dashboard" className="py-3 px-4 font-bold text-slate-600 rounded-xl hover:text-indigo-600"><LayoutDashboard size={18} className="text-indigo-500"/> Dashboard</Link></li>
 
-                      <li><Link to="/profile" className="py-3 px-4 font-bold text-slate-600 rounded-xl hover:text-indigo-600"><LayoutDashboard size={18} className="text-indigo-500"/> Profile</Link></li>
+                      <li><Link to="/profile" className="py-3 px-4 font-bold text-slate-600 rounded-xl hover:text-indigo-600"><User size={18} className="text-indigo-500" /> Profile</Link></li>
 
-                      <li><Link to="/notification" className="py-3 px-4 font-bold text-slate-600 rounded-xl hover:text-indigo-600"><LayoutDashboard size={18} className="text-indigo-500"/> Notification</Link></li>
+                      <li><Link to="/notification" className="py-3 px-4 font-bold text-slate-600 rounded-xl hover:text-indigo-600"><Bell size={18} className="text-indigo-500" /> Notification</Link></li>
+
+                      {user?.role === "admin" &&(
+                        <>
+                        <li><Link to="/jobs-view" className="py-3 px-4 font-bold text-slate-600 rounded-xl hover:text-indigo-600"><FaLayerGroup size={18} className="text-indigo-500" /> Jobs View</Link></li>
+                        </>
+                      )}
+
                       <div className="divider my-1 opacity-50 px-4"></div>
                       <li><button onClick={handleLogOut} className="text-rose-600 hover:bg-rose-50 font-black py-3 px-4 rounded-xl"><LogOut size={18} /> Sign Out</button></li>
                   </ul>
@@ -152,7 +155,7 @@ const Navbar = () => {
               )}
             </div>
 
-            {/* Hamburg Button - Fixed Z-index and cursor pointer */}
+            {/* Hamburg Button */}
             <div className="lg:hidden flex items-center">
               <button 
                 onClick={(e) => {
@@ -169,7 +172,6 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* MOBILE DRAWER - Z-index 200 */}
       <div className={`fixed inset-0 z-[200] ${isOpen ? 'visible' : 'invisible'}`} style={{ pointerEvents: isOpen ? 'auto' : 'none' }}>
         {/* Overlay */}
         <div 
@@ -189,7 +191,7 @@ const Navbar = () => {
             </div>
 
             {user && (
-              <div className="mx-6 mt-6 p-5 bg-gradient-to-br from-slate-900 to-indigo-900 rounded-3xl text-white shadow-xl shadow-indigo-100">
+              <div className="mx-6 mt-6 p-5 bg-linear-to-br from-slate-900 to-indigo-900 rounded-3xl text-white shadow-xl shadow-indigo-100">
                 <div className="flex items-center gap-4">
                   <img className="w-14 h-14 rounded-2xl border-2 border-white/10" src={user?.photoURL || `https://ui-avatars.com/api/?name=${user?.email}`} alt="User" />
                   <div className="overflow-hidden">

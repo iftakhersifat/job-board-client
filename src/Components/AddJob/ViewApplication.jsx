@@ -77,7 +77,7 @@ const ViewApplication = () => {
   const filterOptions = ["All", "Pending", "Call For Interview", "Hired", "Rejected"];
 
   return (
-    <div className="min-h-screen bg-gray-50/50 py-12 pt-24">
+    <div className="min-h-screen -mb-24 bg-gray-50/50 py-12 pt-24">
       <div className="max-w-6xl mx-auto px-6 md:px-6 lg:px-0">
         
         {/* Header Section */}
@@ -94,7 +94,7 @@ const ViewApplication = () => {
           </div>
         </div>
 
-        {/* Dynamic Filter Tabs */}
+        {/* Dynamic Filter */}
         <div className="flex flex-wrap items-center gap-2 mb-10 bg-white p-2 rounded-[2rem] border border-slate-200 shadow-sm w-fit">
             <div className="px-4 py-2 text-slate-400 border-r border-slate-100 mr-2 hidden md:block">
                 <FaFilter size={14} />
@@ -114,13 +114,12 @@ const ViewApplication = () => {
             ))}
         </div>
 
-        {/* Applicants Grid */}
+        {/* Applicants */}
         <div className="grid grid-cols-1 gap-6">
           {filteredApplications.length > 0 ? filteredApplications.map((app, index) => (
             <div
               key={app._id}
-              className="group bg-white rounded-[2rem] p-6 md:p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300"
-            >
+              className="group bg-white rounded-[2rem] p-6 md:p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300">
               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
                 
                 {/* Applicant Profile info */}
@@ -151,8 +150,7 @@ const ViewApplication = () => {
                   <select
                     value={app.status || "Pending"}
                     onChange={(e) => handleStatus(e, app._id, app.applicantUID, index)}
-                    className="w-full lg:w-56 h-12 px-4 rounded-2xl bg-slate-50 border-slate-200 text-slate-700 font-bold text-sm focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition-all cursor-pointer outline-none shadow-inner"
-                  >
+                    className="w-full lg:w-56 h-12 px-4 rounded-2xl bg-slate-50 border-slate-200 text-slate-700 font-bold text-sm focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition-all cursor-pointer outline-none shadow-inner">
                     <option value="Pending">Pending</option>
                     <option value="Call For Interview">Call for Interview</option>
                     <option value="Hired">Hired</option>

@@ -24,7 +24,7 @@ import SearchJobsPage from './Components/Pages/SearchJobsPage.jsx';
 import RolePrivate from './Components/Firebase/RolePrivate.jsx';
 import AdminPanel from './Components/Pages/AdminPanel.jsx';
 import AdminPrivate from './Components/Firebase/AdminPrivate.jsx';
-import Dashboard from './Components/Pages/Dashboard.jsx';
+
 import AdminPendingJobs from './Components/Pages/AdminPendingJobs.jsx';
 import EditJob from './Components/AddJob/EditJob.jsx';
 import JobsPage from './Components/Jobs/JobsPage.jsx';
@@ -36,7 +36,8 @@ import HowItWorks from './Components/Pages/HowItWorks.jsx';
 import ProfileView from './Components/Dashboard/ProfileView.jsx';
 import NotificationView from './Components/Dashboard/NotificationsView.jsx';
 import NotificationsView from './Components/Dashboard/NotificationsView.jsx';
-// import AboutUs from './Components/Pages/AboutUs.jsx';
+import AdminJobsView from './Components/AddJob/AdminJobsView.jsx';
+
 
 
 
@@ -71,7 +72,6 @@ const router = createBrowserRouter([
         path:"/search/:searchTerm", element:<SearchJobsPage></SearchJobsPage>
       },
       {path: "/admin", element: (<AdminPrivate><AdminPanel /></AdminPrivate>),},
-      {path:"/dashboard", element:<Dashboard></Dashboard>},
       // {path:"/about", element:<AboutUs></AboutUs>},
       {path:"/pending-jobs", element: <AdminPrivate><AdminPendingJobs></AdminPendingJobs></AdminPrivate>},
       {path:"/jobs/edit/:id", element:<EditJob></EditJob>},
@@ -81,14 +81,10 @@ const router = createBrowserRouter([
       {path:"/testimonials", Component:CandidateTestimonials},
       {path:"/how-it-works", Component:HowItWorks},
 
-      {path:'/profile', element:<ProfileView></ProfileView>},
-      {path:'/notification', element:<NotificationsView></NotificationsView>},
-
+      {path:'/profile', element:<ProfileView />},
+      {path:'/notification', element:<NotificationsView />},
       
-
-
-      
-      
+      {path:'/jobs-view', element:<AdminPrivate><AdminJobsView /></AdminPrivate>}, 
     ]
   },
   {
