@@ -230,7 +230,8 @@ const UserSection = ({ title, type, data, changeRole, deleteUser }) => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="relative">
+      className="relative"
+    >
       <div className="flex items-center gap-4 mb-6">
         <h2 className="text-xl font-black text-slate-800 tracking-tight">{title}</h2>
         <div className="h-px flex-1 bg-slate-200" />

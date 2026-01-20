@@ -77,7 +77,8 @@ const HowItWorks = () => {
                 <input 
                   type="email" 
                   placeholder="Enter your email" 
-                  className="w-full bg-white/10 border-2 border-white/20 rounded-2xl py-5 px-8 text-white placeholder:text-indigo-200/50 outline-none focus:border-white transition-all font-medium"/>
+                  className="w-full bg-white/10 border-2 border-white/20 rounded-2xl py-5 px-8 text-white placeholder:text-indigo-200/50 outline-none focus:border-white transition-all font-medium"
+                />
                 <button className="absolute right-3 p-4 bg-white text-indigo-600 rounded-xl hover:bg-slate-900 hover:text-white transition-all duration-300 shadow-lg active:scale-95">
                   <FaPaperPlane />
                 </button>

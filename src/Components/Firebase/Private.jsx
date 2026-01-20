@@ -8,7 +8,7 @@ const Private = ({ children }) => {
 
     if (loading) {
         return (
-            <div className="flex justify-center items-center min-h-[200px]">
+            <div className="flex mt-45 justify-center items-center min-h-[200px]">
                 <span className="loading loading-ring loading-lg text-indigo-600"></span>
             </div>
         );

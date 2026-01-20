@@ -150,6 +150,8 @@ const AdminPendingJobs = () => {
                         </button>
                     </div>
                 </div>
+
+                {/* Collapsible Content */}
                 {expandedJobs[job._id] && (
                 <div className="px-8 pb-10 pt-4 bg-slate-50/50 border-t border-slate-100 animate-in fade-in slide-in-from-top-2 duration-300">
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
