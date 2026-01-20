@@ -11,7 +11,7 @@ const Logo = () => (
     <div className="relative w-10 h-10 md:w-11 md:h-11 bg-slate-900 rounded-[12px] md:rounded-[14px] flex items-center justify-center overflow-hidden transition-all duration-500 group-hover:bg-indigo-600 group-hover:rounded-[18px] group-hover:rotate-[10deg] shadow-lg shadow-slate-200 group-hover:shadow-indigo-200">
       <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:4px_4px]"></div>
       <span className="relative z-10 text-white font-[1000] text-xl md:text-2xl italic tracking-tighter transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-[10deg]">J</span>
-      <div className="absolute inset-0 w-full h-full bg-gradient-to-tr from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+      <div className="absolute inset-0 w-full h-full bg-linear-to-tr from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
     </div>
     <div className="flex flex-col -space-y-1 text-left">
       <div className="flex items-center">

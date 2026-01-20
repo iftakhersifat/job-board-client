@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const TopBrands = () => {
   const brands = [
@@ -12,57 +13,70 @@ const TopBrands = () => {
     { id: 8, logo: "/assets/easy.png" },
   ];
 
+  const duplicatedBrands = [...brands, ...brands, ...brands];
+
   return (
-    <section className="py-12 transition-colors duration-500 overflow-hidden">
+    <section className="py-24 bg-white overflow-hidden">
       <div className="max-w-6xl mx-auto px-6 md:px-6 lg:px-0">
         
-        <div className="text-center mb-20">
-          <span className="text-indigo-600 font-black text-[10px] uppercase tracking-[0.5em] mb-4 block opacity-80">Strategic Partners</span>
-          <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-slate-900 dark:text-white uppercase italic">
-            Top <span className="text-indigo-600">Brands</span> & Networks
-          </h2>
-          <div className="w-24 h-1.5 bg-indigo-600 mx-auto mt-6 rounded-full opacity-20"></div>
+        <div className="text-center mb-16">
+          <motion.span 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-indigo-600 font-bold text-xs uppercase tracking-[0.4em] mb-4 block">
+            Trusted Partnerships
+          </motion.span>
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white">
+            Powering Careers with <span className="text-indigo-600 italic">Industry Giants</span>
+          </motion.h2>
         </div>
 
-        <div className="relative border-y border-slate-100 dark:border-slate-800/60 bg-slate-50/30 dark:bg-slate-900/10 py-16">
-          <marquee direction="left" scrollamount="12" onMouseOver={(e) => e.target.stop()} onMouseOut={(e) => e.target.start()}>
-            <div className="flex items-center gap-24 md:gap-32 px-10">
-              {[...brands, ...brands].map((brand, index) => (
-                <div key={index} className="flex-shrink-0">
+        <div className="relative group">
+          <div className="flex overflow-hidden py-10 select-none">
+            <motion.div 
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{ 
+                duration: 30, 
+                ease: "linear", 
+                repeat: Infinity 
+              }}
+              className="flex items-center gap-16 md:gap-24 flex-nowrap">
+              {duplicatedBrands.map((brand, index) => (
+                <div key={index} className="flex-shrink-0 w-28 md:w-36">
                   <img 
                     src={brand.logo} 
-                    alt="partner" 
-                    className="h-10 md:h-14 w-auto object-contain grayscale opacity-40 hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-500 cursor-pointer dark:brightness-200"
+                    alt="Brand Logo" 
+                    className="w-full h-12 md:h-16 object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-500"
                   />
                 </div>
               ))}
-            </div>
-          </marquee>
+            </motion.div>
+          </div>
 
-          <div className="absolute inset-y-0 left-0 w-32 md:w-64 bg-linear-to-r from-white pointer-events-none z-10"></div>
-          <div className="absolute inset-y-0 right-0 w-32 md:w-64 bg-linear-to-l from-white pointer-events-none z-10"></div>
+          <div className="absolute inset-y-0 left-0 w-24 md:w-48 bg-linear-to-r from-white z-10"></div>
+          <div className="absolute inset-y-0 right-0 w-24 md:w-48 bg-linear-to-l from-white z-10"></div>
         </div>
 
-        <div className="mt-24 relative rounded-[3.5rem] overflow-hidden group">
-            <div className="absolute inset-0 bg-indigo-600 dark:bg-indigo-700 transition-all duration-700"></div>
-            <div className="absolute -top-24 -right-24 w-80 h-80 bg-white/10 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-1000"></div>
-            <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-indigo-400/20 rounded-full blur-3xl"></div>
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          className="mt-20 relative rounded-[2.5rem] bg-indigo-600 p-8 md:p-14 overflow-hidden shadow-2xl shadow-indigo-200 dark:shadow-none">
+          <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/4 w-80 h-80 bg-indigo-400/20 rounded-full blur-3xl"></div>
 
-            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10 p-12 md:p-20">
-                <div className="max-w-xl text-center md:text-left">
-                    <h4 className="text-3xl md:text-5xl font-black text-white italic">
-                        LOOKING TO HIRE <br /> <span className="text-indigo-200">TOP TALENT</span> FAST?
-                    </h4>
-                    <p className="text-indigo-100/70 mt-4 text-lg font-medium">
-                        Post your job requirements and connect with over 50,000+ verified professionals today.
-                    </p>
-                </div>
-                
-                <button className="relative z-10 px-12 py-6 bg-white text-indigo-900 font-black rounded-2xl hover:bg-slate-900 hover:text-white transition-all duration-500 active:scale-95 uppercase tracking-widest text-sm shadow-2xl">
-                    Post a Job Now
-                </button>
+          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="text-center md:text-left">
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">Want to showcase your company?</h3>
+              <p className="text-indigo-100 font-medium">Join 500+ brands hiring through our network.</p>
             </div>
-        </div>
+            <button className="px-10 py-4 bg-white text-indigo-600 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-indigo-50 transition-colors shadow-lg shadow-black/5">
+              Become a Partner
+            </button>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

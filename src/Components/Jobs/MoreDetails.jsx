@@ -1,170 +1,151 @@
 import React from "react";
-import { FaLocationDot } from "react-icons/fa6";
+import { FaLocationDot, FaGlobe, FaUsers } from "react-icons/fa6";
 import { Link, useLoaderData } from "react-router";
-import { FiMail, FiUser, FiCalendar, FiBriefcase, FiDollarSign } from "react-icons/fi";
+import { FiMail, FiUser, FiCalendar, FiBriefcase, FiExternalLink, FiShield, FiClock, FiAlertCircle } from "react-icons/fi";
 
 const MoreDetails = () => {
   const job = useLoaderData();
+  const isDeadlineOver = new Date(job.deadline) < new Date();
 
-  // Check if deadline is over
-  const today = new Date();
-  const deadlineDate = new Date(job.deadline);
-  const isDeadlineOver = deadlineDate < today;
+  const formatTimeAgo = (createdAt, id) => {
+    const postDate = createdAt ? new Date(createdAt) : new Date(parseInt(id.substring(0, 8), 16) * 1000);
+    const now = new Date();
+    const diffInMs = now - postDate;
+    const diffInMins = Math.floor(diffInMs / (1000 * 60));
+    const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
+    const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
 
-  // Format deadline nicely
-  const formattedDeadline = new Date(job.deadline).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+    if (diffInMins < 60) return `${diffInMins} mins ago`;
+    if (diffInHours < 24) return `${diffInHours} hours ago`;
+    return `${diffInDays} days ago`;
+  };
 
   return (
-    <div className="max-w-4xl mx-auto px-5 md:px-6 lg:px-0 mt-28 pb-20">
-
-      {/* Main Card */}
-      <div className="relative bg-white/80 backdrop-blur-xl rounded-3xl border border-indigo-100 shadow-2xl p-8 md:p-10 space-y-8 overflow-hidden">
-
-        {/* Top Accent Line - Now Indigo to Blue */}
-        <div className="absolute top-0 left-0 w-full h-1.5 rounded-t-3xl 
-          bg-gradient-to-r from-indigo-600 via-blue-600 to-cyan-500"></div>
-
-        {/* Company & Job Type */}
-        <div className="flex flex-col md:flex-row justify-between gap-6 mb-4 relative z-10">
-
-          {/* Company Info */}
-          <div className="flex flex-col md:flex-row items-start md:items-center gap-5">
-            <div className="w-20 h-20 rounded-2xl bg-white border border-indigo-50 shadow-sm flex items-center justify-center p-2">
-              <img
-                src={job.company_logo}
-                alt="Company Logo"
-                className="w-16 h-16 object-contain"
-              />
-            </div>
-            <div>
-              <h2 className="text-2xl font-black text-slate-900 tracking-tight">{job.company}</h2>
-              <p className="flex items-center gap-1 text-slate-500 text-sm mt-1 font-medium">
-                <FaLocationDot className="text-indigo-600" /> {job?.location}
-              </p>
-              <p className={`flex items-center gap-1 text-sm font-bold mt-2 ${isDeadlineOver ? "text-red-500" : "text-emerald-600"}`}>
-                <FiCalendar /> Deadline: {formattedDeadline} {isDeadlineOver && "(Passed)"}
-              </p>
-            </div>
-          </div>
-
-          {/* Job Type Tag - Indigo Styled */}
-          <div>
-            <span className="px-5 py-2.5 text-xs rounded-xl font-black uppercase tracking-widest bg-gradient-to-r
-              from-indigo-600 to-blue-600 text-white shadow-lg shadow-indigo-100 flex items-center gap-2">
-              <FiBriefcase /> {job.jobType}
-            </span>
-          </div>
+    <div className="min-h-screen -mb-24 bg-[#F3F4F6] pb-58 pt-32">
+      <div className="max-w-6xl mx-auto px-6 md:px-6 lg:px-0">
+        
+        <div className="flex items-center gap-2 text-sm text-slate-500 mb-6">
+          <Link to="/" className="hover:text-indigo-600">Home</Link>
+          <span>/</span>
+          <Link to="/jobs" className="hover:text-indigo-600">Jobs</Link>
+          <span>/</span>
+          <span className="text-slate-900 font-medium truncate">{job.title}</span>
         </div>
 
-        {/* Job Title */}
-        <h1 className="text-4xl md:text-5xl font-[1000] text-slate-900 leading-[1.1] tracking-tight">
-          {job.title}
-        </h1>
-
-        {/* Salary Badge - Indigo Styled */}
-        <div className="flex items-center gap-2 w-fit bg-indigo-50 text-indigo-700 px-5 py-2.5 rounded-2xl 
-          text-sm font-black border border-indigo-100 shadow-sm">
-          Salary: {job.salaryRange?.min} - {job.salaryRange?.max} {job.salaryRange?.currency}
-        </div>
-
-        {/* Description */}
-        <section className="space-y-4 pt-4 border-t border-slate-50">
-          <h3 className="text-xl font-black text-slate-900 flex items-center gap-2">
-             <span className="w-1.5 h-6 bg-indigo-600 rounded-full"></span>
-             Job Description
-          </h3>
-          <p className="text-slate-600 leading-relaxed text-base md:text-lg font-medium">
-            {job.description}
-          </p>
-        </section>
-
-        {/* Skills */}
-        <section className="space-y-4">
-          <h3 className="text-xl font-black text-slate-900 flex items-center gap-2">
-             <span className="w-1.5 h-6 bg-indigo-600 rounded-full"></span>
-             Required Skills
-          </h3>
-          <div className="flex flex-wrap gap-2.5">
-            {job.requirements?.map((skill, index) => (
-              <span
-                key={index}
-                className="px-4 py-1.5 bg-slate-50 text-slate-600 border border-slate-200 
-                text-xs rounded-xl font-bold hover:bg-indigo-50 hover:border-indigo-200 hover:text-indigo-600 transition-all duration-300"
-              >
-                {skill}
-              </span>
-            ))}
-          </div>
-        </section>
-
-        {/* Responsibilities */}
-        <section className="space-y-4">
-          <h3 className="text-xl font-black text-slate-900 flex items-center gap-2">
-             <span className="w-1.5 h-6 bg-indigo-600 rounded-full"></span>
-             Responsibilities
-          </h3>
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {job.responsibilities?.map((res, index) => (
-              <li key={index} className="flex items-start gap-3 text-slate-600 text-sm md:text-base font-medium">
-                <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-indigo-400 shrink-0"></span>
-                {res}
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        {/* HR Section - Now Indigo themed */}
-        <section className="bg-slate-50 border border-indigo-100 rounded-[2rem] p-6 md:p-8 space-y-4 relative overflow-hidden">
-          <div className="absolute top-0 right-0 p-8 opacity-5 text-indigo-600">
-             <FiUser size={100} />
-          </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          <h3 className="text-xl font-black text-slate-900">HR Contact</h3>
+          <div className="lg:col-span-8 space-y-6">
+            
+            <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+              <div className="p-8">
+                <div className="flex flex-col md:flex-row justify-between items-start gap-6">
+                  <div className="flex gap-6">
+                    <div className="w-20 h-20 rounded-xl border border-slate-100 flex-shrink-0 bg-white p-2 shadow-sm">
+                      <img src={job.company_logo} alt="Company" className="w-full h-full object-contain" />
+                    </div>
+                    <div>
+                      <h1 className="text-3xl font-bold text-slate-900 mb-2">{job.title}</h1>
+                      <div className="flex flex-wrap items-center gap-y-2 gap-x-4 text-slate-600">
+                        <span className="font-semibold text-indigo-600 hover:underline cursor-pointer">{job.company}</span>
+                        <span className="flex items-center gap-1.5"><FaLocationDot className="text-slate-400" /> {job.location}</span>
+                        <span className="flex items-center gap-1.5"><FiClock className="text-slate-400" /> Posted {formatTimeAgo(job.createdAt, job._id)}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <span className="px-3 py-1.5 bg-slate-100 text-slate-700 rounded-md text-xs font-bold uppercase tracking-wider">{job.jobType}</span>
+                  <span className="px-3 py-1.5 bg-indigo-50 text-indigo-700 rounded-md text-xs font-bold uppercase tracking-wider">{job.category}</span>
+                </div>
+              </div>
+            </div>
 
-          <div className="flex flex-col gap-3 relative z-10">
-            <p className="flex items-center gap-3 text-sm md:text-base text-slate-700">
-              <span className="w-8 h-8 rounded-lg bg-indigo-100 flex items-center justify-center text-indigo-600">
-                <FiUser />
-              </span>
-              <strong>Name:</strong>{" "}
-              <span className="text-indigo-700 font-bold ml-1">{job.hr_name}</span>
-            </p>
+            <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-8 space-y-10">
+              <section>
+                <h3 className="text-xl font-bold text-slate-900 mb-4">Job Description</h3>
+                <div className="text-slate-600 leading-relaxed space-y-4">
+                  <p>{job.description}</p>
+                </div>
+              </section>
 
-            <p className="flex items-center gap-3 text-sm md:text-base text-slate-700">
-              <span className="w-8 h-8 rounded-lg bg-indigo-100 flex items-center justify-center text-indigo-600">
-                <FiMail />
-              </span>
-              <strong>Email:</strong>{" "}
-              <span className="text-indigo-700 font-bold ml-1">{job.hr_email}</span>
-            </p>
+              <section>
+                <h3 className="text-xl font-bold text-slate-900 mb-6">Responsibilities</h3>
+                <ul className="grid grid-cols-1 gap-4">
+                  {job.responsibilities?.map((res, i) => (
+                    <li key={i} className="flex gap-3 text-slate-600">
+                      <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-indigo-500 flex-shrink-0"></div>
+                      <span className="text-[15px]">{res}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+
+              <section>
+                <h3 className="text-xl font-bold text-slate-900 mb-6">Required Skills</h3>
+                <div className="flex flex-wrap gap-2">
+                  {job.requirements?.map((skill, i) => (
+                    <span key={i} className="px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium text-slate-700">
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </section>
+            </div>
           </div>
-        </section>
 
-        {/* Apply Button Section */}
-        <div className="pt-8">
-          {isDeadlineOver ? (
-            <button
-              disabled
-              className="w-full md:w-auto px-12 py-4 rounded-2xl font-black text-sm uppercase tracking-widest text-white
-                bg-slate-300 cursor-not-allowed shadow-none"
-            >
-              Deadline Passed
-            </button>
-          ) : (
-            <Link to={`/jobApply/${job._id}`}>
-              <button className="w-full md:w-auto px-12 py-4 rounded-2xl font-black text-sm uppercase tracking-[0.2em] text-white
-                bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700
-                shadow-xl shadow-indigo-100 hover:shadow-indigo-200 transition-all duration-300 hover:-translate-y-1 active:scale-95">
-                Apply for this Job
-              </button>
-            </Link>
-          )}
+          <div className="lg:col-span-4 space-y-6 lg:sticky lg:top-28">
+            
+            <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+              <div className="mb-6">
+                <p className="text-sm text-slate-500 mb-1">Estimated Salary</p>
+                <h4 className="text-2xl font-bold text-slate-900">
+                  {job.salaryRange?.min}k - {job.salaryRange?.max}k 
+                  <span className="text-base font-normal text-slate-500 ml-1">{job.salaryRange?.currency} / yr</span>
+                </h4>
+              </div>
+
+              {!isDeadlineOver ? (
+                <Link to={`/jobApply/${job._id}`} className="block">
+                  <button className="w-full py-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-bold transition-all shadow-md shadow-indigo-100 flex items-center justify-center gap-2">
+                    Apply Now <FiExternalLink />
+                  </button>
+                </Link>
+              ) : (
+                <button disabled className="w-full py-4 bg-slate-200 text-slate-500 rounded-lg font-bold flex items-center justify-center gap-2 cursor-not-allowed">
+                   <FiAlertCircle /> Applications Closed
+                </button>
+              )}
+
+              <div className="mt-6 pt-6 border-t border-slate-100 space-y-4">
+                <div className="flex justify-between text-sm">
+                  <span className="text-slate-500">Application Deadline</span>
+                  <span className={`font-semibold ${isDeadlineOver ? 'text-red-500' : 'text-slate-900'}`}>
+                    {new Date(job.deadline).toLocaleDateString()}
+                  </span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-slate-500">Job Security</span>
+                  <span className="flex items-center gap-1 text-emerald-600 font-medium"><FiShield /> Verified</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+              <h4 className="font-bold text-slate-900 mb-4 flex items-center gap-2">
+                <FaUsers className="text-indigo-600" /> About Recruitment
+              </h4>
+              <div className="space-y-4">
+                <div className="p-4 bg-slate-50 rounded-lg">
+                  <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">Hiring Manager</p>
+                  <p className="text-sm font-bold text-slate-800">{job.hr_name}</p>
+                  <p className="text-xs text-indigo-600 font-medium underline truncate mt-1">{job.hr_email}</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
-
       </div>
     </div>
   );

@@ -8,7 +8,6 @@ import JobStats from './JobStats.jsx';
 import CandidateTestimonials from './CandidateTestimonials.jsx';
 import HowItWorks from './HowItWorks.jsx';
 
-
 const jobsPromise =fetch('https://job-board-server-five.vercel.app/jobs')
 .then(res=>res.json())
 

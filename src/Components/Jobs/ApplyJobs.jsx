@@ -54,7 +54,6 @@ const ApplyJobs = () => {
         <div className='min-h-screen bg-[#F9FAFB] mt-16 pt-16 pb-24 px-4 md:px-8'>
             <div className='max-w-6xl mx-auto'>
                 
-                {/* Back Button & Header */}
                 <div className="mb-10">
                     <Link to={`/jobs/${id}`} className="inline-flex items-center gap-2 text-slate-500 hover:text-indigo-600 font-bold text-sm transition-all mb-4">
                         <FaArrowLeft /> Back to Job Details
@@ -65,11 +64,11 @@ const ApplyJobs = () => {
 
                 <div className='flex flex-col lg:flex-row gap-12 items-start'>
                     
-                    {/* Left Side: Professional Form */}
+                    {/* Left Side */}
                     <div className='w-full lg:w-2/3'>
                         <form onSubmit={handleApplyForm} className="space-y-8">
                             
-                            {/* Section 1: Basic Information */}
+                            {/* Information */}
                             <div className="bg-white border border-slate-200 rounded-[2rem] p-8 shadow-sm">
                                 <div className="flex items-center gap-3 mb-8 border-b border-slate-50 pb-6">
                                     <span className="w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center text-xs font-bold">1</span>
@@ -79,12 +78,12 @@ const ApplyJobs = () => {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                     <div className="space-y-2">
                                         <label className="text-[11px] font-black uppercase tracking-widest text-slate-400 ml-1">Full Name</label>
-                                        <input required name="fullName" type="text" placeholder="e.g. John Doe" 
+                                        <input required name="fullName" type="text" placeholder="e.g. Your Name" 
                                                className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:bg-white focus:ring-4 focus:ring-indigo-50 focus:border-indigo-600 outline-none transition-all font-semibold text-slate-700" />
                                     </div>
                                     <div className="space-y-2">
                                         <label className="text-[11px] font-black uppercase tracking-widest text-slate-400 ml-1">Contact Email</label>
-                                        <input required name="email" type="email" placeholder="john@example.com"
+                                        <input required name="email" type="email" placeholder="your@gmail.com"
                                                className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:bg-white focus:ring-4 focus:ring-indigo-50 focus:border-indigo-600 outline-none transition-all font-semibold text-slate-700" />
                                     </div>
                                     <div className="space-y-2 md:col-span-2">
@@ -95,7 +94,7 @@ const ApplyJobs = () => {
                                 </div>
                             </div>
 
-                            {/* Section 2: Professional Links */}
+                            {/* Links */}
                             <div className="bg-white border border-slate-200 rounded-[2rem] p-8 shadow-sm">
                                 <div className="flex items-center gap-3 mb-8 border-b border-slate-50 pb-6">
                                     <span className="w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center text-xs font-bold">2</span>
@@ -141,36 +140,29 @@ const ApplyJobs = () => {
                         </form>
                     </div>
 
-                    {/* Right Side: Sticky Job Summary */}
+                    {/* Right Side */}
                     <div className='w-full lg:w-1/3 lg:sticky lg:top-32'>
                         <div className='bg-white border border-slate-200 rounded-[2.5rem] overflow-hidden shadow-sm'>
                             <div className="relative p-8 text-center overflow-hidden bg-white">
-    {/* Background Decorative Mesh Shapes */}
-    <div className="absolute top-[-20%] left-[-10%] w-40 h-40 bg-indigo-200 rounded-full blur-[50px] opacity-60"></div>
-    <div className="absolute bottom-[-20%] right-[-10%] w-40 h-40 bg-blue-200 rounded-full blur-[50px] opacity-60"></div>
-    
-    {/* Content Area */}
-    <div className="relative z-10">
-        <div className="inline-block relative">
-            <img 
-                src={job?.company_logo || "/assets/placeholder-logo.png"} 
-                alt="logo" 
-                className='w-20 h-20 rounded-[1.5rem] mx-auto bg-white/80 backdrop-blur-sm border border-white shadow-xl object-contain p-3 mb-5 transition-transform duration-500 hover:scale-110' 
-            />
-            {/* Verified Badge Overlay */}
-            
-        </div>
-        
-        <h2 className='text-2xl font-[1000] text-slate-800 tracking-tight leading-none'>
-            {job?.company}
-        </h2>
-        <div className="mt-3 flex items-center justify-center gap-2">
-            <p className="text-slate-500 text-[10px] font-black tracking-[0.2em] uppercase">
-                {job?.location}
-            </p>
-        </div>
-    </div>
-</div>
+
+                        <div className="absolute top-[-20%] left-[-10%] w-40 h-40 bg-indigo-200 rounded-full blur-[50px] opacity-60"></div>
+                        <div className="absolute bottom-[-20%] right-[-10%] w-40 h-40 bg-blue-200 rounded-full blur-[50px] opacity-60"></div>
+                        
+                        {/* Content Area */}
+                        <div className="relative z-10">
+                            <div className="inline-block relative">
+                                <img 
+                                    src={job?.company_logo || "/assets/placeholder-logo.png"} 
+                                    alt="logo" 
+                                    className='w-20 h-20 rounded-[1.5rem] mx-auto bg-white/80 backdrop-blur-sm border border-white shadow-xl object-contain p-3 mb-5 transition-transform duration-500 hover:scale-110'/></div>
+                            <h2 className='text-2xl font-[1000] text-slate-800 tracking-tight leading-none'>{job?.company}</h2>
+                            <div className="mt-3 flex items-center justify-center gap-2">
+                                <p className="text-slate-500 text-[10px] font-black tracking-[0.2em] uppercase">
+                                    {job?.location}
+                                </p>
+                            </div>
+                            </div>
+                           </div>
                             
                             <div className='p-8 space-y-6'>
                                 <div className="flex items-center gap-4 group">

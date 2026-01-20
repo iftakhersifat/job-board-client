@@ -40,15 +40,13 @@ const AdminPrivate = ({ children }) => {
           <div className="space-y-3">
             <button 
               onClick={() => window.history.back()}
-              className="w-full flex items-center justify-center gap-2 py-4 bg-slate-900 text-white rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-slate-800 transition-all shadow-lg shadow-slate-200"
-            >
+              className="w-full flex items-center justify-center gap-2 py-4 bg-slate-900 text-white rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-slate-800 transition-all shadow-lg shadow-slate-200">
               <ArrowLeft size={14} /> Return to Safety
             </button>
             
             <Link 
               to="/"
-              className="w-full flex items-center justify-center gap-2 py-4 bg-white text-slate-400 border border-slate-200 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-slate-50 transition-all"
-            >
+              className="w-full flex items-center justify-center gap-2 py-4 bg-white text-slate-400 border border-slate-200 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-slate-50 transition-all">
               Back to Home
             </Link>
           </div>

@@ -2,16 +2,22 @@ import React, { use } from 'react';
 import { AuthContext } from './AuthProvider';
 import { Navigate, useLocation } from 'react-router';
 
-const Private = ({children}) => {
-    const {user, loading}=use(AuthContext)
+const Private = ({ children }) => {
+    const { user, loading } = use(AuthContext);
     const location = useLocation();
-    console.log(location.pathname)
+
     if (loading) {
-    return <div className="text-center mt-24 text-lg">Loading user info...</div>;
-  }
-    if(!user){
-        return <Navigate to='/login' state={location.pathname}></Navigate>
+        return (
+            <div className="flex justify-center items-center min-h-[200px]">
+                <span className="loading loading-ring loading-lg text-indigo-600"></span>
+            </div>
+        );
     }
+
+    if (!user) {
+        return <Navigate to="/login" state={{ from: location }} replace />;
+    }
+
     return children;
 };
 

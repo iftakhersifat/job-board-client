@@ -76,7 +76,7 @@ const ProfilePage = () => {
                 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
                     
-                    {/* LEFT SIDE: PHOTO */}
+                    {/* Left Side */}
                     <div className="lg:col-span-4 flex flex-col items-center lg:items-start">
                         <div className="relative group">
                             <div className="h-64 w-64 rounded-3xl bg-slate-50 border-8 border-white overflow-hidden shadow-2xl relative ring-1 ring-slate-100">
@@ -85,12 +85,9 @@ const ProfilePage = () => {
                                         <Loader2 className="animate-spin text-indigo-600" size={32} />
                                     </div>
                                 ) : (
-                                    <img 
-                                        src={user?.photoURL || `https://ui-avatars.com/api/?name=${name}&background=6366f1&color=fff`} 
+                                    <img src={user?.photoURL || `https://ui-avatars.com/api/?name=${name}&background=6366f1&color=fff`} 
                                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
-                                        alt="Profile" 
-                                    />
-                                )}
+                                        alt="Profile" />)}
                             </div>
                             <label className="absolute -bottom-4 -right-4 h-12 w-12 bg-indigo-600 text-white rounded-2xl flex items-center justify-center cursor-pointer hover:bg-slate-900 transition-all shadow-xl active:scale-90 border-4 border-white">
                                 <Camera size={20} />
@@ -101,15 +98,11 @@ const ProfilePage = () => {
                         <div className="mt-8 w-full space-y-3">
                             <div className="flex items-center gap-2 px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl w-fit">
                                 <Shield size={14} />
-                                <span className="text-[10px] font-bold uppercase tracking-wider">{user?.role || 'User'} Member</span>
+                                <span className="text-[10px] font-bold uppercase tracking-wider">Role {user?.role || 'User'}</span>
                             </div>
                         </div>
                     </div>
-
-                    {/* RIGHT SIDE: INFO & EDIT */}
                     <div className="lg:col-span-8 space-y-10">
-                        
-                        {/* Header Info */}
                         <div className="border-b border-slate-50 pb-8">
                             <div className="flex items-center gap-3 mb-2">
                                 <h1 className="text-4xl font-black text-slate-900 tracking-tight uppercase italic">
@@ -122,21 +115,12 @@ const ProfilePage = () => {
                                 <span>{user?.email}</span>
                             </div>
                         </div>
-
-                        {/* Edit Section */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="p-6 rounded-3xl bg-slate-50 border border-slate-100">
                                 <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Account Status</p>
                                 <div className="flex items-center justify-between mt-2">
                                     <span className="text-sm font-bold text-slate-700">Verified Profile</span>
                                     <Lock size={14} className="text-emerald-500" />
-                                </div>
-                            </div>
-                            <div className="p-6 rounded-3xl bg-slate-50 border border-slate-100">
-                                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Last Login</p>
-                                <div className="flex items-center justify-between mt-2">
-                                    <span className="text-sm font-bold text-slate-700">Recent</span>
-                                    <CheckCircle2 size={14} className="text-indigo-500" />
                                 </div>
                             </div>
                         </div>

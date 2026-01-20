@@ -45,16 +45,14 @@ const RolePrivate = ({ children, allowedRoles }) => {
           <div className="grid grid-cols-1 gap-3">
             <button 
               onClick={() => window.history.back()}
-              className="group w-full flex items-center justify-center gap-3 py-4 bg-slate-900 text-white rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-indigo-600 transition-all duration-300 shadow-lg shadow-slate-200"
-            >
+              className="group w-full flex items-center justify-center gap-3 py-4 bg-slate-900 text-white rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-indigo-600 transition-all duration-300 shadow-lg shadow-slate-200">
               <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> 
               Go Back Backwards
             </button>
             
             <Link 
               to="/"
-              className="w-full flex items-center justify-center gap-3 py-4 bg-white text-slate-400 border border-slate-200 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-slate-50 hover:text-slate-600 transition-all duration-300"
-            >
+              className="w-full flex items-center justify-center gap-3 py-4 bg-white text-slate-400 border border-slate-200 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-slate-50 hover:text-slate-600 transition-all duration-300">
               <Home size={16} /> Dashboard Home
             </Link>
           </div>

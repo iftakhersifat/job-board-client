@@ -17,7 +17,7 @@ const CandidateTestimonials = () => {
     },
     {
       id: 2,
-      name: "Sarah Miller",
+      name: "David Chen",
       role: "UI/UX Designer",
       image: "/assets/t-2.jpeg",
       text: "The platform's job matching algorithm is brilliant. I received relevant job alerts that perfectly matched my skill set and portfolio.",
@@ -25,7 +25,7 @@ const CandidateTestimonials = () => {
     },
     {
       id: 3,
-      name: "David Chen",
+      name: "Sarah Miller",
       role: "Marketing Specialist",
       image: "/assets/t-3.jpeg",
       text: "Best career resource I've ever used. The interface is clean, and contacting recruiters directly was a game changer for my career.",

@@ -6,12 +6,12 @@ const ContactSection = () => {
     <section className="py-38 bg-white">
       <div className="max-w-6xl mx-auto px-6">
         <div className="bg-slate-900 rounded-[3rem] overflow-hidden relative shadow-2xl shadow-indigo-200">
-          {/* Background Decorative Elements */}
+
           <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-full -mr-32 -mt-32 blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-indigo-500/10 rounded-full -ml-32 -mb-32 blur-3xl"></div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 relative z-10">
-            {/* Left Side: Contact Info */}
+
             <div className="p-12 lg:p-20 bg-indigo-600 text-white">
               <h2 className="text-4xl font-black mb-6 leading-tight">
                 Got Questions? <br />
@@ -28,7 +28,7 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <p className="text-indigo-200 text-xs font-black uppercase tracking-widest">Email Us</p>
-                    <p className="text-xl font-bold">support@jobportal.com</p>
+                    <p className="text-xl font-bold">support@jobbox.com</p>
                   </div>
                 </div>
 
@@ -63,7 +63,7 @@ const ContactSection = () => {
               </div>
             </div>
 
-            {/* Right Side: Contact Form */}
+            {/* Right Side */}
             <div className="p-12 lg:p-20 bg-white">
               <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

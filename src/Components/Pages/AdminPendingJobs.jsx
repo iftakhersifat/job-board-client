@@ -114,7 +114,6 @@ const AdminPendingJobs = () => {
             {filteredJobs.length > 0 ? filteredJobs.map(job => (
             <div key={job._id} className="bg-white border border-slate-200 rounded-[2rem] overflow-hidden shadow-sm hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300">
                 
-                {/* Main Row */}
                 <div className="p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
                     <div className="flex items-center gap-6">
                         <div className="w-16 h-16 bg-slate-50 rounded-2xl border border-slate-100 flex items-center justify-center p-2 shrink-0">
@@ -151,8 +150,6 @@ const AdminPendingJobs = () => {
                         </button>
                     </div>
                 </div>
-
-                {/* Collapsible Content */}
                 {expandedJobs[job._id] && (
                 <div className="px-8 pb-10 pt-4 bg-slate-50/50 border-t border-slate-100 animate-in fade-in slide-in-from-top-2 duration-300">
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">

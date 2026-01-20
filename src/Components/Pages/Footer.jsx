@@ -11,7 +11,7 @@ const Footer = () => {
         <span className="relative z-10 text-white font-[1000] text-xl md:text-2xl italic tracking-tighter transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-[10deg]">
           J
         </span>
-        <div className="absolute inset-0 w-full h-full bg-gradient-to-tr from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+        <div className="absolute inset-0 w-full h-full bg-linear-to-tr from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
       </div>
       <div className="flex flex-col -space-y-1">
         <div className="flex items-center">

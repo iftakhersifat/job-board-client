@@ -43,7 +43,7 @@ const HowItWorks = () => {
           {steps.map((step) => (
             <div key={step.id} className="group text-center">
               <div className="relative inline-flex mb-8">
-                <div className={`w-20 h-20 rounded-[2rem] bg-gradient-to-br ${step.color} text-white flex items-center justify-center text-3xl shadow-xl group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}>
+                <div className={`w-20 h-20 rounded-[2rem] bg-linear-to-br ${step.color} text-white flex items-center justify-center text-3xl shadow-xl group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}>
                   {step.icon}
                 </div>
                 <div className="absolute -top-2 -right-2 w-8 h-8 bg-white border-2 border-slate-100 rounded-full flex items-center justify-center text-xs font-black text-slate-900 shadow-sm">
@@ -77,8 +77,7 @@ const HowItWorks = () => {
                 <input 
                   type="email" 
                   placeholder="Enter your email" 
-                  className="w-full bg-white/10 border-2 border-white/20 rounded-2xl py-5 px-8 text-white placeholder:text-indigo-200/50 outline-none focus:border-white transition-all font-medium"
-                />
+                  className="w-full bg-white/10 border-2 border-white/20 rounded-2xl py-5 px-8 text-white placeholder:text-indigo-200/50 outline-none focus:border-white transition-all font-medium"/>
                 <button className="absolute right-3 p-4 bg-white text-indigo-600 rounded-xl hover:bg-slate-900 hover:text-white transition-all duration-300 shadow-lg active:scale-95">
                   <FaPaperPlane />
                 </button>

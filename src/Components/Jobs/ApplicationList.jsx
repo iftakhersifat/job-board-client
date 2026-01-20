@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
-import { Calendar, Trash2, MapPin, TrendingUp, Clock, Filter, List, CheckCircle2, Download } from 'lucide-react';
+import { Calendar, Trash2, TrendingUp, Clock, Filter, List, Download } from 'lucide-react';
 
 const ApplicationList = ({ myApplicationList }) => {
     const [loading, setLoading] = useState(true);
@@ -62,9 +62,9 @@ const ApplicationList = ({ myApplicationList }) => {
 
     const handleExportCSV = () => {
         if (displayList.length === 0) return Swal.fire("No Data", "Nothing to export!", "info");
-        const headers = ["Company,Job Role,Location,Type,Applied Date,Status"];
+        const headers = ["Company,Job Role,Applied Date,Status"];
         const rows = displayList.map(app => (
-            `"${app.company}","${app.category || app.title}","${app.location}","${app.jobType}","${new Date(app.appliedAt).toLocaleDateString()}","${app.status || 'Pending'}"`
+            `"${app.company}","${app.category || app.title}","${new Date(app.appliedAt).toLocaleDateString()}","${app.status || 'Pending'}"`
         ));
         const csvContent = "data:text/csv;charset=utf-8," + headers.concat(rows).join("\n");
         const encodedUri = encodeURI(csvContent);
@@ -77,31 +77,30 @@ const ApplicationList = ({ myApplicationList }) => {
     };
 
     const handleDelete = (id) => {
-    Swal.fire({
-        title: 'Delete Record?',
-        text: "This action is permanent.",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#ef4444', // Red color for delete
-        confirmButtonText: 'Yes, delete'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            axios.delete(`https://job-board-server-five.vercel.app/applications/${id}`)
-                .then(res => {
-                    if (res.data.deletedCount > 0) {
-                        setOriginalList(prev => prev.filter(app => app._id !== id));
-                        setDisplayList(prev => prev.filter(app => app._id !== id));
-                        
-                        Swal.fire('Deleted!', 'Record removed.', 'success');
-                    }
-                })
-                .catch(err => {
-                    console.error(err);
-                    Swal.fire('Error!', 'Something went wrong.', 'error');
-                });
-        }
-    });
-};
+        Swal.fire({
+            title: 'Delete Record?',
+            text: "This action is permanent.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#ef4444', 
+            confirmButtonText: 'Yes, delete'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`https://job-board-server-five.vercel.app/applications/${id}`)
+                    .then(res => {
+                        if (res.data.deletedCount > 0) {
+                            setOriginalList(prev => prev.filter(app => app._id !== id));
+                            setDisplayList(prev => prev.filter(app => app._id !== id));
+                            Swal.fire('Deleted!', 'Record removed.', 'success');
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        Swal.fire('Error!', 'Something went wrong.', 'error');
+                    });
+            }
+        });
+    };
 
     const getStatusStyles = (status) => {
         const s = (status || "Pending").toLowerCase();
@@ -113,7 +112,6 @@ const ApplicationList = ({ myApplicationList }) => {
 
     return (
         <div className='max-w-6xl mx-auto px-6 py-28 min-h-screen'>
-
             <div className="mb-10 flex flex-col lg:flex-row lg:items-end justify-between gap-6">
                 <div>
                     <h1 className="text-4xl font-bold tracking-tighter">
@@ -146,7 +144,6 @@ const ApplicationList = ({ myApplicationList }) => {
                 </div>
             </div>
 
-            {/* Stats Cards */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-10">
                 <StatCard label="Today" count={getFilteredByTime("today", originalList).length} active={activeFilter === 'today'} onClick={() => setActiveFilter('today')} color="bg-rose-500" icon={<Clock size={18} />} />
                 <StatCard label="This Week" count={getFilteredByTime("thisWeek", originalList).length} active={activeFilter === 'thisWeek'} onClick={() => setActiveFilter('thisWeek')} color="bg-indigo-600" icon={<TrendingUp size={18} />} />
@@ -156,7 +153,6 @@ const ApplicationList = ({ myApplicationList }) => {
                 <StatCard label="Total All" count={originalList.length} active={activeFilter === 'total'} onClick={() => setActiveFilter('total')} color="bg-slate-900" icon={<List size={18} />} />
             </div>
 
-            {/* Table */}
             <div className="bg-white rounded-[32px] border border-slate-200 shadow-sm overflow-hidden">
                 {loading ? (
                     <div className="py-32 text-center"><span className="loading loading-ring loading-lg text-indigo-600"></span></div>
@@ -173,7 +169,6 @@ const ApplicationList = ({ myApplicationList }) => {
                                 <tr className="text-slate-400 uppercase text-[10px] tracking-widest font-black">
                                     <th className="py-6 pl-8">Company</th>
                                     <th>Job Details</th>
-                                    <th>Work Type</th>
                                     <th>Applied On</th>
                                     <th>Status</th>
                                     <th className="text-right pr-8">Action</th>
@@ -192,14 +187,6 @@ const ApplicationList = ({ myApplicationList }) => {
                                         </td>
                                         <td>
                                             <p className="font-bold text-slate-900 text-sm">{app.category || app.title}</p>
-                                            <div className="flex items-center gap-1 text-slate-400 text-[9px] mt-1 font-black uppercase">
-                                                <MapPin size={10} /> {app.location}
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <span className="px-3 py-1 text-[9px] font-black uppercase bg-slate-100 text-slate-600 rounded-lg group-hover:bg-indigo-600 group-hover:text-white transition-all">
-                                                {app.jobType}
-                                            </span>
                                         </td>
                                         <td className="text-[10px] font-black text-slate-400 uppercase">
                                             {new Date(app.appliedAt).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}

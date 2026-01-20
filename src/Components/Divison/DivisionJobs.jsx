@@ -35,7 +35,6 @@ const DivisionJobs = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [viewMode, setViewMode] = useState("grid");
 
-  // API Data Fetching
   useEffect(() => {
     setLoading(true);
     axios.get("https://job-board-server-five.vercel.app/jobs")
@@ -93,7 +92,6 @@ const DivisionJobs = () => {
     <div className="bg-[#f8fafc] min-h-screen font-sans">
       
       <div className="relative pt-24 pb-6 px-6 bg-white overflow-hidden">
-  {/* Subtle, Professional Background Accents */}
  <div className="absolute inset-0 z-0">
     <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
     <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
@@ -131,9 +129,9 @@ const DivisionJobs = () => {
         </p>
       </div>
 
-      {/* Right Content - Compact Stats Card */}
+      {/* Right Content */}
       <div className="relative group">
-        <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-2xl blur opacity-10 group-hover:opacity-20 transition duration-1000"></div>
+        <div className="absolute -inset-1 bg-linear-to-r from-indigo-500 to-blue-500 rounded-2xl blur opacity-10 group-hover:opacity-20 transition duration-1000"></div>
         <div className="relative bg-white border border-slate-200 p-8 rounded-2xl shadow-sm min-w-[300px]">
           <div className="flex items-center gap-4 mb-6">
             <div className="w-10 h-10 bg-slate-900 rounded-lg flex items-center justify-center text-white">
@@ -181,8 +179,7 @@ const DivisionJobs = () => {
                   placeholder="Search industries..."
                   value={categorySearchQuery}
                   onChange={(e) => setCategorySearchQuery(e.target.value)}
-                  className="w-full bg-slate-50 border-none rounded-2xl py-3.5 pl-12 pr-4 text-xs font-bold text-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none transition-all"
-                />
+                  className="w-full bg-slate-50 border-none rounded-2xl py-3.5 pl-12 pr-4 text-xs font-bold text-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none transition-all"/>
               </div>
 
               {/* Scrollable Categories */}
@@ -196,8 +193,7 @@ const DivisionJobs = () => {
                         selectedCategories.includes(cat) 
                         ? 'bg-indigo-600 text-white shadow-xl shadow-indigo-100' 
                         : 'text-slate-600 hover:bg-slate-50'
-                      }`}
-                    >
+                      }`}>
                       <span className="truncate">{cat}</span>
                       {selectedCategories.includes(cat) && <AiOutlineClose size={12}/>}
                     </button>
@@ -210,8 +206,7 @@ const DivisionJobs = () => {
               {selectedCategories.length > 0 && (
                 <button 
                   onClick={handleClearFilters}
-                  className="w-full mt-8 py-4 bg-slate-900 text-white rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] shadow-lg shadow-slate-200 hover:bg-slate-800 transition-all active:scale-95"
-                >
+                  className="w-full mt-8 py-4 bg-slate-900 text-white rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] shadow-lg shadow-slate-200 hover:bg-slate-800 transition-all active:scale-95">
                   Clear All Filters
                 </button>
               )}
@@ -220,19 +215,16 @@ const DivisionJobs = () => {
 
           {/* Feed Area */}
           <main className="flex-1">
-             {/* Feed Header/Toolbar */}
              <div className="bg-white p-5 rounded-[2.5rem] border border-slate-100 shadow-sm flex flex-col md:flex-row justify-between items-center gap-6 mb-10">
                 <div className="flex items-center gap-2 p-1.5 bg-slate-50 rounded-2xl">
                     <button 
                       onClick={() => setViewMode("grid")} 
-                      className={`p-3 rounded-xl transition-all ${viewMode === "grid" ? "bg-white text-indigo-600 shadow-md" : "text-slate-400 hover:text-slate-600"}`}
-                    >
+                      className={`p-3 rounded-xl transition-all ${viewMode === "grid" ? "bg-white text-indigo-600 shadow-md" : "text-slate-400 hover:text-slate-600"}`}>
                       <FiGrid size={20}/>
                     </button>
                     <button 
                       onClick={() => setViewMode("list")} 
-                      className={`p-3 rounded-xl transition-all ${viewMode === "list" ? "bg-white text-indigo-600 shadow-md" : "text-slate-400 hover:text-slate-600"}`}
-                    >
+                      className={`p-3 rounded-xl transition-all ${viewMode === "list" ? "bg-white text-indigo-600 shadow-md" : "text-slate-400 hover:text-slate-600"}`}>
                       <FiList size={20}/>
                     </button>
                 </div>
@@ -245,16 +237,13 @@ const DivisionJobs = () => {
                     <select 
                       value={sortBy} 
                       onChange={(e) => setSortBy(e.target.value)} 
-                      className="w-full md:w-60 bg-slate-50 border-none rounded-2xl py-4 px-5 text-sm font-bold text-slate-700 focus:ring-2 focus:ring-indigo-500 cursor-pointer appearance-none"
-                    >
+                      className="w-full md:w-60 bg-slate-50 border-none rounded-2xl py-4 px-5 text-sm font-bold text-slate-700 focus:ring-2 focus:ring-indigo-500 cursor-pointer appearance-none">
                         <option value="date_desc">Most Recent Postings</option>
                         <option value="salary_desc">Highest Compensations</option>
                         <option value="salary_asc">Entry Level Salary</option>
                     </select>
                 </div>
              </div>
-
-             {/* Results */}
              {loading ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 animate-pulse">
                    {[1,2,3,4].map(i => <div key={i} className="h-64 bg-white rounded-[3rem] border border-slate-50"></div>)}
@@ -270,7 +259,7 @@ const DivisionJobs = () => {
                         ))}
                     </div>
                   ) : (
-                    /* EMPTY STATE */
+                    
                     <div className="bg-white rounded-[4rem] border border-dashed border-slate-200 py-32 px-10 text-center">
                         <div className="w-28 h-28 bg-indigo-50 rounded-full flex items-center justify-center mx-auto mb-8 text-indigo-200">
                             <FiInbox size={56} />
@@ -281,21 +270,17 @@ const DivisionJobs = () => {
                         </p>
                         <button 
                             onClick={handleClearFilters}
-                            className="bg-indigo-600 text-white px-12 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-indigo-700 transition-all shadow-2xl shadow-indigo-100 active:scale-95"
-                        >
+                            className="bg-indigo-600 text-white px-12 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-indigo-700 transition-all shadow-2xl shadow-indigo-100 active:scale-95">
                             Reset Search
                         </button>
                     </div>
                   )}
-
-                  {/* PREMIUM PAGINATION */}
                   {filteredAndSorted.length > PAGE_SIZE && (
                     <div className="mt-20 flex items-center justify-center gap-3">
                         <button 
                           onClick={() => setCurrentPage(p => Math.max(1, p-1))} 
                           disabled={currentPage === 1} 
-                          className="w-14 h-14 rounded-2xl bg-white border border-slate-100 flex items-center justify-center text-slate-400 hover:text-indigo-600 disabled:opacity-30 transition-all hover:shadow-lg"
-                        >
+                          className="w-14 h-14 rounded-2xl bg-white border border-slate-100 flex items-center justify-center text-slate-400 hover:text-indigo-600 disabled:opacity-30 transition-all hover:shadow-lg">
                           <FiChevronLeft size={24}/>
                         </button>
                         
@@ -318,8 +303,7 @@ const DivisionJobs = () => {
                         <button 
                           onClick={() => setCurrentPage(p => Math.min(totalPages, p+1))} 
                           disabled={currentPage === totalPages} 
-                          className="w-14 h-14 rounded-2xl bg-white border border-slate-100 flex items-center justify-center text-slate-400 hover:text-indigo-600 disabled:opacity-30 transition-all hover:shadow-lg"
-                        >
+                          className="w-14 h-14 rounded-2xl bg-white border border-slate-100 flex items-center justify-center text-slate-400 hover:text-indigo-600 disabled:opacity-30 transition-all hover:shadow-lg">
                           <FiChevronRight size={24}/>
                         </button>
                     </div>

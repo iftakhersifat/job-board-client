@@ -25,12 +25,9 @@ const CategoryJobs = () => {
   return (
     <div className="max-w-6xl mx-auto mt-28 px-6 md:px-6 lg:px-0 pb-20">
       
-      {/* Breadcrumb / Back Navigation */}
-      <Link 
-        to="/" 
-        className="flex items-center gap-2 text-slate-500 hover:text-indigo-600 transition-colors mb-6 font-semibold text-sm group">
-        <FiArrowLeft className="group-hover:-translate-x-1 transition-transform" />
-        Back to Categories
+      {/* Breadcrumb Navigation */}
+      <Link to="/" className="flex items-center gap-2 text-slate-500 hover:text-indigo-600 transition-colors mb-6 font-semibold text-sm group">
+        <FiArrowLeft className="group-hover:-translate-x-1 transition-transform" />Back to Categories
       </Link>
 
       {/* Header Section */}
@@ -49,8 +46,7 @@ const CategoryJobs = () => {
             Explore {jobs.length} open positions in the {decodedCategory} sector.
           </p>
         </div>
-        
-        {/* Result Counter/Filter Placeholder */}
+
         <div className="flex items-center gap-3 bg-slate-50 px-4 py-2 rounded-xl border border-slate-100">
            <FiFilter className="text-slate-400" />
            <span className="text-sm font-bold text-slate-600">{jobs.length} Results Found</span>

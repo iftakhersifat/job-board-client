@@ -27,7 +27,7 @@ const CategorySection = () => {
             Browse by Sector
           </h2>
           <h1 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
-            Explore <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-500">Categories</span>
+            Explore <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-blue-500">Categories</span>
           </h1>
         </div>
 
@@ -39,8 +39,7 @@ const CategorySection = () => {
             placeholder="Search across 50+ categories..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="relative w-full py-4 pl-12 pr-6 bg-white border border-slate-200 rounded-[1.5rem] shadow-sm focus:outline-none focus:ring-4 focus:ring-indigo-500/5 focus:border-indigo-400 transition-all font-medium text-slate-700 placeholder:text-slate-400"
-          />
+            className="relative w-full py-4 pl-12 pr-6 bg-white border border-slate-200 rounded-[1.5rem] shadow-sm focus:outline-none focus:ring-4 focus:ring-indigo-500/5 focus:border-indigo-400 transition-all font-medium text-slate-700 placeholder:text-slate-400"/>
           <span className="absolute left-4 top-1/2 -translate-y-1/2 text-2xl group-focus-within:scale-110 transition-transform">
             <FcSearch />
           </span>
@@ -62,8 +61,7 @@ const CategorySection = () => {
                   className="group relative h-40 flex flex-col items-center justify-center bg-white border border-slate-100 rounded-[2.5rem] p-6 transition-all duration-500 hover:shadow-[0_20px_50px_rgba(79,70,229,0.1)] hover:-translate-y-2 overflow-hidden">
 
                   <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-indigo-50 rounded-full group-hover:scale-[3] transition-transform duration-700 ease-in-out opacity-50"></div>
-                  
-                  {/* Icon Wrapper */}
+
                   <div className="relative z-10 mb-4 w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-400 group-hover:bg-indigo-600 group-hover:text-white group-hover:rotate-[10deg] transition-all duration-500 shadow-inner">
                     <FiGrid size={24} />
                   </div>
@@ -86,8 +84,7 @@ const CategorySection = () => {
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="col-span-full py-20 bg-slate-50/50 rounded-[3rem] border-2 border-dashed border-slate-200 flex flex-col items-center justify-center text-center"
-            >
+              className="col-span-full py-20 bg-slate-50/50 rounded-[3rem] border-2 border-dashed border-slate-200 flex flex-col items-center justify-center text-center">
               <div className="w-20 h-20 bg-white rounded-3xl shadow-sm flex items-center justify-center mb-4">
                 <MdErrorOutline size={40} className="text-slate-300" />
               </div>
@@ -107,11 +104,7 @@ const CategorySection = () => {
           <button
             onClick={handleLoadMore}
             className="relative px-10 py-4 bg-white border border-slate-200 hover:border-indigo-500 text-slate-900 font-black rounded-full shadow-xl hover:shadow-indigo-100 transition-all duration-300 hover:scale-105 active:scale-95 flex items-center gap-3 group">
-            <span className="bg-indigo-600 text-white w-6 h-6 rounded-full flex items-center justify-center group-hover:rotate-90 transition-transform">
-              +
-            </span>
-            Show More Sectors
-          </button>
+            <span className="bg-indigo-600 text-white w-6 h-6 rounded-full flex items-center justify-center group-hover:rotate-90 transition-transform">+</span>Show More Sectors</button>
         </div>
       )}
     </div>

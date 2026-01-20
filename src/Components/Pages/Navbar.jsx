@@ -47,10 +47,7 @@ const Navbar = () => {
 
   const navLinkStyles = ({ isActive }) => `
     relative flex items-center gap-2 px-5 py-2 text-[13px] font-bold transition-all duration-300 rounded-xl group
-    ${isActive 
-      ? 'text-indigo-600 bg-indigo-50/80 shadow-sm' 
-      : 'text-slate-500 hover:text-indigo-600 hover:bg-slate-50'}
-  `;
+    ${isActive ? 'text-indigo-600 bg-indigo-50/80 shadow-sm' : 'text-slate-500 hover:text-indigo-600 hover:bg-slate-50'}`;
 
   const NavLinks = () => (
     <>
@@ -95,7 +92,7 @@ const Navbar = () => {
       <div className="relative w-10 h-10 md:w-11 md:h-11 bg-slate-900 rounded-[12px] md:rounded-[14px] flex items-center justify-center overflow-hidden transition-all duration-500 group-hover:bg-indigo-600 group-hover:rounded-[18px] group-hover:rotate-[10deg] shadow-lg shadow-slate-200 group-hover:shadow-indigo-200">
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:4px_4px]"></div>
         <span className="relative z-10 text-white font-[1000] text-xl md:text-2xl italic tracking-tighter transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-[10deg]">J</span>
-        <div className="absolute inset-0 w-full h-full bg-gradient-to-tr from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+        <div className="absolute inset-0 w-full h-full bg-linear-to-tr from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
       </div>
       <div className="flex flex-col -space-y-1">
         <div className="flex items-center">
@@ -111,8 +108,7 @@ const Navbar = () => {
   return (
     <>
       <nav className={`fixed top-0 left-0 w-full transition-all duration-300 z-[100] ${
-        scrolled ? 'py-2 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100' : 'py-4 bg-white md:bg-transparent'
-      }`}>
+        scrolled ? 'py-2 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100' : 'py-4 bg-white md:bg-transparent'}`}>
         <div className="max-w-6xl mx-auto px-6 md:px-6 lg:px-0">
           <div className="flex justify-between items-center h-12">
             
@@ -120,9 +116,7 @@ const Navbar = () => {
               <Logo />
             </div>
 
-            <div className="hidden lg:flex items-center bg-slate-100/50 border border-slate-200/30 p-1 rounded-2xl">
-              <NavLinks />
-            </div>
+            <div className="hidden lg:flex items-center bg-slate-100/50 border border-slate-200/30 p-1 rounded-2xl"><NavLinks /></div>
 
             <div className="hidden lg:flex items-center gap-4">
               {user ? (
@@ -161,14 +155,10 @@ const Navbar = () => {
 
             {/* Hamburg Button */}
             <div className="lg:hidden flex items-center">
-              <button 
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setIsOpen(true);
-                }} 
+              <button onClick={(e) => {e.stopPropagation();
+                  setIsOpen(true);}} 
                 className="relative z-[110] p-2.5 rounded-xl bg-white border border-slate-200 text-slate-600 shadow-sm active:scale-90 transition-all cursor-pointer"
-                aria-label="Toggle Menu"
-              >
+                aria-label="Toggle Menu">
                 <Menu size={24} />
               </button>
             </div>
@@ -177,11 +167,7 @@ const Navbar = () => {
       </nav>
 
       <div className={`fixed inset-0 z-[200] ${isOpen ? 'visible' : 'invisible'}`} style={{ pointerEvents: isOpen ? 'auto' : 'none' }}>
-        {/* Overlay */}
-        <div 
-          className={`absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity duration-500 ${isOpen ? 'opacity-100' : 'opacity-0'}`} 
-          onClick={() => setIsOpen(false)}
-        />
+        <div className={`absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity duration-500 ${isOpen ? 'opacity-100' : 'opacity-0'}`} onClick={() => setIsOpen(false)}/>
         
         {/* Sidebar Drawer */}
         <div className={`absolute right-0 top-0 h-full w-[300px] bg-white transition-transform duration-500 ease-in-out transform shadow-2xl ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
@@ -208,7 +194,6 @@ const Navbar = () => {
 
             <div className="flex-grow py-8 px-4 space-y-1.5">
                <p className="px-4 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4">Navigation</p>
-               
                <NavLinks />
             </div>
 

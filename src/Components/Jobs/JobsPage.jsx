@@ -4,7 +4,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import { FiArrowUpRight, FiLayers, FiAlertCircle, FiZap, FiClock } from "react-icons/fi";
 import { Briefcase } from 'lucide-react';
 
-// --- JobCard Component ---
+
 const JobCard = ({ job, showTimeAgo = true }) => {
   
   const calculateDaysLeft = (deadline) => {
@@ -33,14 +33,14 @@ const JobCard = ({ job, showTimeAgo = true }) => {
   return (
     <div className="group relative flex flex-col bg-white border border-slate-200 rounded-[2.5rem] p-8 transition-all duration-500 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] hover:border-indigo-100">
       
-      {/* --- Urgent Badge --- */}
+
       {daysLeft !== null && daysLeft > 0 && daysLeft <= 10 && (
         <div className="absolute -top-3 left-8 z-20 bg-red-500 text-white text-[10px] font-black px-4 py-1.5 rounded-full shadow-lg shadow-red-200 animate-pulse border-2 border-white">
           {daysLeft === 1 ? "⚠️ LAST DAY" : `⏳ ${daysLeft} DAYS LEFT`}
         </div>
       )}
 
-      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-indigo-50 to-transparent rounded-bl-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+      <div className="absolute top-0 right-0 w-32 h-32 bg-linear-to-br from-indigo-50 to-transparent rounded-bl-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
       
       <div className="flex justify-between items-start mb-8 relative z-10">
         <div className="w-16 h-16 rounded-2xl bg-slate-50 border border-slate-100 p-3 shadow-inner group-hover:bg-white group-hover:scale-110 transition-all duration-500">
@@ -51,7 +51,6 @@ const JobCard = ({ job, showTimeAgo = true }) => {
             {job.jobType}
           </span>
           
-          {/* --- Time Ago Badge (Urgent সেকশনে এটি লুকানো থাকবে) --- */}
           {showTimeAgo && (
             <span className="bg-indigo-50 text-indigo-600 text-[9px] font-black px-2.5 py-1 rounded-md border border-indigo-100 uppercase flex items-center gap-1">
                <FiClock size={10} /> {timeAgo}
@@ -74,6 +73,21 @@ const JobCard = ({ job, showTimeAgo = true }) => {
         </div>
       </div>
 
+      <div className="grid grid-cols-2 gap-4 mb-8 relative z-10">
+        <div className="bg-slate-50 group-hover:bg-indigo-50/50 p-4 rounded-2xl border border-slate-100 group-hover:border-indigo-100 transition-colors">
+          <p className="text-[10px] font-black text-slate-400 uppercase mb-1 tracking-widest">Compensations</p>
+          <p className="text-sm font-black text-slate-700 truncate">
+            {job.salaryRange?.min}K - {job.salaryRange?.max}K <span className="text-[10px]">{job.salaryRange?.currency}</span>
+          </p>
+        </div>
+        <div className="bg-slate-50 group-hover:bg-blue-50/50 p-4 rounded-2xl border border-slate-100 group-hover:border-blue-100 transition-colors">
+          <p className="text-[10px] font-black text-slate-400 uppercase mb-1 tracking-widest">Schedule</p>
+          <p className="text-sm font-black text-slate-700 flex items-center gap-1.5 capitalize">
+            <FiClock className="text-blue-500" /> {job.jobType || "Full-time"}
+          </p>
+        </div>
+      </div>
+
       <div className="mt-auto relative z-10">
         <Link to={`/jobs/${job._id}`} className="block">
           <button className="w-full flex items-center justify-between px-6 py-4 bg-slate-900 group-hover:bg-indigo-600 text-white rounded-2xl font-black text-sm transition-all shadow-xl shadow-slate-200 active:scale-95 overflow-hidden">
@@ -86,7 +100,6 @@ const JobCard = ({ job, showTimeAgo = true }) => {
   );
 };
 
-// --- JobsList Component ---
 const JobsList = ({ jobsPromise }) => {
   const jobs = use(jobsPromise);
   const now = new Date();
@@ -122,7 +135,6 @@ const JobsList = ({ jobsPromise }) => {
 
   return (
     <div className="pb-20">
-      {/* Urgent Section: এখানে showTimeAgo={false} করা হয়েছে */}
       {urgentJobs.length > 0 && (
         <section>
           <SectionTitle icon={FiAlertCircle} title="Urgent: Closing Soon" color="bg-red-500 shadow-lg shadow-red-100" />
@@ -153,7 +165,7 @@ const JobsList = ({ jobsPromise }) => {
   );
 };
 
-// --- Main Page Component ---
+
 const JobsPage = () => {
   const jobsPromise = fetch('https://job-board-server-five.vercel.app/jobs').then(res => res.json());
 
@@ -178,7 +190,15 @@ const JobsPage = () => {
         <Suspense fallback={
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20">
             {[1, 2, 3].map(i => (
-              <div key={i} className="h-80 bg-slate-200/50 animate-pulse rounded-[2.5rem]"></div>
+              <div key={i} className="h-[400px] bg-white border border-slate-100 rounded-[2.5rem] p-8 space-y-4">
+                 <div className="w-16 h-16 bg-slate-100 rounded-2xl animate-pulse"></div>
+                 <div className="h-8 bg-slate-100 rounded-lg w-3/4 animate-pulse"></div>
+                 <div className="h-4 bg-slate-100 rounded-lg w-1/2 animate-pulse"></div>
+                 <div className="grid grid-cols-2 gap-4 mt-8">
+                    <div className="h-16 bg-slate-100 rounded-2xl animate-pulse"></div>
+                    <div className="h-16 bg-slate-100 rounded-2xl animate-pulse"></div>
+                 </div>
+              </div>
             ))}
           </div>
         }>

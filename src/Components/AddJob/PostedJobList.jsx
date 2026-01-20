@@ -68,17 +68,13 @@ const PostedJobList = ({ postedJobPromise }) => {
                 <p className="text-slate-500 font-bold mt-1 uppercase text-[11px] tracking-widest">Manage your organization's open roles</p>
             </div>
             
-            <Link 
-    to="/addJob" 
-    className="group relative flex items-center justify-center bg-indigo-600 text-white w-14 h-14 md:w-auto md:px-8 md:py-4 rounded-2xl shadow-lg shadow-indigo-200 hover:bg-indigo-700 hover:shadow-indigo-300 transition-all duration-300 active:scale-95 overflow-hidden">
-    <span className="hidden md:inline-block font-black text-xs uppercase tracking-widest mr-3">
-        Post New Job
-    </span>
+            <Link to="/addJob" className="group relative flex items-center justify-center bg-indigo-600 text-white w-14 h-14 md:w-auto md:px-8 md:py-4 rounded-2xl shadow-lg shadow-indigo-200 hover:bg-indigo-700 hover:shadow-indigo-300 transition-all duration-300 active:scale-95 overflow-hidden">
+            <span className="hidden md:inline-block font-black text-xs uppercase tracking-widest mr-3">Post New Job</span>
 
-    <FaPlus className="text-xl group-hover:rotate-90 transition-transform duration-500" />
+            <FaPlus className="text-xl group-hover:rotate-90 transition-transform duration-500" />
 
-    <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
-</Link>
+            <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+            </Link>
         </div>
 
         {/* Filtering Tabs */}

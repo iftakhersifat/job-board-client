@@ -8,23 +8,16 @@ const DivisionSection = () => {
 
   return (
     <div className="w-full">
-      {/* Grid Layout - Optimized for Sidebars or Banner integration */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {divisions.map((d, index) => (
           <Link
             key={index}
             to={`/division/${encodeURIComponent(d)}`}
-            className="group relative flex items-center justify-between p-3.5 bg-white border border-slate-200/60 rounded-2xl transition-all duration-300 hover:border-indigo-500/50 hover:shadow-[0_12px_24px_-8px_rgba(79,70,229,0.12)] hover:-translate-y-0.5 overflow-hidden"
-          >
-            {/* Soft Hover Background */}
+            className="group relative flex items-center justify-between p-3.5 bg-white border border-slate-200/60 rounded-2xl transition-all duration-300 hover:border-indigo-500/50 hover:shadow-[0_12px_24px_-8px_rgba(79,70,229,0.12)] hover:-translate-y-0.5 overflow-hidden">
+
             <div className="absolute inset-0 bg-indigo-50/40 opacity-0 group-hover:opacity-100 transition-opacity" />
 
             <div className="relative z-10 flex items-center gap-3">
-              {/* Modern Minimalist Icon Box */}
-              {/* <div className="w-10 h-10 flex items-center justify-center bg-slate-50 rounded-xl group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
-                <FiMapPin size={18} className="group-hover:scale-110 transition-transform" />
-              </div> */}
-
               <div className="flex flex-col">
                 <span className="font-bold text-[14px] text-slate-800 group-hover:text-indigo-700 transition-colors">
                   {d}
@@ -35,7 +28,6 @@ const DivisionSection = () => {
               </div>
             </div>
 
-            {/* Action Arrow - Only shows on hover or subtle always */}
             <div className="relative z-10 p-1 rounded-full bg-slate-50 text-slate-400 group-hover:bg-indigo-100 group-hover:text-indigo-600 transition-all">
               <FiChevronRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
             </div>

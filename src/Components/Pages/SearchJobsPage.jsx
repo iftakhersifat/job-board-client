@@ -1,4 +1,3 @@
-// SearchJobsPage.jsx
 import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router";
 import axios from "axios";
@@ -88,7 +87,7 @@ const SearchJobsPage = () => {
   return (
     <div className="max-w-6xl mx-auto mt-6 px-6 md:px-6 lg:px-0">
 
-      {/* Top header */}
+      {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
         <div>
           <h1 className="text-2xl md:text-3xl font-bold text-green-600">
@@ -123,7 +122,6 @@ const SearchJobsPage = () => {
 
       <div className="flex flex-col sm:flex-row gap-5">
 
-        {/* Desktop sidebar */}
         <aside className="hidden sm:block w-72 shrink-0 sticky top-24 h-fit">
           <div className="bg-white border rounded-xl shadow-sm p-5">
             <div className="flex items-center justify-between mb-4">
@@ -178,7 +176,7 @@ const SearchJobsPage = () => {
         </main>
       </div>
 
-      {/* Mobile drawer */}
+      {/* Drawer */}
       {mobileFiltersOpen && (
         <div className="fixed inset-0 z-50 flex flex-col justify-end">
           <div className="absolute inset-0 bg-black/40" onClick={()=>setMobileFiltersOpen(false)} />

@@ -113,8 +113,7 @@ const AdminPanel = () => {
             <motion.h1 
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="text-3xl font-black text-slate-900 tracking-tight sm:text-4xl"
-            >
+              className="text-3xl font-black text-slate-900 tracking-tight sm:text-4xl">
               System Directory
             </motion.h1>
             <p className="mt-2 text-slate-500 font-medium italic">Manage user permissions and access levels across the platform.</p>
@@ -150,8 +149,7 @@ const AdminPanel = () => {
               <select
                 value={roleFilter}
                 onChange={(e) => setRoleFilter(e.target.value)}
-                className="w-full pl-10 pr-4 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500/20 outline-none appearance-none font-bold text-slate-600 cursor-pointer"
-              >
+                className="w-full pl-10 pr-4 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500/20 outline-none appearance-none font-bold text-slate-600 cursor-pointer">
                 <option value="">Role: All</option>
                 <option value="admin">Admin</option>
                 <option value="employee">Employee</option>
@@ -187,8 +185,7 @@ const AdminPanel = () => {
                             currentPage === i + 1 
                             ? "bg-slate-900 text-white shadow-lg shadow-slate-200 scale-110" 
                             : "bg-white text-slate-400 hover:bg-slate-50 border border-slate-200"
-                          }`}
-                        >
+                          }`}>
                           {i + 1}
                         </button>
                       ))}
@@ -207,8 +204,7 @@ const AdminPanel = () => {
 const StatCard = ({ label, value, icon: Icon, color, loading }) => (
   <motion.div 
     whileHover={{ y: -5 }}
-    className="bg-white p-7 rounded-[2.5rem] shadow-sm border border-slate-100 flex items-center justify-between"
-  >
+    className="bg-white p-7 rounded-[2.5rem] shadow-sm border border-slate-100 flex items-center justify-between">
     <div>
       <p className="text-slate-500 font-bold text-xs uppercase tracking-[0.15em] mb-1">{label}</p>
       {loading ? (
@@ -234,8 +230,7 @@ const UserSection = ({ title, type, data, changeRole, deleteUser }) => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="relative"
-    >
+      className="relative">
       <div className="flex items-center gap-4 mb-6">
         <h2 className="text-xl font-black text-slate-800 tracking-tight">{title}</h2>
         <div className="h-px flex-1 bg-slate-200" />
@@ -288,8 +283,7 @@ const UserSection = ({ title, type, data, changeRole, deleteUser }) => {
                         <select
                           value={user.role}
                           onChange={(e) => changeRole(user.id, e.target.value)}
-                          className="pl-4 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-600 outline-none focus:ring-2 focus:ring-indigo-500/10 appearance-none cursor-pointer hover:bg-white transition-all"
-                        >
+                          className="pl-4 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-600 outline-none focus:ring-2 focus:ring-indigo-500/10 appearance-none cursor-pointer hover:bg-white transition-all">
                           <option value="admin">Promote Admin</option>
                           <option value="employee">Employee</option>
                           <option value="user">User</option>
@@ -300,8 +294,7 @@ const UserSection = ({ title, type, data, changeRole, deleteUser }) => {
                       <button
                         onClick={() => deleteUser(user.id)}
                         className="p-2.5 bg-white text-rose-500 border border-rose-100 rounded-xl hover:bg-rose-500 hover:text-white transition-all shadow-sm"
-                        title="Delete Account"
-                      >
+                        title="Delete Account">
                         <Trash2 size={18} />
                       </button>
                     </div>

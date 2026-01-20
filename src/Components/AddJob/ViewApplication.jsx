@@ -9,13 +9,11 @@ import { FaFileAlt, FaLinkedin, FaGithub, FaGlobe, FaUserCircle, FaEnvelope, FaB
 const ViewApplication = () => {
   const { id } = useParams();
   const loaderApplications = useLoaderData();
-  
-  // States
+
   const [applications, setApplications] = useState(loaderApplications);
   const [filteredApplications, setFilteredApplications] = useState(loaderApplications);
   const [activeFilter, setActiveFilter] = useState("All");
 
-  // Filter effect
   useEffect(() => {
     if (activeFilter === "All") {
       setFilteredApplications(applications);
@@ -94,7 +92,7 @@ const ViewApplication = () => {
           </div>
         </div>
 
-        {/* Dynamic Filter */}
+        {/* Filter */}
         <div className="flex flex-wrap items-center gap-2 mb-10 bg-white p-2 rounded-[2rem] border border-slate-200 shadow-sm w-fit">
             <div className="px-4 py-2 text-slate-400 border-r border-slate-100 mr-2 hidden md:block">
                 <FaFilter size={14} />
@@ -124,7 +122,7 @@ const ViewApplication = () => {
                 
                 {/* Applicant Profile info */}
                 <div className="flex items-center gap-5">
-                  <div className="h-16 w-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-blue-200">
+                  <div className="h-16 w-16 bg-linear-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-blue-200">
                     {app.applicant?.charAt(0) || "A"}
                   </div>
                   <div>
@@ -159,7 +157,7 @@ const ViewApplication = () => {
                 </div>
               </div>
 
-              {/* Links Row */}
+              {/* Links */}
               <div className="mt-8 pt-8 border-t border-slate-100 grid grid-cols-2 md:grid-cols-4 gap-4">
                 <a href={app.resume} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 py-3 px-4 rounded-2xl bg-slate-50 text-slate-700 hover:bg-blue-600 hover:text-white font-bold text-sm transition-all border border-slate-100 active:scale-95">
                   <FaFileAlt /> Resume

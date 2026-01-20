@@ -94,8 +94,7 @@ const AdminJobControl = () => {
                                 type="text" 
                                 placeholder="Filter by role..." 
                                 className="w-full outline-none font-bold text-sm bg-transparent text-slate-700"
-                                onChange={(e) => setSearchTerm(e.target.value)}
-                            />
+                                onChange={(e) => setSearchTerm(e.target.value)}/>
                         </div>
                     </div>
                 </div>
@@ -144,8 +143,7 @@ const AdminJobControl = () => {
                                         <td className="p-6 text-right">
                                             <button 
                                                 onClick={() => handleDelete(job._id)} 
-                                                className="inline-flex items-center justify-center w-10 h-10 bg-rose-50 text-rose-500 rounded-xl hover:bg-rose-500 hover:text-white transition-all duration-300 shadow-sm"
-                                            >
+                                                className="inline-flex items-center justify-center w-10 h-10 bg-rose-50 text-rose-500 rounded-xl hover:bg-rose-500 hover:text-white transition-all duration-300 shadow-sm">
                                                 <FaTrashAlt size={14} />
                                             </button>
                                         </td>
