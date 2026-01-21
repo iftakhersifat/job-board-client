@@ -33,7 +33,6 @@ const AuthProvider = ({ children }) => {
       const snap = await getDoc(ref);
 
       if (!snap.exists()) {
-        // New user: create Firestore document
         await setDoc(ref, {
           name: currentUser.displayName || "No Name",
           email: currentUser.email,
@@ -74,7 +73,7 @@ const AuthProvider = ({ children }) => {
     });
   };
 
-  // Listen for auth changes
+  // auth changes
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {

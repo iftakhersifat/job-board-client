@@ -26,7 +26,6 @@ const DivisionJobs = () => {
   const { division } = useParams();
   const decodedDivision = decodeURIComponent(division || "");
 
-  // States
   const [initialDivisionJobs, setInitialDivisionJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -89,7 +88,7 @@ const DivisionJobs = () => {
   };
 
   return (
-    <div className="bg-[#f8fafc] min-h-screen font-sans">
+    <div className="bg-[#f8fafc] min-h-screen font-sans -mb-24">
       
       <div className="relative pt-24 pb-6 px-6 bg-white overflow-hidden">
  <div className="absolute inset-0 z-0">

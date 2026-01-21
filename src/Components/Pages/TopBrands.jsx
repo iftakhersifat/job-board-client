@@ -30,7 +30,7 @@ const TopBrands = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white">
-            Powering Careers with <span className="text-indigo-600 italic">Industry Giants</span>
+            Top <span className="text-indigo-600 italic">Brands</span> & Partners
           </motion.h2>
         </div>
 
